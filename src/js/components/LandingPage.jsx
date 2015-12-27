@@ -46,15 +46,33 @@ class LandingPage extends React.Component {
 				<Header ref='header' />
 
 				<div className={'ui basic center aligned segment landing-page-header'}>
-					<h1 className={'ui inverted header'}>
-						<span>{this.flux.getState('Service').name}</span>
-					</h1>
-					<h2 className={'ui inverted header'}>
-						<I18n sign='landing_page.subtitle'>Isomorphic WebApp Boilerplate<br /> with ES6, Node.js, Koa, React and Webpack.</I18n>
-					</h2>
+					<h2>很想去</h2>
 					<br />
-					<button className={'massive ui inverted button'} onClick={this.about}>
-						<I18n sign='landing_page.entry_button'>What's this</I18n>
+					<h1>東京？巴黎？紐約？莫斯科？</h1>
+					<br />
+					
+
+					<div className="ui stackable three column grid">
+						<div className="column">
+							<div className="ui fluid icon input">
+								<input type="text" placeholder="請輸入你的真實姓名" />
+							</div>
+						</div>
+						<div className="column">
+							<div className="ui fluid icon input">
+								<input type="text" placeholder="請輸入E-mail" />
+							</div>
+						</div>
+						<div className="column">
+							<div className="ui fluid icon input">
+								<input type="text" placeholder="請輸入你的電話號碼" />
+							</div>
+						</div>
+					</div>
+					
+					
+					<button className={'medium ui inverted button'} onClick={this.about}>
+						加入 Limago
 					</button>
 				</div>
 	
