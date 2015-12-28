@@ -7,15 +7,19 @@ import I18n from 'Extension/I18n.jsx';
 import { flux } from 'Decorator';
 
 // icons
+import xIcon from 'Source/images/x-icon.png';
 import peopleIcon from 'Source/images/people-icon.png';
 import ticketIcon from 'Source/images/ticket-icon.png';
 import timeIcon from 'Source/images/time-icon.png';
 
-var descStyle = {
-	fontSize: '1.5em'
+var sectionStyle = {
 };
 
-var sectionStyle = {
+var breakInput = {
+	marginTop: '100px'
+};
+var breakItems = {
+	marginTop: '150px'
 };
 
 @flux
@@ -23,7 +27,6 @@ class LandingPage extends React.Component {
 
 	constructor(props, context) {
 		super(props, context);
-//		console.log(context);
 	}
 
 	about = () => {
@@ -36,7 +39,8 @@ class LandingPage extends React.Component {
 	}
 
 	render() {
-//		console.log(this.context);
+		var includeIcon = <img className="ui mini image include" src={xIcon} />;
+
 		return (
 			<div className='main-page'>
 				<Header ref='header' />
@@ -45,55 +49,67 @@ class LandingPage extends React.Component {
 					<h2 className="head-title">很想去</h2>
 					<br />
 					<h1 className="head-sub-title">東京？巴黎？紐約？莫斯科？</h1>
-					<br />
-
-						<div className="ui stackable three column grid">
-							<div className="column">
-								<div className="ui fluid icon input">
-									<input type="text" placeholder="請輸入你的真實姓名" />
+					<div style={ breakInput }></div>
+					<div className="ui stackable three column grid">
+						<div className="three wide column"></div>
+						<div className="ten wide column">
+							<div className="ui stackable three column grid">
+								<div className="column">
+									<div className="ui fluid icon input">
+										<input type="text" placeholder="請輸入你的真實姓名" />
+									</div>
+									<p className="text-left input-tag">姓名</p>
 								</div>
-							</div>
-							<div className="column">
-								<div className="ui fluid icon input">
-									<input type="text" placeholder="請輸入E-mail" />
+								<div className="column">
+									<div className="ui fluid icon input">
+										<input type="text" placeholder="請輸入E-mail" />
+									</div>
+									<p className="text-left input-tag">E-mail</p>
 								</div>
-							</div>
-							<div className="column">
-								<div className="ui fluid icon input">
-									<input type="text" placeholder="請輸入你的電話號碼" />
+								<div className="column">
+									<div className="ui fluid icon input">
+										<input type="text" placeholder="請輸入你的電話號碼" />
+									</div>
+									<p className="text-left input-tag">電話</p>
 								</div>
 							</div>
 						</div>
-
-					<button className={'medium ui inverted button'} onClick={this.about}>
+					</div>
+					<button className={'large ui inverted button join'} onClick={this.about}>
 						加入 Limago
 					</button>
-
+					<div style={ breakItems }></div>
 					<div className="ui stackable three column grid">
 						<div className="column item">
 							<img className="ui middle aligned tiny image" src={peopleIcon} />
 							<span className="color-white item-title">人數</span>
-							<h1 className="color-white item-value">{ '{ 1 x 2 x 多 }' }</h1>
+							<h1 className="color-white item-value">
+								1 { includeIcon } 2 { includeIcon } 多
+							</h1>
 							<span className="color-white item-value">人同行</span>
 						</div>
-						<div className="column item center-block">
+						<div className="column item center-item">
 							<img className="ui middle aligned tiny image" src={ticketIcon} />
 							<span className="color-white item-title"> 機票</span>
-							<h1 className="color-white item-value">{ '{ 1 x 5 x 9 }' }</h1>
+							<h1 className="color-white item-value">
+								1 { includeIcon } 5 { includeIcon } 9
+							</h1>
 							<span className="color-white item-value">折機票</span>
 						</div>
 						<div className="column item">
 							<img className="ui middle aligned tiny image" src={timeIcon} />
 							<span className="color-white item-title"> 時間</span>
-							<h1 className="color-white item-value">{ '{ 3 x 8 x 24 }' }</h1>
+							<h1 className="color-white item-value">
+								3 { includeIcon } 8 { includeIcon } 24
+							</h1>
 							<span className="color-white item-value">小時內出發</span>
 						</div>
 					</div>
-
-					
-					
 				</div>
 	
+
+
+
 				<section style={sectionStyle} ref='app_section'>
 					
 				</section>
