@@ -6,14 +6,10 @@ import I18n from 'Extension/I18n.jsx';
 // Decorators
 import { flux } from 'Decorator';
 
-// Section image
-import appIcon from 'Source/images/app-icon.png';
-import techIcon from 'Source/images/tech-icon.png';
-
-// Avatar
-import avatar1 from 'Source/images/avatar-1.png';
-import avatar2 from 'Source/images/avatar-2.png';
-import avatar3 from 'Source/images/avatar-3.png';
+// icons
+import peopleIcon from 'Source/images/people-icon.png';
+import ticketIcon from 'Source/images/ticket-icon.png';
+import timeIcon from 'Source/images/time-icon.png';
 
 var descStyle = {
 	fontSize: '1.5em'
@@ -46,122 +42,60 @@ class LandingPage extends React.Component {
 				<Header ref='header' />
 
 				<div className={'ui basic center aligned segment landing-page-header'}>
-					<h2>很想去</h2>
+					<h2 className="head-title">很想去</h2>
 					<br />
-					<h1>東京？巴黎？紐約？莫斯科？</h1>
+					<h1 className="head-sub-title">東京？巴黎？紐約？莫斯科？</h1>
 					<br />
-					
 
-					<div className="ui stackable three column grid">
-						<div className="column">
-							<div className="ui fluid icon input">
-								<input type="text" placeholder="請輸入你的真實姓名" />
+						<div className="ui stackable three column grid">
+							<div className="column">
+								<div className="ui fluid icon input">
+									<input type="text" placeholder="請輸入你的真實姓名" />
+								</div>
+							</div>
+							<div className="column">
+								<div className="ui fluid icon input">
+									<input type="text" placeholder="請輸入E-mail" />
+								</div>
+							</div>
+							<div className="column">
+								<div className="ui fluid icon input">
+									<input type="text" placeholder="請輸入你的電話號碼" />
+								</div>
 							</div>
 						</div>
-						<div className="column">
-							<div className="ui fluid icon input">
-								<input type="text" placeholder="請輸入E-mail" />
-							</div>
-						</div>
-						<div className="column">
-							<div className="ui fluid icon input">
-								<input type="text" placeholder="請輸入你的電話號碼" />
-							</div>
-						</div>
-					</div>
-					
-					
+
 					<button className={'medium ui inverted button'} onClick={this.about}>
 						加入 Limago
 					</button>
+
+					<div className="ui stackable three column grid">
+						<div className="column item">
+							<img className="ui middle aligned tiny image" src={peopleIcon} />
+							<span className="color-white item-title">人數</span>
+							<h1 className="color-white item-value">{ '{ 1 x 2 x 多 }' }</h1>
+							<span className="color-white item-value">人同行</span>
+						</div>
+						<div className="column item center-block">
+							<img className="ui middle aligned tiny image" src={ticketIcon} />
+							<span className="color-white item-title"> 機票</span>
+							<h1 className="color-white item-value">{ '{ 1 x 5 x 9 }' }</h1>
+							<span className="color-white item-value">折機票</span>
+						</div>
+						<div className="column item">
+							<img className="ui middle aligned tiny image" src={timeIcon} />
+							<span className="color-white item-title"> 時間</span>
+							<h1 className="color-white item-value">{ '{ 3 x 8 x 24 }' }</h1>
+							<span className="color-white item-value">小時內出發</span>
+						</div>
+					</div>
+
+					
+					
 				</div>
 	
 				<section style={sectionStyle} ref='app_section'>
-					<div className={'ui basic center aligned very padded segment'}>
-						<div className={'ui two column middle aligned stackable grid'}>
-							<div className={'mobile only column'}>
-								<img src={appIcon} className={'ui centered image'} />
-							</div>
-							<div className={'column'}>
-								<div className={'ui basic left aligned segment'}>
-									<h1>
-										<I18n sign='landing_page.app_section.title'>Make Web Application Quicker</I18n>
-									</h1>
-									<p style={descStyle}>
-										<I18n sign='landing_page.app_section.desc'>Lantern is a boilerplate that helps creating an isomorphic web application with modern technologies.</I18n>
-									</p>
-								</div>
-							</div>
-							<div className={'tablet only computer only column'}>
-								<img src={appIcon} className={'ui large centered image'} />
-							</div>
-						</div>
-
-					</div>
-				</section>
-
-				<section style={sectionStyle}>
-					<div className={'ui basic aligned very padded segment'}>
-						<div className={'ui two column middle aligned stackable grid'}>
-							<div className={'column'}>
-								<img src={techIcon} className={'ui large centered image'} />
-							</div>
-							<div className={'column'}>
-								<div className={'ui basic left aligned segment'}>
-									<h1>
-										<I18n sign='landing_page.tech_section.title'>Modern Technologies</I18n>
-									</h1>
-									<p style={descStyle}>
-										<I18n sign='landing_page.tech_section.desc'>Lantern is using ES6, Node.js, Koa, React, Semantic UI and Webpack.</I18n>
-									</p>
-								</div>
-							</div>
-						</div>
-					</div>
-				</section>
-
-				<section style={sectionStyle}>
-					<div className={'ui basic very padded inverted segment'}>
-						<div className={'ui three column divided inverted stackable grid'}>
-
-							<div className={'middle aligned column'}>
-								<div className={'ui basic center aligned segment'}>
-									<h2 className={'ui center aligned inverted icon header'}>
-										<img className={'ui small circular image'} src={avatar1} />
-										<br />
-										<br />
-										<div>Fred Chien</div>
-										<div className={'sub header'}>Founder</div>
-									</h2>
-								</div>
-							</div>
-
-							<div className={'middle aligned column'}>
-								<div className={'ui basic center aligned segment'}>
-									<h2 className={'ui center aligned inverted icon header'}>
-										<img className={'ui small circular image'} src={avatar2} />
-										<br />
-										<br />
-										<div>Leon Lin</div>
-										<div className={'sub header'}>Founder</div>
-									</h2>
-								</div>
-							</div>
-
-							<div className={'middle aligned column'}>
-								<div className={'ui basic center aligned segment'}>
-									<h2 className={'ui center aligned inverted icon header'}>
-										<img className={'ui small circular image'} src={avatar3} />
-										<br />
-										<br />
-										<div>Unknown</div>
-										<div className={'sub header'}>Founder</div>
-									</h2>
-								</div>
-							</div>
-							
-						</div>
-					</div>
+					
 				</section>
 
 				<div className={'ui basic inverted center aligned segment'}>
