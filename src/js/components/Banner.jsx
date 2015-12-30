@@ -6,7 +6,7 @@ import I18n from 'Extension/I18n.jsx';
 import { flux } from 'Decorator';
 
 // icons
-import xIcon from 'Source/images/x-icon.png';
+import xIcon from 'Source/images/x-icon-white.png';
 import peopleIcon from 'Source/images/people-icon.png';
 import ticketIcon from 'Source/images/ticket-icon.png';
 import timeIcon from 'Source/images/time-icon.png';
@@ -25,7 +25,7 @@ var breakItems = {
 class Banner extends React.Component {
 
 	render() {
-		var includeIcon = <img className="ui mini image include" src={xIcon} />;
+		var includeIcon = <img className="ui mini image include" src={ xIcon } />;
 
 		return (
 			<div className={'ui basic center aligned segment landing-page-header'}>
@@ -67,7 +67,7 @@ class Banner extends React.Component {
 						<img className="ui middle aligned tiny image" src={peopleIcon} />
 						<span className="color-white item-title">人數</span>
 						<h1 className="color-white item-value">
-							1 { includeIcon } 2 { includeIcon } 多
+							{'{'} 1 { includeIcon } 2 { includeIcon } 多 {'}'}
 						</h1>
 						<span className="color-white item-value">人同行</span>
 					</div>
@@ -75,7 +75,7 @@ class Banner extends React.Component {
 						<img className="ui middle aligned tiny image" src={ticketIcon} />
 						<span className="color-white item-title"> 機票</span>
 						<h1 className="color-white item-value">
-							1 { includeIcon } 5 { includeIcon } 9
+							{ '{' } 1 { includeIcon } 5 { includeIcon } 9 } {'}'}
 						</h1>
 						<span className="color-white item-value">折機票</span>
 					</div>
@@ -83,7 +83,7 @@ class Banner extends React.Component {
 						<img className="ui middle aligned tiny image" src={timeIcon} />
 						<span className="color-white item-title"> 時間</span>
 						<h1 className="color-white item-value">
-							3 { includeIcon } 8 { includeIcon } 24
+							{'{'} 3 { includeIcon } 8 { includeIcon } 24 {'}'}
 						</h1>
 						<span className="color-white item-value">小時內出發</span>
 					</div>
