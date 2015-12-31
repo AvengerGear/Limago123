@@ -15,6 +15,8 @@ import peopleIcon from 'Source/images/people-icon.png';
 import ticketIcon from 'Source/images/ticket-icon.png';
 import timeIcon from 'Source/images/time-icon.png';
 import arrow from 'Source/images/arrow.png';
+import pen from 'Source/images/pen.png';
+import email from 'Source/images/email.png';
 
 var sectionStyle = {
 	paddingTop: '40px',
@@ -141,7 +143,49 @@ class LandingPage extends React.Component {
 					<img className="arrow" src={ arrow } />
 				</div>
 
-				<div className={'ui basic inverted center aligned segment'}>
+				<div className={'ui basic center aligned segment user-data'}>
+					<img className="ui middle aligned tiny image title-tag" src={ pen } />
+					<span className="title">馬上開始你的旅程</span>
+					<div className="ui stackable two column grid top-row">
+						<div className="three wide column"></div>
+						<div className="ten wide column">
+							<div className="ui fluid icon input">
+								<input type="text" placeholder="請輸入你的真實姓名" />
+							</div>
+						</div>
+					</div>
+					<div className="ui stackable three column grid top-row">
+						<div className="three wide column"></div>
+						<div className="five wide column">
+							<div className="column">
+								<div className="ui fluid icon input">
+									<input type="text" placeholder="請輸入你的電話號碼" />
+								</div>
+							</div>
+						</div>
+						<div className="five wide column">
+							<div className="column">
+								<div className="ui fluid icon input">
+									<input type="text" placeholder="請輸入E-mail" />
+								</div>
+							</div>
+						</div>
+					</div>
+					<div className="ui stackable two column grid">
+						<div className="three wide column"></div>
+						<div className="ten wide column">
+							<p className="text-left textarea-tag color-white">最想去哪裡旅行 ?</p>
+							<div className="ui fluid icon input">
+								<textarea rows="6" cols="250"></textarea>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div className={'ui basic inverted center aligned segment footer'}>
+					<img className="ui middle aligned tiny image icon" src={ email } />
+					<span>contact@limago.com</span>
+					<br />
 					<span>Copyright &copy; 2015 Limago Project. All Rights Reserved.</span>
 				</div>
 			</div>

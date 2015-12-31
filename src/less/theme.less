@@ -1,4 +1,7 @@
 @import "variables";
+.menu {
+	background-color: rgba(0,0,0,.6)!important;
+}
 .ui.basic.segment.landing-page-header {
 	background-image: url(../images/travel.jpg);
 	background-repeat: no-repeat;
@@ -118,7 +121,7 @@
 }
 .description {
 	padding-top: 60px;
-	padding-bottom: 60px;
+	padding-bottom: 50px;
 }
 .ui.basic.segment.target-space {
 	background-image: url(../images/sea.jpg);
@@ -126,6 +129,7 @@
 	background-size: cover;
 	background-position: center top;
 	min-height: 700px;
+	margin-bottom: 0;
 }
 .arrow {
 	position: relative;
@@ -133,7 +137,65 @@
 	top: -90px;
 	left: 20%;
 }
+.ui.basic.segment.user-data {
+	background-color: @orange;
+	color: white;
+	margin-bottom: 0;
+	padding-top: 50px;
+	padding-bottom: 70px;
+	.title-tag {
+		height: 55px;
+		width: 55px;
+		margin-top: -15px;
+		margin-right: 5px;
+	}
+	.title {
+		font-size: 32px;
+	}
+	input[type='text'] {
+		margin-top: 10px;
+		background-color: transparent;
+		border: 0;
+		border-bottom: solid 1px white;
+		border-radius: 0;
+		color: white;
+		&::-webkit-input-placeholder {
+		   color: white;
+		}
 
+		&:-moz-placeholder { /* Firefox 18- */
+		   color: white;  
+		}
+
+		&::-moz-placeholder {  /* Firefox 19+ */
+		   color: white;  
+		}
+
+		&:-ms-input-placeholder {  
+		   color: white;  
+		}
+	}
+	.top-row {
+		margin-top: 20px;
+	}
+	.textarea-tag {
+		margin-top: 30px;
+		padding-left: 14px;
+	}
+	textarea {
+		background-color: transparent;
+		border: solid 1px white;
+		color: white;
+	}
+}
+.footer {
+	img {
+		margin-top: -6px;
+		margin-right: 6px;
+		height: 30px!important;
+		width: 30px!important;
+	}
+}
 @media (max-width: @screen-sm-min) {
 	.ui.basic.segment.landing-page-header {
 		padding-bottom: 60px; 
