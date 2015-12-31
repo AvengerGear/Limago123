@@ -86,8 +86,8 @@ class LandingPage extends React.Component {
 				</section>
 
 				<section className="section-selects">
-					<div className="ui stackable two column grid limago-select">
-						<div className="eleven wide column">
+					<div className="ui stackable two column grid limago-select flex">
+						<div className="eleven wide column order-2">
 							<div className="ui stackable sixteen column grid ticket-section">
 								<div className="three wide column"></div>
 								<div className="ten wide column section-text">
@@ -98,7 +98,7 @@ class LandingPage extends React.Component {
 								</div>
 							</div>
 						</div>
-						<div className="five wide column ticket-section-icon">
+						<div className="five wide column ticket-section-icon order-1">
 							<div className={'ui basic center aligned segment'}>
 								<img className="ui middle aligned tiny image section-text" src={ ticketIcon } /	>
 								<p className="color-white icon-tag">機票</p>
@@ -178,6 +178,12 @@ class LandingPage extends React.Component {
 							<div className="ui fluid icon input">
 								<textarea rows="6" cols="250"></textarea>
 							</div>
+						</div>
+					</div>
+					<div className="ui stackable two column grid top-row">
+						<div className="six wide column"></div>
+						<div className="four wide column">
+							<span className="btn-style btn-base btn-submit">馬上加入Limago</span>
 						</div>
 					</div>
 				</div>

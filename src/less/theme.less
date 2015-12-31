@@ -1,4 +1,6 @@
 @import "variables";
+@import "buttons";
+
 .menu {
 	background-color: rgba(0,0,0,.6)!important;
 }
@@ -142,7 +144,7 @@
 	color: white;
 	margin-bottom: 0;
 	padding-top: 50px;
-	padding-bottom: 70px;
+	padding-bottom: 60px;
 	.title-tag {
 		height: 55px;
 		width: 55px;
@@ -176,10 +178,10 @@
 		}
 	}
 	.top-row {
-		margin-top: 20px;
+		margin-top: 10px;
 	}
 	.textarea-tag {
-		margin-top: 30px;
+		margin-top: 20px;
 		padding-left: 14px;
 	}
 	textarea {
@@ -197,6 +199,28 @@
 	}
 }
 @media (max-width: @screen-sm-min) {
+	.flex {
+		display: -ms-flexbox!important;
+		display: -webkit-flex!important;
+		display: -moz-flex!important;
+		display: flex!important;
+		-webkit-flex-flow: row wrap!important;
+		-ms-flex-flow: row wrap!important;
+		-moz-flex-flow: row wrap!important;
+		flex-flow: row wrap!important;
+	}
+	.order-1 {
+		order: 1;
+		-webkit-order: 1;
+		-ms-order: 1;
+		-moz-order: 1;
+	}
+	.order-2 {
+		order: 2;
+	    -webkit-order: 2;
+	    -ms-order: 2;
+	    -moz-order: 2;
+	}
 	.ui.basic.segment.landing-page-header {
 		padding-bottom: 60px; 
 		.center-item {
