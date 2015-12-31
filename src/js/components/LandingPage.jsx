@@ -14,6 +14,7 @@ import xIconGreen from 'Source/images/x-icon-green.png';
 import peopleIcon from 'Source/images/people-icon.png';
 import ticketIcon from 'Source/images/ticket-icon.png';
 import timeIcon from 'Source/images/time-icon.png';
+import arrow from 'Source/images/arrow.png';
 
 var sectionStyle = {
 	paddingTop: '40px',
@@ -125,9 +126,23 @@ class LandingPage extends React.Component {
 					</div>
 				</section>
 
+				<div className={'ui basic center aligned segment'}>
+					<div className="ui stackable three column grid">
+						<div className="four wide column"></div>
+						<div className="seven wide column">
+							<h2 className="description">
+								LiMaGo 提供 100 個以上的獨特早鳥票，只要登入我們的會員，你就有機會馬上進行一趟美妙的旅程。
+							</h2>
+						</div>
+					</div>
+				</div>
+
+				<div className={'ui basic center aligned segment target-space'}>
+					<img className="arrow" src={ arrow } />
+				</div>
 
 				<div className={'ui basic inverted center aligned segment'}>
-					<span>Copyright &copy; 2015 Lantern Project. All Rights Reserved.</span>
+					<span>Copyright &copy; 2015 Limago Project. All Rights Reserved.</span>
 				</div>
 			</div>
 		);
