@@ -147,15 +147,6 @@ class SignInPage extends React.Component {
 									<a href={this.toURL('/auth/facebook', target)} className='ui facebook icon button'>
 										<i className='facebook icon' />
 									</a>
-									<a href={this.toURL('/auth/github', target)} className='ui github icon button'>
-										<i className='github icon' />
-									</a>
-									<a href={this.toURL('/auth/google', target)} className='ui google plus icon button'>
-										<i className='google plus icon' />
-									</a>
-									<a href={this.toURL('/auth/linkedin', target)} className='ui linkedin icon button'>
-										<i className='linkedin icon' />
-									</a>
 								</div>
 							</div>
 
