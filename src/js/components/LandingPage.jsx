@@ -17,12 +17,7 @@ import timeIcon from 'Source/images/time-icon.png';
 
 var sectionStyle = {
 	paddingTop: '40px',
-	paddingBottom: '60px'
-};
-
-var itemSectionStyle = {
-	paddingTop: '60px',
-	paddingBottom: '60px'
+	paddingBottom: '50px'
 };
 
 var peopleColor =  {
@@ -46,7 +41,9 @@ class LandingPage extends React.Component {
 	}
 
 	render() {
-		var includeIcon = <img className="ui mini image include" src={ xIconBrown } />;
+		var includeIconBrown = <img className="ui mini image include" src={ xIconBrown } />;
+		var includeIconOrange = <img className="ui mini image include" src={ xIconOrange } />;
+		var includeIconGreen = <img className="ui mini image include" src={ xIconGreen } />;
 
 		return (
 			<div className='main-page'>
@@ -63,28 +60,71 @@ class LandingPage extends React.Component {
 					</div>
 				</section>
 
-				<section style={ itemSectionStyle } className="limago-select" ref='app_section'>
-					<div className="ui stackable two column grid">
-						<div className="five wide column" style={ peopleColor }>
+				<section ref='app_section' className="section-selects">
+					<div className="ui stackable two column grid limago-select">
+						<div className="five wide column people-section-icon">
 							<div className={'ui basic center aligned segment'}>
-								<img className="ui middle aligned tiny image" src={ peopleIcon } />
-								<p>人數</p>
+								<img className="ui middle aligned tiny image section-text" src={ peopleIcon } /	>
+								<p className="color-white icon-tag">人數</p>
 							</div>
 						</div>
 						<div className="eleven wide column">
-							<div className="ui stackable sixteen column grid">
+							<div className="ui stackable sixteen column grid people-section">
 								<div className="three wide column"></div>
-								<div className="ten wide column">
+								<div className="ten wide column section-text">
 									<h1 className="select-title color-brown text-right">
-										{'{'} 1 { includeIcon } 2 { includeIcon } 多 {'}'} <span className="color-black">人同行</span>
+										{'{'} 1 { includeIconBrown } 2 { includeIconBrown } 多 {'}'} <span className="color-black">人同行</span>
 									</h1>
-									<p className="text-right">你將有機會認識不一樣的朋友</p>
+									<p className="text-right select-sub-title">你將有機會認識不一樣的朋友</p>
 								</div>
 							</div>
 						</div>
 					</div>
 				</section>
-				
+
+				<section className="section-selects">
+					<div className="ui stackable two column grid limago-select">
+						<div className="eleven wide column">
+							<div className="ui stackable sixteen column grid ticket-section">
+								<div className="three wide column"></div>
+								<div className="ten wide column section-text">
+									<h1 className="select-title color-orange text-right">
+										{'{'} 1 { includeIconOrange } 5 { includeIconOrange } 9 {'}'} <span className="color-black">折機票</span>
+									</h1>
+									<p className="text-right select-sub-title">同時享有你意想不到的折扣機票</p>
+								</div>
+							</div>
+						</div>
+						<div className="five wide column ticket-section-icon">
+							<div className={'ui basic center aligned segment'}>
+								<img className="ui middle aligned tiny image section-text" src={ ticketIcon } /	>
+								<p className="color-white icon-tag">機票</p>
+							</div>
+						</div>
+					</div>
+				</section>
+
+				<section className="section-selects">
+					<div className="ui stackable two column grid limago-select">
+						<div className="five wide column time-section-icon">
+							<div className={'ui basic center aligned segment'}>
+								<img className="ui middle aligned tiny image section-text" src={ timeIcon } /	>
+								<p className="color-white icon-tag">時間</p>
+							</div>
+						</div>
+						<div className="eleven wide column time-section">
+							<div className="ui stackable sixteen column grid">
+								<div className="thirteen wide column section-text">
+									<h1 className="select-title color-green text-right">
+										{'{'} 3 { includeIconGreen } 8 { includeIconGreen } 24 {'}'} <span className="color-black">小時內出發</span>
+									</h1>
+									<p className="text-right select-sub-title">心動了嗎？那就馬上收拾你的行李吧！</p>
+								</div>
+							</div>
+						</div>
+					</div>
+				</section>
+
 
 				<div className={'ui basic inverted center aligned segment'}>
 					<span>Copyright &copy; 2015 Lantern Project. All Rights Reserved.</span>

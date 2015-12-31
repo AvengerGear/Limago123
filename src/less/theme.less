@@ -1,7 +1,7 @@
 @import "variables";
-
 .ui.basic.segment.landing-page-header {
 	background: url(../images/travel.jpg);
+	background-repeat: no-repeat;
 	background-size: cover;
 	background-position: center bottom;
 	min-height: 1000px;
@@ -53,7 +53,9 @@
 .main-page .ui.basic.segment {
 	margin-top: 0px;
 }
-
+.section-selects {
+	margin-bottom: 14px;
+}
 .limago {
 	.step-number {
 		height: 50px;
@@ -73,16 +75,70 @@
 			margin-top: -10px;
 		}	
 	}
-	
+	.people-section-icon {
+		background-color: @brown;
+	}
+	.ticket-section-icon {
+		background-color: @orange;
+	}
+	.time-section-icon {
+		background-color: @green;
+	}
+	.icon-tag {
+		font-size: 18px;
+	}
+	.select-sub-title {
+		font-size: 22px;
+		text-shadow: -2px 0 white, 0 2px white, 2px 0 white, 0 -2px white;
+	}
+	.section-text {
+		margin-top: 35px;
+	}
+	.people-section {
+		background-image: url(../images/people.png);
+		background-repeat: no-repeat;
+		background-size: inherit;
+		background-position: left bottom;
+		min-height: 250px;
+	}
+	.ticket-section {
+		background-image: url(../images/plane.png);
+		background-repeat: no-repeat;
+		background-size: inherit;
+		background-position: left bottom;
+		min-height: 250px;
+	}
+	.time-section {
+		background-image: url(../images/clock.png);
+		background-repeat: no-repeat;
+		background-size: inherit;
+		background-position: right center;
+		min-height: 250px;
+	}
 }
-
-
 
 @media (max-width: @screen-sm-min) {
 	.ui.basic.segment.landing-page-header {
 		padding-bottom: 60px; 
 		.center-item {
 			border: 0;
+		}
+	}
+	.limago-select {
+		.section-text {
+			margin-top: 0;
+		}
+		.select-sub-title {
+			margin-bottom: 40px;
+		}
+		.people-section {
+			background-size: contain;
+		}
+		.ticket-section {
+			background-size: contain;
+		}
+		.time-section {
+			background-size: cover;
 		}
 	}
 }
