@@ -45,11 +45,12 @@ router.post('/signin', function *(next) {
 
 router.post('/signup', function *() {
 	var name = this.request.body.name || null;
+	var phone = this.request.body.phone || null;
 	var password = this.request.body.password || null;
 	var email = this.request.body.email || null;
 
 	// Check fields
-	if (!name || !password || !email) {
+	if (!name || !phone || !password || !email) {
 		this.status = 400;
 		return;
 	}
@@ -72,6 +73,7 @@ router.post('/signup', function *() {
 	try {
 		var member = yield Member.create({
 			name: name,
+			phone: phone,
 			password: password,
 			email: email
 		});

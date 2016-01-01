@@ -6,6 +6,7 @@ export default function *() {
 		status: 'normal',
 		name: 'Nobody',
 		username: null,
+		phone: null,
 		email: null,
 		logined: false,
 		permissions: {},
@@ -181,7 +182,7 @@ export default function *() {
 		}
 	});
 
-	this.on('store.User.signUp', function *(email, password, name) {
+	this.on('store.User.signUp', function *(email, phone, password, name) {
 
 		var store = this.getState('User');
 
@@ -190,6 +191,7 @@ export default function *() {
 				.post('/signup')
 				.send({
 					email: email,
+					phone: phone,
 					password: password,
 					name: name
 				});
@@ -200,6 +202,7 @@ export default function *() {
 				store.status = 'normal';
 				store.logined = true;
 				store.name = name;
+				store.phone = phone;
 				store.username = email;
 				store.email = email;
 				store.login_time = res.body.data.login_time;

@@ -23,7 +23,9 @@ class SignUpPage extends React.Component {
 			password_error: false,
 			password_empty_error: false,
 			name_error: false,
-			name_empty_error: false
+			name_empty_error: false,
+			phone_error: false,
+			phone_empty_error: false
 		};
 	}
 
@@ -37,6 +39,7 @@ class SignUpPage extends React.Component {
 
 	signUp = () => {
 		var email = this.refs.email.value.trim();
+		var phone = this.refs.phone.value.trim();
 		var name = this.refs.name.value.trim();
 		var password = this.refs.password.value;
 		var confirm_password = this.refs.confirm_password.value;
@@ -49,7 +52,9 @@ class SignUpPage extends React.Component {
 			password_error: false,
 			password_empty_error: false,
 			name_error: false,
-			name_empty_error: false
+			name_empty_error: false,
+			phone_error: false,
+			phone_empty_error: false
 		};
 
 		if (email == '') {
@@ -62,6 +67,12 @@ class SignUpPage extends React.Component {
 			state.error = true;
 			state.name_error = true;
 			state.name_empty_error = true;
+		}
+
+		if (phone == '') {
+			state.error = true;
+			state.phone_error = true;
+			state.phone_empty_error = true;
 		}
 
 		if (password == '') {
@@ -86,8 +97,10 @@ class SignUpPage extends React.Component {
 		// Sign up now
 		this.flux.dispatch('action.User.signUp',
 			this.refs.email.value,
+			this.refs.phone.value,
 			this.refs.password.value,
-			this.refs.name.value);
+			this.refs.name.value
+		);
 	}
 
 	onChange = () => {
@@ -123,6 +136,7 @@ class SignUpPage extends React.Component {
 	}
 
 	render() {
+		var phoneClasses = 'required field';
 		var emailClasses = 'required field';
 		var nameClasses = 'required field';
 		var passwordClasses = 'required field';
@@ -144,7 +158,6 @@ class SignUpPage extends React.Component {
 					</div>
 				);
 			} else {
-
 				message = (
 					<div className='ui negative icon message'>
 						<i className={'warning sign icon'} />
@@ -162,6 +175,10 @@ class SignUpPage extends React.Component {
 
 			if (this.state.name_error) {
 				nameClasses += ' error';
+			}
+
+			if (this.state.phone_error) {
+				phoneClasses += ' error';
 			}
 
 			if (this.state.password_error) {
@@ -195,7 +212,15 @@ class SignUpPage extends React.Component {
 										<label><I18n sign='sign_up.display_name'>Display Name</I18n></label>
 										<div className={'ui left icon input'}>
 											<i className={'user icon'} />
-											<input type='text' ref='name' name='name' placeholder='Fred Chien' />
+											<input type='text' ref='name' name='name' placeholder='Limago' />
+										</div>
+									</div>
+
+									<div className={phoneClasses}>
+										<label><I18n sign='sign_up.phone'>Cellphone Number</I18n></label>
+										<div className={'ui left icon input'}>
+											<i className={'phone icon'} />
+											<input type='text' ref='phone' name='phone' placeholder='0912345678' />
 										</div>
 									</div>
 
@@ -203,7 +228,7 @@ class SignUpPage extends React.Component {
 										<label><I18n sign='sign_up.email'>E-mail Address</I18n></label>
 										<div className={'ui left icon input'}>
 											<i className={'mail icon'} />
-											<input type='text' ref='email' name='email' placeholder='fred@example.com' autoFocus={true} />
+											<input type='text' ref='email' name='email' placeholder='limago@example.com' autoFocus={true} />
 										</div>
 									</div>
 
