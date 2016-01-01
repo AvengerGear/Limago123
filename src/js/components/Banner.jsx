@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router';
 import ReactDOM from 'react-dom';
 import I18n from 'Extension/I18n.jsx';
 
@@ -23,6 +24,14 @@ var breakItems = {
 
 @flux
 class Banner extends React.Component {
+	toSignUp = () => {
+		// Copy data to sign up page
+		this.flux.dispatch('action.User.toSignUp',
+			this.refs.email.value,
+			this.refs.phone.value,
+			this.refs.name.value
+		);
+	}
 
 	render() {
 		var includeIcon = <img className="ui mini image include" src={ xIcon } />;
@@ -39,28 +48,30 @@ class Banner extends React.Component {
 						<div className="ui stackable three column grid">
 							<div className="column">
 								<div className="ui fluid icon input">
-									<input type="text" placeholder="請輸入你的真實姓名" />
+									<input type="text" ref='name' placeholder="請輸入你的真實姓名" />
 								</div>
 								<p className="text-left input-tag color-white">姓名</p>
 							</div>
 							<div className="column">
 								<div className="ui fluid icon input">
-									<input type="text" placeholder="請輸入E-mail" />
+									<input type="text" ref='email' placeholder="請輸入E-mail" />
 								</div>
 								<p className="text-left input-tag color-white">E-mail</p>
 							</div>
 							<div className="column">
 								<div className="ui fluid icon input">
-									<input type="text" placeholder="請輸入你的電話號碼" />
+									<input type="text" ref='phone' placeholder="請輸入你的電話號碼" />
 								</div>
 								<p className="text-left input-tag color-white">電話</p>
 							</div>
 						</div>
 					</div>
 				</div>
-				<button className={'large ui inverted button join'} onClick={this.about}>
+
+				<Link to='/signup' className={'large ui inverted button join'} onClick={this.toSignUp}>
 					加入 Limago
-				</button>
+				</Link>
+
 				<div style={ breakItems }></div>
 				<div className="ui stackable three column grid">
 					<div className="column item">

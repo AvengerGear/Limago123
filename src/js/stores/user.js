@@ -231,4 +231,14 @@ export default function *() {
 			this.dispatch('state.User');
 		}
 	});
+
+	this.on('store.User.toSignUp', function *(email, phone, name) {
+		var store = this.getState('User');
+
+		store.name = name;
+		store.phone = phone;
+		store.email = email;
+
+		this.dispatch('state.User');
+	});
 };

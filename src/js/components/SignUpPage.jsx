@@ -10,7 +10,6 @@ import Header from './Header.jsx';
 @router
 @flux
 class SignUpPage extends React.Component {
-
 	constructor() {
 		super();
 
@@ -116,6 +115,14 @@ class SignUpPage extends React.Component {
 			return;
 		}
 
+		var userData = {
+			'name': user.name,
+			'phone': user.phone,
+			'email': user.email
+		}
+
+		this.setState(userData);
+
 		var updateState = {}
 		switch(user.status) {
 		case 'signup-failed-existing-account':
@@ -143,6 +150,8 @@ class SignUpPage extends React.Component {
 		var confirmClasses = 'required field';
 		var message;
 		var fieldClass = 'field';
+		var user = this.state;
+
 		if (this.state.error) {
 			fieldClass += ' error';
 
@@ -203,6 +212,7 @@ class SignUpPage extends React.Component {
 								<i className='add user icon' />
 								<div className='content'><I18n sign='sign_up.header'>Create a New Account</I18n></div>
 							</h1>
+						
 							<div className={'ui basic segment'}>
 								{message}
 
@@ -212,7 +222,7 @@ class SignUpPage extends React.Component {
 										<label><I18n sign='sign_up.display_name'>Display Name</I18n></label>
 										<div className={'ui left icon input'}>
 											<i className={'user icon'} />
-											<input type='text' ref='name' name='name' placeholder='Limago' />
+											<input type='text' ref='name' name='name' placeholder='Limago' value={ user.name || null } />
 										</div>
 									</div>
 
@@ -220,7 +230,7 @@ class SignUpPage extends React.Component {
 										<label><I18n sign='sign_up.phone'>Cellphone Number</I18n></label>
 										<div className={'ui left icon input'}>
 											<i className={'phone icon'} />
-											<input type='text' ref='phone' name='phone' placeholder='0912345678' />
+											<input type='text' ref='phone' name='phone' placeholder='0912345678' value={ user.phone || null } />
 										</div>
 									</div>
 
@@ -228,7 +238,7 @@ class SignUpPage extends React.Component {
 										<label><I18n sign='sign_up.email'>E-mail Address</I18n></label>
 										<div className={'ui left icon input'}>
 											<i className={'mail icon'} />
-											<input type='text' ref='email' name='email' placeholder='limago@example.com' autoFocus={true} />
+											<input type='text' ref='email' name='email' placeholder='limago@example.com' autoFocus={true}  value={ user.email || null } />
 										</div>
 									</div>
 

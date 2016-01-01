@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router';
 import ReactDOM from 'react-dom';
 import Header from './Header.jsx';
 import Banner from './Banner.jsx';
@@ -27,6 +28,22 @@ var peopleColor =  {
 	backgroundColor: '#BCA27D'
 }
 
+class Notes extends React.Component {
+	render() {
+		return (
+			<div className="ui stackable two column grid">
+				<div className="three wide column"></div>
+				<div className="ten wide column">
+					<p className="text-left textarea-tag color-white">最想去哪裡旅行 ?</p>
+					<div className="ui fluid icon input">
+						<textarea rows="6" cols="250"></textarea>
+					</div>
+				</div>
+			</div>
+		);
+	}
+}
+
 @flux
 class LandingPage extends React.Component {
 
@@ -41,6 +58,15 @@ class LandingPage extends React.Component {
 		$('html, body').stop().animate({
 			scrollTop: $node.offset().top - $header.height()
 		}, 400);
+	}
+
+	toSignUp = () => {
+		// Copy data to sign up page
+		this.flux.dispatch('action.User.toSignUp',
+			this.refs.email.value,
+			this.refs.phone.value,
+			this.refs.name.value
+		);
 	}
 
 	render() {
@@ -150,7 +176,7 @@ class LandingPage extends React.Component {
 						<div className="three wide column"></div>
 						<div className="ten wide column">
 							<div className="ui fluid icon input">
-								<input type="text" placeholder="請輸入你的真實姓名" />
+								<input type="text" ref='name' placeholder="請輸入你的真實姓名" />
 							</div>
 						</div>
 					</div>
@@ -159,31 +185,25 @@ class LandingPage extends React.Component {
 						<div className="five wide column">
 							<div className="column">
 								<div className="ui fluid icon input">
-									<input type="text" placeholder="請輸入你的電話號碼" />
+									<input type="text" ref='phone' placeholder="請輸入你的電話號碼" />
 								</div>
 							</div>
 						</div>
 						<div className="five wide column">
 							<div className="column">
 								<div className="ui fluid icon input">
-									<input type="text" placeholder="請輸入E-mail" />
+									<input type="text" ref='email' placeholder="請輸入E-mail" />
 								</div>
 							</div>
 						</div>
 					</div>
-					<div className="ui stackable two column grid">
-						<div className="three wide column"></div>
-						<div className="ten wide column">
-							<p className="text-left textarea-tag color-white">最想去哪裡旅行 ?</p>
-							<div className="ui fluid icon input">
-								<textarea rows="6" cols="250"></textarea>
-							</div>
-						</div>
-					</div>
+				
 					<div className="ui stackable two column grid top-row">
 						<div className="six wide column"></div>
 						<div className="four wide column">
-							<span className="btn-style btn-base btn-submit">馬上加入Limago</span>
+							<Link to='/signup' className={'btn-style btn-base btn-submit'} onClick={ this.toSignUp }>
+								馬上加入Limago
+							</Link>
 						</div>
 					</div>
 				</div>
