@@ -158,7 +158,7 @@ class LandingPage extends React.Component {
 					<div className="ui stackable three column grid">
 						<div className="four wide column"></div>
 						<div className="seven wide column">
-							<h2 className="description">
+							<h2 className="limago-description">
 								LiMaGo 提供 100 個以上的獨特早鳥票，只要登入我們的會員，你就有機會馬上進行一趟美妙的旅程。
 							</h2>
 						</div>

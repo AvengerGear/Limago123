@@ -232,6 +232,57 @@ export default function *() {
 		}
 	});
 
+	this.on('store.User.signUpWithTicket', function *(email, phone, password, name, qrcode) {
+
+		var store = this.getState('User');
+
+		try {
+			var res = yield this.request
+				.post('/signup')
+				.send({
+					email: email,
+					phone: phone,
+					password: password,
+					name: name,
+					qrcode: qrcode
+				});
+
+			switch(res.status) {
+			case 200:
+				// Updating store
+				store.status = 'normal';
+				store.logined = true;
+				store.name = name;
+				store.phone = phone;
+				store.username = email;
+				store.email = email;
+				store.login_time = res.body.data.login_time;
+				store.avatar_hash = res.body.data.avatar_hash;
+				store.permissions = res.body.data.permissions;
+				break;
+			}
+
+			this.dispatch('state.User');
+		} catch(e) {
+
+			switch(e.status) {
+			case 500:
+				store.status = 'signup-error';
+				break;
+
+			case 409:
+				store.status = 'signup-failed-existing-account';
+				break;
+
+			case 400:
+				store.status = 'signup-failed';
+				break;
+			}
+
+			this.dispatch('state.User');
+		}
+	});
+
 	this.on('store.User.toSignUp', function *(email, phone, name) {
 		var store = this.getState('User');
 
