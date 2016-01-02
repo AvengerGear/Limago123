@@ -72,14 +72,54 @@ export default function() {
 					super(props, context);
 
 					// Do not fetch data twice
-					if (!context.flux.disabledEventHandler) {
+					if (!context.flux.disabledEventHandler && !context.flux.isBrowser) {
 						handleActions(Component, props, context);
+					}
+				}
+
+				componentDidMount() {
+
+					// Making a proxy for methods of component
+					for (var method in this.refs.component) {
+
+						switch(method) {
+						case 'render':
+						case 'componentWillMount':
+						case 'componentDidMount':
+						case 'componentWillUnmount':
+						case 'componentWillReceiveProps':
+						case '_reactInternalInstance':
+						case 'isReactComponent':
+						case 'state':
+						case 'setState':
+						case 'forceUpdate':
+						case 'props':
+						case 'context':
+						case 'refs':
+						case 'updater':
+							continue;
+						}
+
+						(function(self, method) {
+							Object.defineProperty(self, method, {
+								get: function() {
+									return self.refs.component[method];
+								},
+								set: function(value) {
+									self.refs.component[method] = value;
+								}
+							});
+						})(this, method);
+					}
+
+					if (this.flux.isBrowser) {
+						handleActions(Component, this.props, this.context);
 					}
 				}
 
 				render() {
 					return (
-						<Component {...this.props} />
+						<Component ref='component' {...this.props} />
 					);
 				}
 			};
