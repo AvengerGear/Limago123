@@ -1,6 +1,6 @@
 {
 	"service": {
-		"name": "Lantern",
+		"name": "Limago",
 		"external_url": "http://localhost:3001"
 	},
 	"server": {
@@ -15,7 +15,7 @@
 			"refreshToken": "1/rvU5OkrToA7AujYucB9dagEHT4KoBbiXzP31aaJWweVIgOrJDtdun6zK6XiATCKT"
 		},
 		"sender": {
-			"name": "Lantern Service",
+			"name": "Limago Service",
 			"address": "service@yourdomain.com"
 		}
 	},
