@@ -58,43 +58,49 @@ class SignUpPage extends React.Component {
 	}
 
 	onChange = () => {
-
 		var user = this.flux.getState('User');
 
 		// No need to sign in if logined already
 		if (user.logined) {
+			var userData = {
+				'name': user.name,
+				'phone': user.phone,
+				'email': user.email
+			}
+
+			this.setState(userData);
+
+			var updateState = {}
+			switch(user.status) {
+			case 'signup-failed-existing-account':
+				updateState.email_existing_error = true;
+				return
+
+			case 'signup-failed':
+				updateState.error = true;
+
+				// Clear password inputbox
+				this.refs.password.value = ''; 
+				this.refs.confirm_password.value = ''; 
+
+				// Focus on email inputbox
+				this.refs.email.select();
+
+				this.setState(updateState);
+				return
+			}
+
 			this.history.pushState(null, '/complete/getticket');
-			return;
-		}
-
-		var userData = {
-			'name': user.name,
-			'phone': user.phone,
-			'email': user.email
-		}
-
-		this.setState(userData);
-
-		var updateState = {}
-		switch(user.status) {
-		case 'signup-failed-existing-account':
-			updateState.email_existing_error = true;
-
-		case 'signup-failed':
-			updateState.error = true;
-
-			// Clear password inputbox
-			this.refs.password.value = ''; 
-			this.refs.confirm_password.value = ''; 
-
-			// Focus on email inputbox
-			this.refs.email.select();
-
-			this.setState(updateState);
 		}
 	}
 
 	render() {
+		var user = this.flux.getState('User');
+
+		if (!user.logined) {
+			this.history.pushState(null, '/');
+		}
+
 		var numberClasses = 'required field';
 		var message;
 		var fieldClass = 'field';

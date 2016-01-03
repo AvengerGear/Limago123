@@ -168,7 +168,20 @@ router.post('/ticket/number', function *() {
 		return;
 	}
 
-	// Save
+	// Check whether numbers exists or not
+	try {
+		var ret = yield Tickets.getNumbers(number);
+		if (ret) {
+			this.status = 409;
+			return;
+		}
+	} catch(e) {
+		console.log(e);
+		this.status = 500;
+		return;
+	}
+
+	// Save Number
 	try {
 		var ticket = yield Tickets.updateNumberByEmail(email, number);
 	} catch(e) {
