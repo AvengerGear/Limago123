@@ -39,7 +39,7 @@ class SignUpPage extends React.Component {
 	signUp = () => {
 		var urls = window.location.pathname;
 		var urlArrs = urls.split('/');
-		
+
 		var email = this.refs.email.value.trim();
 		var phone = this.refs.phone.value.trim();
 		var name = this.refs.name.value.trim();
@@ -90,6 +90,10 @@ class SignUpPage extends React.Component {
 			state.confirm_error = true;
 		}
 
+		if (urlArrs[2] == '') {
+			state.error = true;
+		}
+
 		// Something's wrong
 		if (state.error) {
 			this.setState(state);
@@ -97,11 +101,12 @@ class SignUpPage extends React.Component {
 		}
 
 		// Sign up now
-		this.flux.dispatch('action.User.signUp',
+		this.flux.dispatch('action.User.signUpWithTicket',
 			this.refs.email.value,
 			this.refs.phone.value,
 			this.refs.password.value,
-			this.refs.name.value
+			this.refs.name.value,
+			urlArrs[2]
 		);
 	}
 

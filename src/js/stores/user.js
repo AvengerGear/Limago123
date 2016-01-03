@@ -238,31 +238,41 @@ export default function *() {
 
 		try {
 			var res = yield this.request
-				.post('/signup')
+				.post('/signup/ticket')
 				.send({
 					email: email,
 					phone: phone,
 					password: password,
-					name: name,
-					qrcode: qrcode
+					name: name
 				});
-
 			switch(res.status) {
 			case 200:
-				// Updating store
-				store.status = 'normal';
-				store.logined = true;
-				store.name = name;
-				store.phone = phone;
-				store.username = email;
-				store.email = email;
-				store.login_time = res.body.data.login_time;
-				store.avatar_hash = res.body.data.avatar_hash;
-				store.permissions = res.body.data.permissions;
+				var user_id = res.body.data.id;
+				var res = yield this.request
+					.post('/ticket/qrcode')
+					.send({
+						user_id: user_id,
+						qrcode: qrcode
+					});
+				switch(res.status) {
+				case 200:
+					// Updating store
+					store.status = 'normal';
+					store.logined = true;
+					store.name = name;
+					store.phone = phone;
+					store.username = email;
+					store.email = email;
+					store.login_time = res.body.data.login_time;
+					store.avatar_hash = res.body.data.avatar_hash;
+					store.permissions = res.body.data.permissions;
+					break;
+				}
+
+				this.dispatch('state.User');
+
 				break;
 			}
-
-			this.dispatch('state.User');
 		} catch(e) {
 
 			switch(e.status) {

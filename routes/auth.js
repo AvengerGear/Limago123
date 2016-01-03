@@ -2,6 +2,7 @@ var crypto = require('crypto');
 var Router = require('koa-router');
 var passport = require('koa-passport');
 var Member = require('../lib/member');
+var Tickets = require('../lib/tickets');
 var Passport = require('../lib/passport');
 
 var router = module.exports = new Router();
@@ -85,6 +86,88 @@ router.post('/signup', function *() {
 
 	// Store login information in session
 	var m = yield Passport.login(this, member);
+
+	// Return result to client
+	this.body = {
+		success: true,
+		data: m
+	};
+});
+
+router.post('/signup/ticket', function *() {
+	var name = this.request.body.name || null;
+	var phone = this.request.body.phone || null;
+	var password = this.request.body.password || null;
+	var email = this.request.body.email || null;
+
+	// Check fields
+	if (!name || !phone || !password || !email) {
+		this.status = 400;
+		return;
+	}
+
+	// Check whether user exists or not
+	try {
+		// TODO: It should create a record directly if account was available.
+		var ret = yield Member.getMemberByEmail(email);
+		if (ret) {
+			this.status = 409;
+			return;
+		}
+	} catch(e) {
+		console.log(e);
+		this.status = 500;
+		return;
+	}
+
+	// Create a new member
+	try {
+		var member = yield Member.create({
+			name: name,
+			phone: phone,
+			password: password,
+			email: email
+		});
+	} catch(e) {
+		console.log(e);
+		this.status = 500;
+		return;
+	}
+
+	// Store login information in session
+	var m = yield Passport.login(this, member);
+
+	// Return result to client
+	this.body = {
+		success: true,
+		data: m
+	};
+});
+
+router.post('/ticket/qrcode', function *() {
+	var user_id = this.request.body.user_id || null;
+	var qrcode = this.request.body.qrcode || null;
+
+	// Check fields
+	if (!user_id || !qrcode) {
+		this.status = 400;
+		return;
+	}
+
+	// Create a new ticket
+	try {
+		var ticket = yield Tickets.create({
+			user_id: user_id,
+			qrcode: qrcode
+		});
+	} catch(e) {
+		console.log(e);
+		this.status = 500;
+		return;
+	}
+
+	// Store login information in session
+	var m = yield Passport.login(this, ticket);
 
 	// Return result to client
 	this.body = {
