@@ -159,34 +159,26 @@ router.post('/signup/ticket', function *() {
 });
 
 router.post('/ticket/number', function *() {
-	var user_id = this.request.body.user_id || null;
-	var qrcode = this.request.body.qrcode || null;
+	var email = this.request.body.email || null;
+	var number = this.request.body.number || null;
 
 	// Check fields
-	if (!user_id || !qrcode) {
+	if (!email || !number) {
 		this.status = 400;
 		return;
 	}
 
-	// Create a new ticket
-	// try {
-	// 	var ticket = yield Tickets.create({
-	// 		user_id: user_id,
-	// 		qrcode: qrcode
-	// 	});
-	// } catch(e) {
-	// 	console.log(e);
-	// 	this.status = 500;
-	// 	return;
-	// }
-
-	// Store login information in session
-	var m = yield Passport.login(this, ticket);
+	// Save
+	try {
+		var ticket = yield Tickets.updateNumberByEmail(email, number);
+	} catch(e) {
+		this.status = 500;
+		return;
+	}
 
 	// Return result to client
 	this.body = {
-		success: true,
-		data: m
+		success: true
 	};
 });
 

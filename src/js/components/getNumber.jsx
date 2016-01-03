@@ -22,6 +22,14 @@ class SignUpPage extends React.Component {
 		};
 	}
 
+	componentWillMount = () => {
+		this.flux.on('state.User', this.flux.bindListener(this.onChange));
+	}
+
+	componentWillUnmount = () => {
+		this.flux.off('state.User', this.onChange);
+	}
+
 	getNumber = () => {
 		var number = this.refs.number.value.trim();
 
@@ -43,13 +51,47 @@ class SignUpPage extends React.Component {
 			return;
 		}
 
-		// Sign up now
-		// this.flux.dispatch('action.User.signUp',
-		// 	this.refs.email.value,
-		// 	this.refs.phone.value,
-		// 	this.refs.password.value,
-		// 	this.refs.name.value
-		// );
+		// Get number
+		this.flux.dispatch('action.User.getNumber',
+			this.refs.number.value
+		);
+	}
+
+	onChange = () => {
+
+		var user = this.flux.getState('User');
+
+		// No need to sign in if logined already
+		if (user.logined) {
+			this.history.pushState(null, '/complete/getticket');
+			return;
+		}
+
+		var userData = {
+			'name': user.name,
+			'phone': user.phone,
+			'email': user.email
+		}
+
+		this.setState(userData);
+
+		var updateState = {}
+		switch(user.status) {
+		case 'signup-failed-existing-account':
+			updateState.email_existing_error = true;
+
+		case 'signup-failed':
+			updateState.error = true;
+
+			// Clear password inputbox
+			this.refs.password.value = ''; 
+			this.refs.confirm_password.value = ''; 
+
+			// Focus on email inputbox
+			this.refs.email.select();
+
+			this.setState(updateState);
+		}
 	}
 
 	render() {

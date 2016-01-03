@@ -116,10 +116,7 @@ class SignUpPage extends React.Component {
 
 		// No need to sign in if logined already
 		if (user.logined) {
-			if (this.props.location.query.target)
-				this.history.pushState(null, this.props.location.query.target);
-			else
-				this.history.pushState(null, '/');
+			this.history.pushState(null, '/getNumber');
 			return;
 		}
 
@@ -268,7 +265,7 @@ class SignUpPage extends React.Component {
 										<label><I18n sign='sign_up.email'>E-mail Address</I18n></label>
 										<div className={'ui left icon input'}>
 											<i className={'mail icon'} />
-											<input type='text' ref='email' name='email' placeholder='limago@example.com' autoFocus={true}  value={ user.email || null } />
+											<input type='email' ref='email' name='email' placeholder='limago@example.com' autoFocus={true}  value={ user.email || null } />
 										</div>
 									</div>
 
