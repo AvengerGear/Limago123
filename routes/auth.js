@@ -99,9 +99,10 @@ router.post('/signup/ticket', function *() {
 	var phone = this.request.body.phone || null;
 	var password = this.request.body.password || null;
 	var email = this.request.body.email || null;
+	var qrcode = this.request.body.qrcode || null;
 
 	// Check fields
-	if (!name || !phone || !password || !email) {
+	if (!name || !phone || !password || !email || !qrcode) {
 		this.status = 400;
 		return;
 	}
@@ -137,6 +138,21 @@ router.post('/signup/ticket', function *() {
 	// Store login information in session
 	var m = yield Passport.login(this, member);
 
+console.log(m)
+
+
+	// Create a new ticket
+	try {
+		var ticket = yield Tickets.create({
+			user_id: m.id,
+			qrcode: qrcode
+		});
+	} catch(e) {
+		console.log(e);
+		this.status = 500;
+		return;
+	}
+
 	// Return result to client
 	this.body = {
 		success: true,
@@ -144,7 +160,7 @@ router.post('/signup/ticket', function *() {
 	};
 });
 
-router.post('/ticket/qrcode', function *() {
+router.post('/ticket/number', function *() {
 	var user_id = this.request.body.user_id || null;
 	var qrcode = this.request.body.qrcode || null;
 
@@ -155,16 +171,16 @@ router.post('/ticket/qrcode', function *() {
 	}
 
 	// Create a new ticket
-	try {
-		var ticket = yield Tickets.create({
-			user_id: user_id,
-			qrcode: qrcode
-		});
-	} catch(e) {
-		console.log(e);
-		this.status = 500;
-		return;
-	}
+	// try {
+	// 	var ticket = yield Tickets.create({
+	// 		user_id: user_id,
+	// 		qrcode: qrcode
+	// 	});
+	// } catch(e) {
+	// 	console.log(e);
+	// 	this.status = 500;
+	// 	return;
+	// }
 
 	// Store login information in session
 	var m = yield Passport.login(this, ticket);
