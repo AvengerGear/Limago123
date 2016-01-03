@@ -138,13 +138,11 @@ router.post('/signup/ticket', function *() {
 	// Store login information in session
 	var m = yield Passport.login(this, member);
 
-console.log(m)
-
-
 	// Create a new ticket
 	try {
 		var ticket = yield Tickets.create({
 			user_id: m.id,
+			email: email,
 			qrcode: qrcode
 		});
 	} catch(e) {
