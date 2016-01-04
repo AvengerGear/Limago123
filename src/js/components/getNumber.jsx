@@ -18,7 +18,8 @@ class SignUpPage extends React.Component {
 		this.state = {
 			error: false,
 			number_error: false,
-			number_empty_error: false
+			number_empty_error: false,
+			number_existing_error: false
 		};
 	}
 
@@ -71,26 +72,26 @@ class SignUpPage extends React.Component {
 			this.setState(userData);
 
 			var updateState = {}
+
 			switch(user.status) {
 			case 'signup-failed-existing-account':
-				updateState.email_existing_error = true;
-				return
-
+				updateState.number_existing_error = true;
+				
+				this.setState(updateState);
 			case 'signup-failed':
 				updateState.error = true;
 
-				// Clear password inputbox
-				this.refs.password.value = ''; 
-				this.refs.confirm_password.value = ''; 
+				// Clear number inputbox
+				this.refs.number.value = ''; 
 
-				// Focus on email inputbox
-				this.refs.email.select();
+				// Focus on number inputbox
+				this.refs.number.select();
 
 				this.setState(updateState);
-				return
-			}
-
-			this.history.pushState(null, '/complete/getticket');
+				break;
+			case 'getNumber':
+				this.history.pushState(null, '/complete/getticket');
+			}	
 		}
 	}
 
@@ -107,6 +108,33 @@ class SignUpPage extends React.Component {
 
 		if (this.state.error) {
 			fieldClass += ' error';
+
+			if (this.state.number_existing_error) {
+				numberClasses += ' error';
+				message = (
+					<div className='ui negative icon message'>
+						<i className={'warning sign icon'} />
+						<div className='content'>
+							<div className='header'>編號重複</div>
+							<p>此編號已遭使用，請重新輸入</p>
+						</div>
+					</div>
+				);
+			} else {
+				message = (
+					<div className='ui negative icon message'>
+						<i className={'warning sign icon'} />
+						<div className='content'>
+							<div className='header'>輸入錯誤</div>
+							<p>請輸入臨時會員編號</p>
+						</div>
+					</div>
+				);
+
+				if (this.state.email_error) {
+					numberClasses += ' error';
+				}
+			}
 
 			if (this.state.number_error) {
 				numberClasses += ' error';
@@ -128,7 +156,7 @@ class SignUpPage extends React.Component {
 						<div className='column'>
 							<h1 className='ui header'>
 								<i className='suitcase icon' />
-								<div className='content'><I18n sign='sign_up.header'>請輸入臨時會員編號</I18n></div>
+								<div className='content'><I18n sign='sign_up.header'>臨時會員編號有誤，請重新輸入</I18n></div>
 							</h1>
 						
 							<div className="ui ordered steps">
