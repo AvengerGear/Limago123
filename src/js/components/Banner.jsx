@@ -4,7 +4,7 @@ import ReactDOM from 'react-dom';
 import I18n from 'Extension/I18n.jsx';
 
 // Decorators
-import { flux } from 'Decorator';
+import { router, flux, i18n } from 'Decorator';
 
 // icons
 import xIcon from 'Source/images/x-icon-white.png';
@@ -22,15 +22,27 @@ var breakItems = {
 	marginTop: '150px'
 };
 
+@router
 @flux
 class Banner extends React.Component {
 	toSignUp = () => {
-		// Copy data to sign up page
-		this.flux.dispatch('action.User.toSignUp',
-			this.refs.email.value,
-			this.refs.phone.value,
-			this.refs.name.value
-		);
+		var user = this.flux.getState('User');
+
+		// No need to sign in if logined already
+		if (!user.logined) {
+			this.history.pushState(null, '/signup');
+
+			// Copy data to sign up page
+			this.flux.dispatch('action.User.toSignUp',
+				this.refs.email.value,
+				this.refs.phone.value,
+				this.refs.name.value
+			);
+			
+			return;
+		}else {
+			return;
+		}
 	}
 
 	render() {
@@ -68,9 +80,9 @@ class Banner extends React.Component {
 					</div>
 				</div>
 
-				<Link to='/signup' className={'large ui inverted button join'} onClick={this.toSignUp}>
+				<button className={'large ui inverted button join'} onClick={this.toSignUp}>
 					加入 Limago
-				</Link>
+				</button>
 
 				<div style={ breakItems }></div>
 				<div className="ui stackable three column grid">

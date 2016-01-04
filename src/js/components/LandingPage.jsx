@@ -6,7 +6,7 @@ import Banner from './Banner.jsx';
 import I18n from 'Extension/I18n.jsx';
 
 // Decorators
-import { flux } from 'Decorator';
+import { router, flux, i18n } from 'Decorator';
 
 // icons
 import xIconBrown from 'Source/images/x-icon-brown.png';
@@ -44,6 +44,7 @@ class Notes extends React.Component {
 	}
 }
 
+@router
 @flux
 class LandingPage extends React.Component {
 
@@ -61,12 +62,23 @@ class LandingPage extends React.Component {
 	}
 
 	toSignUp = () => {
-		// Copy data to sign up page
-		this.flux.dispatch('action.User.toSignUp',
-			this.refs.email.value,
-			this.refs.phone.value,
-			this.refs.name.value
-		);
+		var user = this.flux.getState('User');
+		
+		// No need to sign in if logined already
+		if (!user.logined) {
+			this.history.pushState(null, '/signup');
+
+			// Copy data to sign up page
+			this.flux.dispatch('action.User.toSignUp',
+				this.refs.email.value,
+				this.refs.phone.value,
+				this.refs.name.value
+			);
+
+			return;
+		}else {
+			return;
+		}
 	}
 
 	render() {
@@ -201,9 +213,9 @@ class LandingPage extends React.Component {
 					<div className="ui stackable two column grid top-row">
 						<div className="six wide column"></div>
 						<div className="four wide column">
-							<Link to='/signup' className={'btn-style btn-base btn-submit'} onClick={ this.toSignUp }>
+							<div className={'btn-style btn-base btn-submit'} onClick={ this.toSignUp }>
 								馬上加入Limago
-							</Link>
+							</div>
 						</div>
 					</div>
 				</div>
