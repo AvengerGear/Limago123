@@ -1,4 +1,5 @@
 import user from './user';
+import tickets from './tickets';
 import admin from './admin';
 import admin_users from './admin_users';
 import admin_user from './admin_user';
@@ -9,6 +10,7 @@ import admin_role from './admin_role';
 
 export default {
 	user: user,
+	tickets: tickets,
 	admin: admin,
 	admin_users: admin_users,
 	admin_user: admin_user,
