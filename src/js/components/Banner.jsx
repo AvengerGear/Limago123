@@ -98,7 +98,7 @@ class Banner extends React.Component {
 						<img className="ui middle aligned tiny image" src={ticketIcon} />
 						<span className="color-white item-title"> 機票</span>
 						<h1 className="color-white item-value">
-							{ '{' } 1 { includeIcon } 5 { includeIcon } 9 } {'}'}
+							{ '{' } 1 { includeIcon } 5 { includeIcon } 9 {'}'}
 						</h1>
 						<span className="color-white item-value">折機票</span>
 					</div>
