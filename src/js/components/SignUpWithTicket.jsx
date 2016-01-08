@@ -37,6 +37,11 @@ var joinBtnStyle = {
 	marginTop: '50px',
 };
 
+var stepStyle = {
+	marginTop: '30px',
+	paddingLeft: '5%'
+};
+
 @router
 @flux
 class SignUpWithTicketPage extends React.Component {
@@ -167,7 +172,7 @@ class SignUpWithTicketPage extends React.Component {
 		var $joinUs = $(ReactDOM.findDOMNode(this.refs.joinUs));
 
 		$('html, body').stop().animate({
-			scrollTop: $node.offset().top - $joinUs.height() - 50
+			scrollTop: $node.offset().top - $joinUs.height() - 150
 		}, 400);
 	}
 
@@ -418,48 +423,11 @@ class SignUpWithTicketPage extends React.Component {
 					<img className="arrow" src={ arrow } />
 				</div>
 
-				<div className={'ui basic center aligned segment user-data'}>
+				<div ref="joinUs" className={'ui basic center aligned segment user-data'}>
 					<img className="ui middle aligned tiny image title-tag" src={ pen } />
-					<span className="title">馬上開始你的旅程</span>
-					<div className="ui stackable two column grid top-row">
-						<div className="three wide column"></div>
-						<div className="ten wide column">
-							<div className="ui fluid icon input">
-								<input type="text" ref='name' placeholder="請輸入你的真實姓名" />
-							</div>
-						</div>
-					</div>
-					<div className="ui stackable three column grid top-row">
-						<div className="three wide column"></div>
-						<div className="five wide column">
-							<div className="column">
-								<div className="ui fluid icon input">
-									<input type="text" ref='phone' placeholder="請輸入你的電話號碼" />
-								</div>
-							</div>
-						</div>
-						<div className="five wide column">
-							<div className="column">
-								<div className="ui fluid icon input">
-									<input type="text" ref='email' placeholder="請輸入E-mail" />
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-
-
-				<div ref="joinUs" className={'ui basic center aligned padded segment'}>
-					<div className='ui hidden divider'></div>
-					<div className='ui hidden divider'></div>
-
-					<div className='ui two column centered stackable grid'>
+					<span className="main-title">馬上開始你的旅程</span>
+					<div className='ui two column centered stackable grid' style={stepStyle}>
 						<div className='column'>
-							<h1 className='ui header'>
-								<i className='add user icon' />
-								<div className='content'><I18n sign='sign_up.header'>Create a New Account</I18n></div>
-							</h1>
-						
 							<div className="ui ordered steps">
 								<div className="active step">
 									<div className="content">
@@ -481,7 +449,10 @@ class SignUpWithTicketPage extends React.Component {
 								</div>
 							</div>
 							<p><i className="info circle icon"></i>如離開本頁請重新掃描票券上的 QR Code，重新進入本頁進行註冊。</p>
-
+						</div>
+					</div>
+					<div className='ui two column centered stackable grid'>
+						<div className='column'>
 							<div className={'ui basic segment'}>
 								{message}
 
@@ -528,16 +499,16 @@ class SignUpWithTicketPage extends React.Component {
 									</div>
 
 									<div className='field'>
-										<button className='ui teal button' onClick={this.signUp}>
+										<button className='ui teal button center-block' onClick={this.signUp}>
 											<I18n sign='sign_up.submit_button'>Register</I18n>
 										</button>
 									</div>
 								</div>
 							</div>
 						</div>
-
 					</div>
 				</div>
+
 				<div ref="app_section"></div>
 				<Footer />
 			</div>
