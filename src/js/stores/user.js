@@ -250,7 +250,7 @@ export default function *() {
 				store.logined = false;
 				break;
 			}
-
+			
 			this.dispatch('state.User');
 		} catch(e) {
 

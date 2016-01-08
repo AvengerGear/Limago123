@@ -110,7 +110,7 @@ class SignInPage extends React.Component {
 						<div className='column'>
 							<h1 className='ui header'>
 								<i className='sign in icon' />
-								<div className='content'><I18n sign='sign_in.header'>Sign In</I18n></div>
+								<div className='content'>持票會員請直接登入</div>
 							</h1>
 
 							<div className={'ui basic segment'}>
@@ -135,18 +135,7 @@ class SignInPage extends React.Component {
 									</div>
 									<div className='field ui teal message'>
 										<div><Link to='/forgot'><I18n sign='sign_in.forgot_password'>Forgot your password?</I18n></Link></div>
-										<div><I18n sign='sign_in.no_account_yet'>No Account yet?</I18n> <Link to='/signup' query={{ target: target }}><I18n sign='sign_in.sign_up'>Sign Up</I18n></Link></div>
 									</div>
-								</div>
-							</div>
-
-							<div className='ui horizontal divider header'><I18n sign='sign_in.or_login_with'>Or Login With</I18n></div>
-
-							<div className={'ui center aligned basic segment'}>
-								<div className='ui buttons'>
-									<a href={this.toURL('/auth/facebook', target)} className='ui facebook icon button'>
-										<i className='facebook icon' />
-									</a>
 								</div>
 							</div>
 
