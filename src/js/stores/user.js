@@ -232,6 +232,46 @@ export default function *() {
 		}
 	});
 
+	this.on('store.User.signUpEmailOnly', function *(email) {
+
+		var store = this.getState('User');
+
+		try {
+			var res = yield this.request
+				.post('/signup/email')
+				.send({
+					email: email
+				});
+
+			switch(res.status) {
+			case 200:
+				// Updating store
+				store.status = 'normal';
+				store.logined = false;
+				break;
+			}
+
+			this.dispatch('state.User');
+		} catch(e) {
+
+			switch(e.status) {
+			case 500:
+				store.status = 'signup-error';
+				break;
+
+			case 409:
+				store.status = 'signup-failed-existing-account';
+				break;
+
+			case 400:
+				store.status = 'signup-failed';
+				break;
+			}
+
+			this.dispatch('state.User');
+		}
+	});
+
 	this.on('store.User.signUpWithTicket', function *(email, phone, password, name, qrcode) {
 
 		var store = this.getState('User');
@@ -323,12 +363,20 @@ export default function *() {
 		}
 	});
 
-	this.on('store.User.toSignUp', function *(email, phone, name) {
+	this.on('store.User.copyToSignUp', function *(email, phone, name) {
 		var store = this.getState('User');
 
 		store.name = name;
 		store.phone = phone;
 		store.email = email;
+
+		this.dispatch('state.User');
+	});
+
+	this.on('store.User.resetStatus', function *() {
+		var store = this.getState('User');
+
+		store.status = 'reset';
 
 		this.dispatch('state.User');
 	});

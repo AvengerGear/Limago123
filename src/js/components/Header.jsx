@@ -50,6 +50,7 @@ class Header extends React.Component {
 	render() {
 
 		var loginState;
+
 		if (this.state.user.logined) {
 			var adminItem;
 			if (this.state.user.permissions.admin) {

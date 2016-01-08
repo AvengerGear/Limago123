@@ -2,6 +2,7 @@ var crypto = require('crypto');
 var Router = require('koa-router');
 var passport = require('koa-passport');
 var Member = require('../lib/member');
+var Emails = require('../lib/emails');
 var Tickets = require('../lib/tickets');
 var Passport = require('../lib/passport');
 
@@ -86,6 +87,50 @@ router.post('/signup', function *() {
 
 	// Store login information in session
 	var m = yield Passport.login(this, member);
+
+	// Return result to client
+	this.body = {
+		success: true,
+		data: m
+	};
+});
+
+router.post('/signup/email', function *() {
+	var email = this.request.body.email || null;
+
+	// Check fields
+	if (!email) {
+		this.status = 400;
+		return;
+	}
+
+	// Check whether user exists or not
+	try {
+		// TODO: It should create a record directly if account was available.
+		var ret = yield Emails.getEmails(email);
+		if (ret) {
+			this.status = 409;
+			return;
+		}
+	} catch(e) {
+		console.log(e);
+		this.status = 500;
+		return;
+	}
+
+	// Create a new email
+	try {
+		var email = yield Emails.create({
+			email: email
+		});
+	} catch(e) {
+		console.log(e);
+		this.status = 500;
+		return;
+	}
+
+	// Store login information in session
+	var m = yield Passport.login(this, email);
 
 	// Return result to client
 	this.body = {

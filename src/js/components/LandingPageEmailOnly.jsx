@@ -37,8 +37,8 @@ class LandingPage extends React.Component {
 
 		this.state = {
 			error: false,
+			email_success: false,
 			email_existing_error: false,
-			email_error: false,
 			email_empty_error: false
 		};
 	}
@@ -52,9 +52,8 @@ class LandingPage extends React.Component {
 	}
 
 	onChange = () => {
-
 		var user = this.flux.getState('User');
-
+		
 		// No need to sign in if logined already
 		if (user.logined) {
 			if (this.props.location.query.target)
@@ -70,7 +69,13 @@ class LandingPage extends React.Component {
 
 		this.setState(userData);
 
-		var updateState = {}
+		var updateState = {
+			error: false,
+			email_success: false,
+			email_existing_error: false,
+			email_empty_error: false
+		}
+
 		switch(user.status) {
 		case 'signup-failed-existing-account':
 			updateState.email_existing_error = true;
@@ -78,29 +83,38 @@ class LandingPage extends React.Component {
 		case 'signup-failed':
 			updateState.error = true;
 
-			// Clear password inputbox
-			this.refs.password.value = ''; 
-			this.refs.confirm_password.value = ''; 
-
 			// Focus on email inputbox
 			this.refs.email.select();
 
 			this.setState(updateState);
+			break;
+		case 'normal':
+			updateState.email_success = true;
+
+			this.setState(updateState);
+			break;
 		}
 	}
 
 	signUp = () => {
 		var email = this.refs.email.value.trim();
+		var status = this.flux.getState('User').status;
 
 		var state = {
 			error: false,
-			email_error: false,
+			email_success: false,
+			email_existing_error: false,
 			email_empty_error: false
 		};
 
 		if (email == '') {
 			state.error = true;
 			state.email_empty_error = true;
+		}
+
+		if (status == 'signup-failed-existing-account') {
+			state.error = true;
+			state.email_existing_error = true;
 		}
 
 		// Something's wrong
@@ -110,11 +124,25 @@ class LandingPage extends React.Component {
 		}
 
 		// Sign up now
-		this.flux.dispatch('action.User.signUp',
-			this.refs.email.value,
-			null,
-			null,
-			null
+		this.flux.dispatch('action.User.signUpEmailOnly',
+			this.refs.email.value
+		);
+	}
+
+	closeAlert = () => {
+		if (this.flux.getState('User').status == 'reset') {
+			return;
+		}
+
+		this.setState({
+			error: false,
+			email_success: false,
+			email_existing_error: false,
+			email_empty_error: false
+		});
+
+		this.flux.dispatch('action.User.resetStatus',
+			this.refs.email.value
 		);
 	}
 
@@ -124,18 +152,27 @@ class LandingPage extends React.Component {
 		if (this.state.email_empty_error) {
 			message = (
 				<div className="ui negative message">
-					<i className="close icon"></i>
+					<i className="close icon" onClick={this.closeAlert}></i>
 					<div className="header">Oops !!</div>
 					<p>你忘了填信箱囉!</p>
 				</div>
 			);
 		}
-		if (this.state.email_error) {
+		if (this.state.email_existing_error) {
 			message = (
 				<div className="ui negative message">
-					<i className="close icon"></i>
+					<i className="close icon" onClick={this.closeAlert}></i>
 					<div className="header">Oops !!</div>
 					<p>這個信箱已經有人用囉! 請重新輸入一個新的。</p>
+				</div>
+			);
+		}
+		if (this.state.email_success) {
+			message = (
+				<div className="ui success message">
+					<i className="close icon" onClick={this.closeAlert}></i>
+					<div className="header">我們已經收到你的聯絡資訊囉 !!</div>
+					<p>歡迎你加入 Limago 隨機旅遊的行列</p>
 				</div>
 			);
 		}
@@ -156,7 +193,7 @@ class LandingPage extends React.Component {
 								<div className="column"></div>
 								<div className="column">
 									<div className="ui fluid icon input">
-										<input type="text" ref='email' placeholder="請輸入E-mail" />
+										<input type="email" ref='email' placeholder="請輸入E-mail" onChange={this.closeAlert} />
 									</div>
 									<p className="text-left input-tag color-gray">E-mail</p>
 								</div>
@@ -174,7 +211,7 @@ class LandingPage extends React.Component {
 						<div className="column"></div>
 						<div className="column">
 							<div className="ui stacked segment">
-								<h4 className="ui header">對隨機旅遊感興趣的您</h4>
+								<h4 className="ui header">對隨機旅遊感興趣嗎？</h4>
 								<p>請留下您的 E-mail，Limago 將提供最新的資訊給您。</p>
 							</div>
 						</div>

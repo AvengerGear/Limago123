@@ -61,7 +61,7 @@ class LandingPage extends React.Component {
 		}, 400);
 	}
 
-	toSignUp = () => {
+	copyToSignUp = () => {
 		var user = this.flux.getState('User');
 		
 		// No need to sign in if logined already
@@ -69,7 +69,7 @@ class LandingPage extends React.Component {
 			this.history.pushState(null, '/signup');
 
 			// Copy data to sign up page
-			this.flux.dispatch('action.User.toSignUp',
+			this.flux.dispatch('action.User.copyToSignUp',
 				this.refs.email.value,
 				this.refs.phone.value,
 				this.refs.name.value
@@ -213,7 +213,7 @@ class LandingPage extends React.Component {
 					<div className="ui stackable two column grid top-row">
 						<div className="six wide column"></div>
 						<div className="four wide column">
-							<div className={'btn-style btn-base btn-submit'} onClick={ this.toSignUp }>
+							<div className={'btn-style btn-base btn-submit'} onClick={ this.copyToSignUp }>
 								馬上加入Limago
 							</div>
 						</div>
