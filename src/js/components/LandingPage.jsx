@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router';
 import ReactDOM from 'react-dom';
 import Header from './Header.jsx';
+import Footer from './Footer.jsx';
 import Banner from './Banner.jsx';
 import I18n from 'Extension/I18n.jsx';
 
@@ -12,12 +13,13 @@ import { router, flux, i18n } from 'Decorator';
 import xIconBrown from 'Source/images/x-icon-brown.png';
 import xIconOrange from 'Source/images/x-icon-orange.png';
 import xIconGreen from 'Source/images/x-icon-green.png';
-import peopleIcon from 'Source/images/people-icon.png';
-import ticketIcon from 'Source/images/ticket-icon.png';
-import timeIcon from 'Source/images/time-icon.png';
+
+import peopleIcon from 'Source/images/people-icon-2.png';
+import ticketIcon from 'Source/images/ticket-icon-5.png';
+import timeIcon from 'Source/images/time-icon-8.png';
+
 import arrow from 'Source/images/arrow.png';
 import pen from 'Source/images/pen.png';
-import email from 'Source/images/email.png';
 
 var sectionStyle = {
 	paddingTop: '40px',
@@ -220,12 +222,7 @@ class LandingPage extends React.Component {
 					</div>
 				</div>
 
-				<div className={'ui basic inverted center aligned segment footer'}>
-					<img className="ui middle aligned tiny image icon" src={ email } />
-					<span>contact@limago.com</span>
-					<br />
-					<span>Copyright &copy; 2015 Limago Project. All Rights Reserved.</span>
-				</div>
+				<Footer />
 			</div>
 		);
 	}

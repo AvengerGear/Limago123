@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router';
 import ReactDOM from 'react-dom';
 import Header from './Header.jsx';
+import Footer from './Footer.jsx';
 import Banner from './Banner.jsx';
 import I18n from 'Extension/I18n.jsx';
 
@@ -24,9 +25,6 @@ var sectionStyle = {
 	paddingTop: '150px'
 };
 
-var peopleColor =  {
-	backgroundColor: '#BCA27D'
-}
 
 @router
 @flux
@@ -218,13 +216,7 @@ class LandingPage extends React.Component {
 						<div className="column"></div>
 					</div>
 				</div>
-
-				<div className={'ui basic inverted center aligned segment footer'}>
-					<img className="ui middle aligned tiny image icon" src={ email } />
-					<span>contact@limago.com</span>
-					<br />
-					<span>Copyright &copy; 2015 Limago Project. All Rights Reserved.</span>
-				</div>
+				<Footer />
 			</div>
 		);
 	}

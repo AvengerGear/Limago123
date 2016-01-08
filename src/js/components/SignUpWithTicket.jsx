@@ -1,15 +1,45 @@
 import React from 'react';
+import ReactDOM from 'react-dom';
 import I18n from 'Extension/I18n.jsx';
+
 
 // Decorators
 import { router, flux, i18n } from 'Decorator';
 
 // Components
 import Header from './Header.jsx';
+import Footer from './Footer.jsx';
+
+// icons
+import peopleIcon1 from 'Source/images/people-icon-1.png';
+import peopleIcon2 from 'Source/images/people-icon-2.png';
+import peopleIconMany from 'Source/images/people-icon-many.png';
+import ticketIcon1 from 'Source/images/ticket-icon-1.png';
+import ticketIcon5 from 'Source/images/ticket-icon-5.png';
+import ticketIcon9 from 'Source/images/ticket-icon-9.png';
+import timeIcon3 from 'Source/images/time-icon-3.png';
+import timeIcon8 from 'Source/images/time-icon-8.png';
+import timeIcon24 from 'Source/images/time-icon-24.png';
+
+import arrow from 'Source/images/arrow.png';
+import pen from 'Source/images/pen.png';
+
+var sectionStyle = {
+	paddingTop: '40px',
+	paddingBottom: '50px'
+};
+
+var bannerStyle = {
+	minHeight: '600px'
+};
+
+var joinBtnStyle = {
+	marginTop: '50px',
+};
 
 @router
 @flux
-class SignUpPage extends React.Component {
+class SignUpWithTicketPage extends React.Component {
 	constructor() {
 		super();
 
@@ -24,7 +54,11 @@ class SignUpPage extends React.Component {
 			name_error: false,
 			name_empty_error: false,
 			phone_error: false,
-			phone_empty_error: false
+			phone_empty_error: false,
+			qrcode: null,
+			people: '?',
+			price: '?',
+			times: '?'
 		};
 	}
 
@@ -36,9 +70,27 @@ class SignUpPage extends React.Component {
 		this.flux.off('state.User', this.onChange);
 	}
 
+	componentDidMount = () => {
+		var url = window.location.pathname;
+		var urlArrs = url.split('/');
+		var tickets = this.flux.getState('Tickets').data;
+		var state = {
+			qrcode: urlArrs[2]
+		};
+
+		tickets.forEach(ticket => {
+			if (urlArrs[2] == ticket.qrcode) {
+				state.people = ticket.people;
+				state.price = ticket.price;
+				state.times = ticket.times;
+			}
+		});
+
+		this.setState(state);
+	}
+
 	signUp = () => {
-		var urls = window.location.pathname;
-		var urlArrs = urls.split('/');
+		var qrcode = this.state.qrcode;
 
 		var email = this.refs.email.value.trim();
 		var phone = this.refs.phone.value.trim();
@@ -90,7 +142,7 @@ class SignUpPage extends React.Component {
 			state.confirm_error = true;
 		}
 
-		if (urlArrs[2] == '') {
+		if (qrcode == '') {
 			state.error = true;
 		}
 
@@ -106,12 +158,20 @@ class SignUpPage extends React.Component {
 			this.refs.phone.value,
 			this.refs.password.value,
 			this.refs.name.value,
-			urlArrs[2]
+			qrcode
 		);
 	}
 
-	onChange = () => {
+	joinUs = () => {
+		var $node = $(this.refs.app_section);
+		var $joinUs = $(ReactDOM.findDOMNode(this.refs.joinUs));
 
+		$('html, body').stop().animate({
+			scrollTop: $node.offset().top - $joinUs.height() - 50
+		}, 400);
+	}
+
+	onChange = () => {
 		var user = this.flux.getState('User');
 
 		// No need to sign in if logined already
@@ -156,6 +216,58 @@ class SignUpPage extends React.Component {
 		var message;
 		var fieldClass = 'field';
 		var user = this.state;
+		var peopleIcon;
+		var ticketIcon;
+		var timeIcon;
+
+		switch(user.people) {
+		case 1:
+			peopleIcon = peopleIcon1;
+			break;
+
+		case 2:
+			peopleIcon = peopleIcon2;
+			break;
+
+		case 'many':
+			peopleIcon = peopleIconMany;
+			break;
+		}
+
+		if (user.people == 'many') {
+			user.people = '多';
+		}
+		switch(user.price) {
+		case 1:
+			ticketIcon = ticketIcon1;
+			break;
+
+		case 5:
+			ticketIcon = ticketIcon5;
+			break;
+
+		case 9:
+			ticketIcon = ticketIcon9;
+			break;
+		}
+
+		switch(user.times) {
+		case 3:
+			timeIcon = timeIcon3;
+			break;
+
+		case 8:
+			timeIcon = timeIcon8;
+			break;
+
+		case 24:
+			timeIcon = timeIcon24;
+			break;
+		}
+
+		if (user.people == 'many') {
+			user.people = '多';
+		}
 
 		if (this.state.error) {
 			fieldClass += ' error';
@@ -207,7 +319,137 @@ class SignUpPage extends React.Component {
 		return (
 			<div className='main-page'>
 				<Header />
-				<div className={'ui basic center aligned padded segment'}>
+				<div className={'ui basic center aligned segment landing-page-header'} style={bannerStyle}>
+					<h2 className="head-title color-white">很想去</h2>
+					<h1 className="head-sub-title color-white">東京？巴黎？紐約？莫斯科？</h1>
+					<button className={'large ui inverted button join'} onClick={this.joinUs} style={joinBtnStyle}>
+						加入 Limago
+					</button>
+				</div>
+
+				<section style={ sectionStyle } className="limago" ref='app_section'>
+					<div className={'ui basic center aligned segment'}>
+							<h1>
+								Limago 
+								<span className="step-number color-white bg-color-brown">1</span>
+								<span className="step-number color-white bg-color-orange">2</span>
+								<span className="step-number color-white bg-color-green">3</span>
+							</h1>
+					</div>
+				</section>
+
+				<section ref='app_section' className="section-selects">
+					<div className="ui stackable two column grid limago-select">
+						<div className="five wide column people-section-icon">
+							<div className={'ui basic center aligned segment'}>
+								<img className="ui middle aligned tiny image section-text" src={ peopleIcon } /	>
+								<p className="color-white icon-tag">人數</p>
+							</div>
+						</div>
+						<div className="eleven wide column">
+							<div className="ui stackable sixteen column grid people-section">
+								<div className="three wide column"></div>
+								<div className="ten wide column section-text">
+									<h1 className="select-title color-black text-right">
+										隨機 <span className="color-brown">{'{ ' + user.people + ' }'}</span> 人出發
+									</h1>
+									<p className="text-right select-sub-title">你將有機會認識不一樣的朋友</p>
+								</div>
+							</div>
+						</div>
+					</div>
+				</section>
+
+				<section className="section-selects">
+					<div className="ui stackable two column grid limago-select flex">
+						<div className="eleven wide column order-2">
+							<div className="ui stackable sixteen column grid ticket-section">
+								<div className="three wide column"></div>
+								<div className="ten wide column section-text">
+									<h1 className="select-title color-black text-right">
+										<span className="color-orange">{'{ ' + user.price + ' }'}</span> 折機票
+									</h1>
+									<p className="text-right select-sub-title">同時享有你意想不到的折扣機票</p>
+								</div>
+							</div>
+						</div>
+						<div className="five wide column ticket-section-icon order-1">
+							<div className={'ui basic center aligned segment'}>
+								<img className="ui middle aligned tiny image section-text" src={ ticketIcon } /	>
+								<p className="color-white icon-tag">機票</p>
+							</div>
+						</div>
+					</div>
+				</section>
+
+				<section className="section-selects">
+					<div className="ui stackable two column grid limago-select">
+						<div className="five wide column time-section-icon">
+							<div className={'ui basic center aligned segment'}>
+								<img className="ui middle aligned tiny image section-text" src={ timeIcon } /	>
+								<p className="color-white icon-tag">時間</p>
+							</div>
+						</div>
+						<div className="eleven wide column time-section">
+							<div className="ui stackable sixteen column grid">
+								<div className="thirteen wide column section-text">
+									<h1 className="select-title color-black text-right">
+										<span className="color-green">{'{ ' + user.times + ' }'}</span> 小時內出發
+									</h1>
+									<p className="text-right select-sub-title">心動了嗎？那就馬上收拾你的行李吧！</p>
+								</div>
+							</div>
+						</div>
+					</div>
+				</section>
+
+				<div className={'ui basic center aligned segment'}>
+					<div className="ui stackable three column grid">
+						<div className="four wide column"></div>
+						<div className="seven wide column">
+							<h2 className="limago-description">
+								LiMaGo 提供 100 個以上的獨特早鳥票，只要輸入你專屬的臨時會員編號，登入 LiMaGo 會員，你就有機會立馬進行一趟美妙的隨機旅程。
+							</h2>
+						</div>
+					</div>
+				</div>
+
+				<div className={'ui basic center aligned segment target-space'}>
+					<img className="arrow" src={ arrow } />
+				</div>
+
+				<div className={'ui basic center aligned segment user-data'}>
+					<img className="ui middle aligned tiny image title-tag" src={ pen } />
+					<span className="title">馬上開始你的旅程</span>
+					<div className="ui stackable two column grid top-row">
+						<div className="three wide column"></div>
+						<div className="ten wide column">
+							<div className="ui fluid icon input">
+								<input type="text" ref='name' placeholder="請輸入你的真實姓名" />
+							</div>
+						</div>
+					</div>
+					<div className="ui stackable three column grid top-row">
+						<div className="three wide column"></div>
+						<div className="five wide column">
+							<div className="column">
+								<div className="ui fluid icon input">
+									<input type="text" ref='phone' placeholder="請輸入你的電話號碼" />
+								</div>
+							</div>
+						</div>
+						<div className="five wide column">
+							<div className="column">
+								<div className="ui fluid icon input">
+									<input type="text" ref='email' placeholder="請輸入E-mail" />
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+
+				<div ref="joinUs" className={'ui basic center aligned padded segment'}>
 					<div className='ui hidden divider'></div>
 					<div className='ui hidden divider'></div>
 
@@ -265,7 +507,7 @@ class SignUpPage extends React.Component {
 										<label><I18n sign='sign_up.email'>E-mail Address</I18n></label>
 										<div className={'ui left icon input'}>
 											<i className={'mail icon'} />
-											<input type='email' ref='email' name='email' placeholder='limago@example.com' autoFocus={true}  value={ user.email || null } />
+											<input type='email' ref='email' name='email' placeholder='limago@example.com' value={ user.email || null } />
 										</div>
 									</div>
 
@@ -295,11 +537,12 @@ class SignUpPage extends React.Component {
 						</div>
 
 					</div>
-
 				</div>
+				<div ref="app_section"></div>
+				<Footer />
 			</div>
 		);
 	}
 }
 
-export default SignUpPage;
+export default SignUpWithTicketPage;

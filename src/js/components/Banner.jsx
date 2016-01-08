@@ -8,9 +8,10 @@ import { router, flux, i18n } from 'Decorator';
 
 // icons
 import xIcon from 'Source/images/x-icon-white.png';
-import peopleIcon from 'Source/images/people-icon.png';
-import ticketIcon from 'Source/images/ticket-icon.png';
-import timeIcon from 'Source/images/time-icon.png';
+
+import peopleIcon from 'Source/images/people-icon-2.png';
+import ticketIcon from 'Source/images/ticket-icon-5.png';
+import timeIcon from 'Source/images/time-icon-8.png';
 
 var sectionStyle = {
 };
