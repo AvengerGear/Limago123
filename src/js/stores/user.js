@@ -272,10 +272,9 @@ export default function *() {
 		}
 	});
 
-	this.on('store.User.signUpWithTicket', function *(email, phone, password, name, qrcode) {
-
+	this.on('store.User.signUpWithTicket', function *(email, phone, password, name, qrcode, number) {
 		var store = this.getState('User');
-
+		
 		try {
 			var res = yield this.request
 				.post('/signup/ticket')
@@ -284,7 +283,8 @@ export default function *() {
 					phone: phone,
 					password: password,
 					name: name,
-					qrcode: qrcode
+					qrcode: qrcode,
+					number: number
 				});
 
 			switch(res.status) {
@@ -303,46 +303,6 @@ export default function *() {
 			}
 
 			this.dispatch('state.User');
-		} catch(e) {
-
-			switch(e.status) {
-			case 500:
-				store.status = 'signup-error';
-				break;
-
-			case 409:
-				store.status = 'signup-failed-existing-account';
-				break;
-
-			case 400:
-				store.status = 'signup-failed';
-				break;
-			}
-
-			this.dispatch('state.User');
-		}
-	});
-
-	this.on('store.User.getNumber', function *(number) {
-
-		var store = this.getState('User');
-
-		try {
-			var res = yield this.request
-				.post('/ticket/number')
-				.send({
-					email: store.email,
-					number: number
-				});
-
-				switch(res.status) {
-				case 200:
-					// Updating store
-					store.status = 'getNumber';
-					break;
-				}
-
-				this.dispatch('state.User');
 		} catch(e) {
 
 			switch(e.status) {

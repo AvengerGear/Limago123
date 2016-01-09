@@ -145,9 +145,11 @@ router.post('/signup/ticket', function *() {
 	var password = this.request.body.password || null;
 	var email = this.request.body.email || null;
 	var qrcode = this.request.body.qrcode || null;
+	var number = this.request.body.number || null;
+
 
 	// Check fields
-	if (!name || !phone || !password || !email || !qrcode) {
+	if (!name || !phone || !password || !email || !qrcode || !number) {
 		this.status = 400;
 		return;
 	}
@@ -156,6 +158,19 @@ router.post('/signup/ticket', function *() {
 	try {
 		// TODO: It should create a record directly if account was available.
 		var ret = yield Member.getMemberByEmail(email);
+		if (ret) {
+			this.status = 409;
+			return;
+		}
+	} catch(e) {
+		console.log(e);
+		this.status = 500;
+		return;
+	}
+
+	// Check whether numbers exists or not
+	try {
+		var ret = yield Tickets.getNumbers(number);
 		if (ret) {
 			this.status = 409;
 			return;
@@ -188,7 +203,8 @@ router.post('/signup/ticket', function *() {
 		var ticket = yield Tickets.create({
 			user_id: m.id,
 			email: email,
-			qrcode: qrcode
+			qrcode: qrcode,
+			number: number
 		});
 	} catch(e) {
 		console.log(e);
@@ -200,43 +216,6 @@ router.post('/signup/ticket', function *() {
 	this.body = {
 		success: true,
 		data: m
-	};
-});
-
-router.post('/ticket/number', function *() {
-	var email = this.request.body.email || null;
-	var number = this.request.body.number || null;
-
-	// Check fields
-	if (!email || !number) {
-		this.status = 400;
-		return;
-	}
-
-	// Check whether numbers exists or not
-	try {
-		var ret = yield Tickets.getNumbers(number);
-		if (ret) {
-			this.status = 409;
-			return;
-		}
-	} catch(e) {
-		console.log(e);
-		this.status = 500;
-		return;
-	}
-
-	// Save Number
-	try {
-		var ticket = yield Tickets.updateNumberByEmail(email, number);
-	} catch(e) {
-		this.status = 500;
-		return;
-	}
-
-	// Return result to client
-	this.body = {
-		success: true
 	};
 });
 

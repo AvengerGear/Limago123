@@ -28,18 +28,18 @@ class SignUpPage extends React.Component {
 								<i className='suitcase icon' />
 								<div className='content'><I18n sign='sign_up.header'>恭喜你取得專屬票券！</I18n></div>
 							</h1>
-						
+
 							<div className="ui ordered steps">
-								<div className="completed step">
-									<div className="content">
-										<div className="title">取得帳號</div>
-										<div className="description">請直接註冊</div>
-									</div>
-								</div>
 								<div className="completed step">
 									<div className="content">
 										<div className="title">輸入臨時會員編號</div>
 										<div className="description">一個編號只能使用一次</div>
+									</div>
+								</div>
+								<div className="completed step">
+									<div className="content">
+										<div className="title">取得帳號</div>
+										<div className="description">請直接註冊</div>
 									</div>
 								</div>
 								<div className="completed step">

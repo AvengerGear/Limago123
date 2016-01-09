@@ -53,6 +53,8 @@ class SignUpWithTicketPage extends React.Component {
 
 		this.state = {
 			error: false,
+			number_error: false,
+			number_empty_error: false,
 			email_existing_error: false,
 			email_error: false,
 			email_empty_error: false,
@@ -64,9 +66,9 @@ class SignUpWithTicketPage extends React.Component {
 			phone_error: false,
 			phone_empty_error: false,
 			qrcode: null,
-			people: '?',
-			price: '?',
-			times: '?'
+			people: '',
+			price: '',
+			times: ''
 		};
 	}
 
@@ -82,6 +84,7 @@ class SignUpWithTicketPage extends React.Component {
 		var url = window.location.pathname;
 		var urlArrs = url.split('/');
 		var tickets = this.flux.getState('Tickets').data;
+		var isQrcode = false;
 		var state = {
 			qrcode: urlArrs[2]
 		};
@@ -91,15 +94,21 @@ class SignUpWithTicketPage extends React.Component {
 				state.people = ticket.people;
 				state.price = ticket.price;
 				state.times = ticket.times;
+				isQrcode = true;
 			}
 		});
+
+		if (!isQrcode) {
+			this.history.pushState(null, '/');
+			return;
+		}
 
 		this.setState(state);
 	}
 
 	signUp = () => {
 		var qrcode = this.state.qrcode;
-
+		var number = this.refs.number.value.trim();
 		var email = this.refs.email.value.trim();
 		var phone = this.refs.phone.value.trim();
 		var name = this.refs.name.value.trim();
@@ -108,6 +117,8 @@ class SignUpWithTicketPage extends React.Component {
 
 		var state = {
 			error: false,
+			number_error: false,
+			number_empty_error: false,
 			email_error: false,
 			email_empty_error: false,
 			confirm_error: false,
@@ -118,6 +129,12 @@ class SignUpWithTicketPage extends React.Component {
 			phone_error: false,
 			phone_empty_error: false
 		};
+
+		if (number == '') {
+			state.error = true;
+			state.number_error = true;
+			state.number_empty_error = true;
+		}
 
 		if (email == '') {
 			state.error = true;
@@ -166,7 +183,8 @@ class SignUpWithTicketPage extends React.Component {
 			this.refs.phone.value,
 			this.refs.password.value,
 			this.refs.name.value,
-			qrcode
+			qrcode,
+			this.refs.number.value
 		);
 	}
 
@@ -188,7 +206,7 @@ class SignUpWithTicketPage extends React.Component {
 
 		// No need to sign in if logined already
 		if (user.logined) {
-			this.history.pushState(null, '/getNumber');
+			this.history.pushState(null, '/complete/getticket');
 			return;
 		}
 
@@ -201,6 +219,9 @@ class SignUpWithTicketPage extends React.Component {
 		this.setState(userData);
 
 		var updateState = {}
+
+console.log(user.status)
+
 		switch(user.status) {
 		case 'signup-failed-existing-account':
 			updateState.email_existing_error = true;
@@ -310,6 +331,10 @@ class SignUpWithTicketPage extends React.Component {
 				if (this.state.email_error) {
 					emailClasses += ' error';
 				}
+			}
+
+			if (this.state.number_error) {
+				numberClasses += ' error';
 			}
 
 			if (this.state.name_error) {

@@ -4,7 +4,6 @@ var ForgotPage = require('./components/ForgotPage.jsx');
 var SignInPage = require('./components/SignInPage.jsx');
 var SignUpPage = require('./components/SignUpPage.jsx');
 var SignUpWithTicket = require('./components/SignUpWithTicket.jsx');
-var getNumber = require('./components/getNumber.jsx');
 var getTicket = require('./components/getTicket.jsx');
 var SettingsPage = require('./components/SettingsPage.jsx');
 var NotFoundPage = require('./components/NotFoundPage.jsx');
@@ -38,10 +37,6 @@ module.exports = [
 	{
 		path: '/getticket/:qrcode',
 		handler: SignUpWithTicket
-	},
-	{
-		path: '/getNumber',
-		handler: getNumber
 	},
 	{
 		path: '/complete/getticket',
