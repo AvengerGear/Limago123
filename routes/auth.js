@@ -130,12 +130,11 @@ router.post('/signup/email', function *() {
 	}
 
 	// Store login information in session
-	var m = yield Passport.login(this, email);
+	// var m = yield Passport.login(this, email);
 
 	// Return result to client
 	this.body = {
-		success: true,
-		data: m
+		success: true
 	};
 });
 
