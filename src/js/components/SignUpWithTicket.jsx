@@ -213,6 +213,7 @@ class SignUpWithTicketPage extends React.Component {
 	}
 
 	render() {
+		var numberClasses = 'required field';
 		var phoneClasses = 'required field';
 		var emailClasses = 'required field';
 		var nameClasses = 'required field';
@@ -431,14 +432,14 @@ class SignUpWithTicketPage extends React.Component {
 							<div className="ui ordered steps">
 								<div className="active step">
 									<div className="content">
-										<div className="title">取得帳號</div>
-										<div className="description">請直接註冊</div>
+										<div className="title">輸入臨時會員編號</div>
+										<div className="description">一個編號只能使用一次</div>
 									</div>
 								</div>
 								<div className="active step">
 									<div className="content">
-										<div className="title">輸入臨時會員編號</div>
-										<div className="description">一個編號只能使用一次</div>
+										<div className="title">取得帳號</div>
+										<div className="description">請直接註冊</div>
 									</div>
 								</div>
 								<div className="active step">
@@ -457,9 +458,16 @@ class SignUpWithTicketPage extends React.Component {
 								{message}
 
 								<div className='ui form'>
+									<div className={numberClasses}>
+										<label>臨時會員編號</label>
+										<div className={'ui left icon input'}>
+											<i className={'privacy icon'} />
+											<input type='text' ref='number' name='number' placeholder='1234567890' />
+										</div>
+									</div>
 
 									<div className={nameClasses}>
-										<label><I18n sign='sign_up.display_name'>Display Name</I18n></label>
+										<label>你的姓名</label>
 										<div className={'ui left icon input'}>
 											<i className={'user icon'} />
 											<input type='text' ref='name' name='name' placeholder='Limago' value={ user.name || null } />
@@ -499,8 +507,9 @@ class SignUpWithTicketPage extends React.Component {
 									</div>
 
 									<div className='field'>
-										<button className='ui teal button center-block' onClick={this.signUp}>
-											<I18n sign='sign_up.submit_button'>Register</I18n>
+										<button className="big ui inverted button center-block" style={joinBtnStyle} onClick={this.signUp}>
+											<i className="icon send"></i>
+											送出資料
 										</button>
 									</div>
 								</div>
