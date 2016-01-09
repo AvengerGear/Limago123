@@ -10,6 +10,9 @@ import { router, flux, i18n } from 'Decorator';
 import Header from './Header.jsx';
 import Footer from './Footer.jsx';
 
+//images
+import ticket from 'Source/images/ticket.jpg';
+
 // icons
 import peopleIcon1 from 'Source/images/people-icon-1.png';
 import peopleIcon2 from 'Source/images/people-icon-2.png';
@@ -174,6 +177,10 @@ class SignUpWithTicketPage extends React.Component {
 		$('html, body').stop().animate({
 			scrollTop: $node.offset().top - $joinUs.height() - 150
 		}, 400);
+	}
+
+	showTicket = () => {
+		$('#show-ticket').toggleClass('hide');
 	}
 
 	onChange = () => {
@@ -459,11 +466,15 @@ class SignUpWithTicketPage extends React.Component {
 
 								<div className='ui form'>
 									<div className={numberClasses}>
-										<label>臨時會員編號</label>
+										<label className="mouse-pointer" onClick={this.showTicket}>臨時會員編號<i className="help circle icon"></i></label>
 										<div className={'ui left icon input'}>
 											<i className={'privacy icon'} />
-											<input type='text' ref='number' name='number' placeholder='1234567890' />
+											<input type='text' ref='number' name='number' placeholder='1234567890' maxLength="16" />
 										</div>
+									</div>
+									<div id="show-ticket" className="ui stacked segment hide">
+										<img className="ui large bordered image center-block" src={ ticket } />
+										<p className="color-black text-center"><i className="warning circle icon"></i>每個臨時會員編號只能使用一次</p>
 									</div>
 
 									<div className={nameClasses}>
