@@ -13,11 +13,11 @@ class UserProfile extends React.Component {
 		super(props, context);
 
 		var state = this.flux.getState('User');
-
 		this.state = {
 			busy: false,
 			error: false,
 			name: state.name,
+			phone: state.phone,
 			email: state.email
 		};
 	}
@@ -36,6 +36,7 @@ class UserProfile extends React.Component {
 
 		this.setState({
 			name: user.name,
+			phone: user.phone,
 			email: user.email,
 			busy: false
 		});
@@ -49,12 +50,13 @@ class UserProfile extends React.Component {
 			busy: true
 		});
 
-		this.flux.dispatch('action.User.updateProfile', this.state.name);
+		this.flux.dispatch('action.User.updateProfile', this.state.name, this.state.phone);
 	}
 
 	render() {
 		var emailClasses = 'field';
 		var nameClasses = 'required field';
+		var phoneClasses = 'required field';
 		var message;
 		var fieldClass = 'field';
 		if (this.state.error) {
@@ -109,6 +111,21 @@ class UserProfile extends React.Component {
 										placeholder='Fred Chien'
 										value={this.state.name}
 										onChange={(event) => this.setState({ name: event.target.value }) } />
+								</div>
+							</div>
+
+							<div className={phoneClasses}>
+								<label>
+									電話
+								</label>
+								<div className={'ui left input'}>
+									<input
+										type='text'
+										ref='phone'
+										name='phone'
+										placeholder='0912345678'
+										value={this.state.phone}
+										onChange={(event) => this.setState({ phone: event.target.value }) } />
 								</div>
 							</div>
 

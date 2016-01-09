@@ -15,6 +15,7 @@ router.get('/user/profile', Middleware.requireAuthorized, function *() {
 	var member = yield Member.getMember(this.state.user.id);
 	var m = {
 		name: member.name,
+		phone: member.phone,
 		email: member.email,
 		created: member.created
 	};
@@ -27,7 +28,7 @@ router.get('/user/profile', Middleware.requireAuthorized, function *() {
 
 router.post('/user/profile', Middleware.requireAuthorized, function *() {
 
-	if (!this.request.body.name) {
+	if (!this.request.body.name || !this.request.body.phone) {
 		this.status = 401;
 		return;
 	}
@@ -35,7 +36,8 @@ router.post('/user/profile', Middleware.requireAuthorized, function *() {
 	// Save
 	try {
 		var member = yield Member.save(this.state.user.id, {
-			name: this.request.body.name
+			name: this.request.body.name,
+			phone: this.request.body.phone
 		});
 	} catch(e) {
 		this.status = 500;
@@ -44,6 +46,7 @@ router.post('/user/profile', Middleware.requireAuthorized, function *() {
 
 	var m = {
 		name: member.name,
+		phone: member.phone,
 		email: member.email
 	};
 

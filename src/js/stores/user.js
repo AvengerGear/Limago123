@@ -29,6 +29,7 @@ export default function *() {
 				// Update store
 				var store = this.getState('User');
 				store.name = res.body.member.name;
+				store.phone = res.body.member.phone;
 				store.email = res.body.member.email;
 			}
 
@@ -38,13 +39,14 @@ export default function *() {
 		}
 	});
 
-	this.on('store.User.updateProfile', function *(name) {
+	this.on('store.User.updateProfile', function *(name, phone) {
 
 		try {
 			var res = yield this.request
 				.post('/user/profile')
 				.send({
-					name: name
+					name: name,
+					phone: phone
 				});
 
 			if (res.status != 200) {
@@ -54,6 +56,7 @@ export default function *() {
 			if (res.body.success) {
 				var store = this.getState('User');
 				store.name = res.body.member.name;
+				store.phone = res.body.member.phone;
 				store.email = res.body.member.email;
 			}
 
@@ -274,7 +277,7 @@ export default function *() {
 
 	this.on('store.User.signUpWithTicket', function *(email, phone, password, name, qrcode, number) {
 		var store = this.getState('User');
-		
+
 		try {
 			var res = yield this.request
 				.post('/signup/ticket')
