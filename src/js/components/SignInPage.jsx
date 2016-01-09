@@ -44,7 +44,7 @@ class SignInPage extends React.Component {
 			if (this.props.location.query.target)
 				this.history.pushState(null, this.props.location.query.target);
 			else
-				this.history.pushState(null, '/');
+				this.history.pushState(null, '/settings');
 
 			return;
 		}
