@@ -5,6 +5,7 @@ import I18n from 'Extension/I18n.jsx';
 // Decorators
 import { router, flux, i18n } from 'Decorator';
 
+@router
 @flux
 @i18n
 class ChangePassword extends React.Component {
@@ -12,6 +13,11 @@ class ChangePassword extends React.Component {
 	constructor(props, context) {
 		super(props, context);
 
+		var state = this.flux.getState('User');
+		if (!state.logined) {
+			this.history.pushState(null, '/');
+		}
+		
 		this.state = {
 			readyToUpdate: false,
 			busy: false,

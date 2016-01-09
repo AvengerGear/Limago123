@@ -4,6 +4,7 @@ import I18n from 'Extension/I18n.jsx';
 // Decorators
 import { router, flux, i18n, preAction } from 'Decorator';
 
+@router
 @flux
 @i18n
 @preAction('User.syncProfile')
@@ -13,6 +14,10 @@ class UserProfile extends React.Component {
 		super(props, context);
 
 		var state = this.flux.getState('User');
+		if (!state.logined) {
+			this.history.pushState(null, '/');
+		}
+
 		this.state = {
 			busy: false,
 			error: false,
