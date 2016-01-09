@@ -161,7 +161,7 @@ class LandingPage extends React.Component {
 				<div className="ui negative message">
 					<i className="close icon" onClick={this.closeAlert}></i>
 					<div className="header">Oops !!</div>
-					<p>這個信箱已經有人用囉! 請重新輸入一個新的。</p>
+					<p>這個信箱已經有人用囉! 請重新輸入一組新的E-mail。</p>
 				</div>
 			);
 		}

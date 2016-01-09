@@ -68,7 +68,8 @@ class SignUpWithTicketPage extends React.Component {
 			qrcode: null,
 			people: '',
 			price: '',
-			times: ''
+			times: '',
+			step1_status: 'active'
 		};
 	}
 
@@ -201,6 +202,16 @@ class SignUpWithTicketPage extends React.Component {
 		$('#show-ticket').toggleClass('hide');
 	}
 
+	stepStatus = () => {
+		var status = {step1_status: 'active'};
+
+		if (this.refs.number.value.length == 16) {
+			status.step1_status = 'completed';
+		}
+
+		this.setState(status);
+	}
+
 	onChange = () => {
 		var user = this.flux.getState('User');
 
@@ -219,8 +230,6 @@ class SignUpWithTicketPage extends React.Component {
 		this.setState(userData);
 
 		var updateState = {}
-
-console.log(user.status)
 
 		switch(user.status) {
 		case 'signup-failed-existing-account':
@@ -312,8 +321,8 @@ console.log(user.status)
 					<div className='ui negative icon message'>
 						<i className={'warning sign icon'} />
 						<div className='content'>
-							<div className='header'>Failed to Sign Up</div>
-							<p>Account exists already. Please type another e-mail address then try again</p>
+							<div className='header'>註冊失敗</div>
+							<p>臨時會員編號或email已經有人用囉!，請重新輸入</p>
 						</div>
 					</div>
 				);
@@ -322,8 +331,8 @@ console.log(user.status)
 					<div className='ui negative icon message'>
 						<i className={'warning sign icon'} />
 						<div className='content'>
-							<div className='header'>Failed to Sign Up</div>
-							<p>Please check all fields then try again</p>
+							<div className='header'>註冊失敗</div>
+							<p>請重新確認你輸入的資料</p>
 						</div>
 					</div>
 				);
@@ -462,7 +471,7 @@ console.log(user.status)
 					<div className='ui two column centered stackable grid' style={stepStyle}>
 						<div className='column'>
 							<div className="ui ordered steps">
-								<div className="active step">
+								<div className={ this.state.step1_status + ' step'}>
 									<div className="content">
 										<div className="title">輸入臨時會員編號</div>
 										<div className="description">一個編號只能使用一次</div>
@@ -494,7 +503,7 @@ console.log(user.status)
 										<label className="mouse-pointer" onClick={this.showTicket}>臨時會員編號<i className="help circle icon"></i></label>
 										<div className={'ui left icon input'}>
 											<i className={'privacy icon'} />
-											<input type='text' ref='number' name='number' placeholder='1234567890' maxLength="16" />
+											<input type='text' ref='number' name='number' placeholder='1234567890' maxLength="16" onChange={this.stepStatus} />
 										</div>
 									</div>
 									<div id="show-ticket" className="ui stacked segment hide">
