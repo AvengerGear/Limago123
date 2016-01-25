@@ -2,7 +2,6 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import I18n from 'Extension/I18n.jsx';
 
-
 // Decorators
 import { router, flux, i18n } from 'Decorator';
 

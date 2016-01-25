@@ -6,6 +6,10 @@ var Tickets = new mongoose.Schema({
 	email: { type: String, unique: true },
 	qrcode: String,
 	number: String,
+	ip: String,
+	os: String,
+	internal_ip: String,
+	browser: String,
 	created: { type: Date, default: Date.now },
 	updated: { type: Date, default: Date.now }
 });
