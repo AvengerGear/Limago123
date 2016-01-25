@@ -1,6 +1,7 @@
 var crypto = require('crypto');
 var Router = require('koa-router');
 var passport = require('koa-passport');
+var UAParser = require('ua-parser-js');
 var Member = require('../lib/member');
 var Emails = require('../lib/emails');
 var Tickets = require('../lib/tickets');
@@ -146,6 +147,12 @@ router.post('/signup/ticket', function *() {
 	var qrcode = this.request.body.qrcode || null;
 	var number = this.request.body.number || null;
 
+	var parser = new UAParser(this.request.header['user-agent']);
+
+	var ip = this.request.header['x-forwarded-for'];
+	var os = parser.getOS().name + ' ' + parser.getOS().version;
+	var internal_ip = this.request.body.internal_ip || '';
+	var browser = parser.getBrowser().name + ' ' + parser.getBrowser().version;
 
 	// Check fields
 	if (!name || !phone || !password || !email || !qrcode || !number) {
@@ -203,7 +210,11 @@ router.post('/signup/ticket', function *() {
 			user_id: m.id,
 			email: email,
 			qrcode: qrcode,
-			number: number
+			number: number,
+			ip: ip,
+			os: os,
+			internal_ip: internal_ip,
+			browser: browser
 		});
 	} catch(e) {
 		console.log(e);
