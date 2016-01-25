@@ -232,12 +232,12 @@ class SignUpWithTicketPage extends React.Component {
 	saveEditTime = () => {
 		if (!this.state.isEdit) {
 			var currentTime = new Date();
-		}
 
-		this.setState({
-			timer_edit: currentTime,
-			isEdit: true
-		});
+			this.setState({
+				timer_edit: currentTime,
+				isEdit: true
+			});
+		}
 	}
 
 	onChange = () => {
