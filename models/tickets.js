@@ -7,8 +7,8 @@ var Tickets = new mongoose.Schema({
 	qrcode: String,
 	number: String,
 	ip: String,
-	os: String,
 	internal_ip: String,
+	os: String,
 	browser: String,
 	created: { type: Date, default: Date.now },
 	updated: { type: Date, default: Date.now }

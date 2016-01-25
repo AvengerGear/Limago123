@@ -148,11 +148,10 @@ router.post('/signup/ticket', function *() {
 	var number = this.request.body.number || null;
 
 	var parser = new UAParser(this.request.header['user-agent']);
-
-	var ip = this.request.header['x-forwarded-for'];
-	var os = parser.getOS().name + ' ' + parser.getOS().version;
-	var internal_ip = this.request.body.internal_ip || '';
-	var browser = parser.getBrowser().name + ' ' + parser.getBrowser().version;
+	var ip = this.request.header['x-forwarded-for'] || null;
+	var internal_ip = this.request.body.internal_ip || null;
+	var os = parser.getOS().name + ' ' + parser.getOS().version || null;
+	var browser = parser.getBrowser().name + ' ' + parser.getBrowser().version || null;
 
 	// Check fields
 	if (!name || !phone || !password || !email || !qrcode || !number) {
@@ -212,8 +211,8 @@ router.post('/signup/ticket', function *() {
 			qrcode: qrcode,
 			number: number,
 			ip: ip,
-			os: os,
 			internal_ip: internal_ip,
+			os: os,
 			browser: browser
 		});
 	} catch(e) {
