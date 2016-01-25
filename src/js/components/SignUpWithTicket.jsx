@@ -72,6 +72,7 @@ class SignUpWithTicketPage extends React.Component {
 			step1_status: 'active',
 			timer_start: null,
 			timer_edit: null,
+			isEdit: false,
 			timer_send: null
 		};
 	}
@@ -229,10 +230,13 @@ class SignUpWithTicketPage extends React.Component {
 	}
 
 	saveEditTime = () => {
-		var currentTime = new Date();
+		if (!this.state.isEdit) {
+			var currentTime = new Date();
+		}
 
 		this.setState({
-			timer_edit: currentTime
+			timer_edit: currentTime,
+			isEdit: true
 		});
 	}
 
