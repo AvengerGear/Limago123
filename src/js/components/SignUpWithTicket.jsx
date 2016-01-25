@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import I18n from 'Extension/I18n.jsx';
+import moment from 'moment';
 
 // Decorators
 import { router, flux, i18n } from 'Decorator';
@@ -68,7 +69,10 @@ class SignUpWithTicketPage extends React.Component {
 			people: '',
 			price: '',
 			times: '',
-			step1_status: 'active'
+			step1_status: 'active',
+			timer_start: null,
+			timer_edit: null,
+			timer_send: null
 		};
 	}
 
@@ -85,8 +89,10 @@ class SignUpWithTicketPage extends React.Component {
 		var urlArrs = url.split('/');
 		var tickets = this.flux.getState('Tickets').data;
 		var isQrcode = false;
+		var currentTime = new Date();
 		var state = {
-			qrcode: urlArrs[2]
+			qrcode: urlArrs[2],
+			timer_start: currentTime
 		};
 
 		tickets.forEach(ticket => {
@@ -114,6 +120,7 @@ class SignUpWithTicketPage extends React.Component {
 		var name = this.refs.name.value.trim();
 		var password = this.refs.password.value;
 		var confirm_password = this.refs.confirm_password.value;
+		var currentTime = new Date();
 
 		var state = {
 			error: false,
@@ -177,6 +184,10 @@ class SignUpWithTicketPage extends React.Component {
 			return;
 		}
 
+		var allTime = moment(currentTime).diff(this.state.timer_start, 'seconds');
+		var viewTime = moment(this.state.timer_edit).diff(this.state.timer_start, 'seconds');
+		var editingTime = moment(currentTime).diff(this.state.timer_edit, 'seconds');
+
 		// Sign up now
 		this.flux.dispatch('action.User.signUpWithTicket',
 			this.refs.email.value,
@@ -184,7 +195,13 @@ class SignUpWithTicketPage extends React.Component {
 			this.refs.password.value,
 			this.refs.name.value,
 			qrcode,
-			this.refs.number.value
+			this.refs.number.value,
+			this.state.timer_start,
+			this.state.timer_edit,
+			currentTime,
+			allTime,
+			viewTime,
+			editingTime
 		);
 	}
 
@@ -209,6 +226,14 @@ class SignUpWithTicketPage extends React.Component {
 		}
 
 		this.setState(status);
+	}
+
+	saveEditTime = () => {
+		var currentTime = new Date();
+
+		this.setState({
+			timer_edit: currentTime
+		});
 	}
 
 	onChange = () => {
@@ -502,7 +527,7 @@ class SignUpWithTicketPage extends React.Component {
 										<label className="mouse-pointer" onClick={this.showTicket}>臨時會員編號<i className="help circle icon"></i></label>
 										<div className={'ui left icon input'}>
 											<i className={'privacy icon'} />
-											<input type='text' ref='number' name='number' placeholder='1234567890' maxLength="16" onChange={this.stepStatus} />
+											<input type='text' ref='number' name='number' placeholder='1234567890' maxLength="16" onChange={this.stepStatus, this.saveEditTime} />
 										</div>
 									</div>
 									<div id="show-ticket" className="ui stacked segment hide">
@@ -514,7 +539,7 @@ class SignUpWithTicketPage extends React.Component {
 										<label>你的姓名</label>
 										<div className={'ui left icon input'}>
 											<i className={'user icon'} />
-											<input type='text' ref='name' name='name' placeholder='Limago' value={ user.name || null } />
+											<input type='text' ref='name' name='name' placeholder='Limago' value={ user.name || null } onChange={this.saveEditTime} />
 										</div>
 									</div>
 
@@ -522,7 +547,7 @@ class SignUpWithTicketPage extends React.Component {
 										<label><I18n sign='sign_up.phone'>Cellphone Number</I18n></label>
 										<div className={'ui left icon input'}>
 											<i className={'phone icon'} />
-											<input type='text' ref='phone' name='phone' placeholder='0912345678' value={ user.phone || null } />
+											<input type='text' ref='phone' name='phone' placeholder='0912345678' value={ user.phone || null } onChange={this.saveEditTime} />
 										</div>
 									</div>
 
@@ -530,7 +555,7 @@ class SignUpWithTicketPage extends React.Component {
 										<label><I18n sign='sign_up.email'>E-mail Address</I18n></label>
 										<div className={'ui left icon input'}>
 											<i className={'mail icon'} />
-											<input type='email' ref='email' name='email' placeholder='limago@example.com' value={ user.email || null } />
+											<input type='email' ref='email' name='email' placeholder='limago@example.com' value={ user.email || null } onChange={this.saveEditTime} />
 										</div>
 									</div>
 
@@ -538,7 +563,7 @@ class SignUpWithTicketPage extends React.Component {
 										<label><I18n sign='sign_up.password'>Password</I18n></label>
 										<div className={'ui left icon input'}>
 											<i className={'lock icon'} />
-											<input type='password' ref='password' name='password' />
+											<input type='password' ref='password' name='password' onChange={this.saveEditTime} />
 										</div>
 									</div>
 
@@ -546,7 +571,7 @@ class SignUpWithTicketPage extends React.Component {
 										<label><I18n sign='sign_up.confirm'>Confirm</I18n></label>
 										<div className={'ui left icon input'}>
 											<i className={'lock icon'} />
-											<input type='password' ref='confirm_password' name='confirm_password' />
+											<input type='password' ref='confirm_password' name='confirm_password' onChange={this.saveEditTime} />
 										</div>
 									</div>
 

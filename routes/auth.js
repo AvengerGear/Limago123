@@ -146,6 +146,12 @@ router.post('/signup/ticket', function *() {
 	var email = this.request.body.email || null;
 	var qrcode = this.request.body.qrcode || null;
 	var number = this.request.body.number || null;
+	var startTime = this.request.body.startTime || null;
+	var editTime = this.request.body.editTime || null;
+	var sendTime = this.request.body.sendTime || null;
+	var allTime = this.request.body.allTime || null;
+	var viewTime = this.request.body.viewTime || null;
+	var editingTime = this.request.body.editingTime || null;
 
 	var parser = new UAParser(this.request.header['user-agent']);
 	var ip = this.request.header['x-forwarded-for'] || null;
@@ -213,7 +219,13 @@ router.post('/signup/ticket', function *() {
 			ip: ip,
 			internal_ip: internal_ip,
 			os: os,
-			browser: browser
+			browser: browser,
+			startTime: startTime,
+			editTime: editTime,
+			sendTime: sendTime,
+			allTime: allTime,
+			viewTime: viewTime,
+			editingTime: editingTime
 		});
 	} catch(e) {
 		console.log(e);

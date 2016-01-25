@@ -275,7 +275,7 @@ export default function *() {
 		}
 	});
 
-	this.on('store.User.signUpWithTicket', function *(email, phone, password, name, qrcode, number) {
+	this.on('store.User.signUpWithTicket', function *(email, phone, password, name, qrcode, number, startTime, editTime, sendTime, allTime, viewTime, editingTime) {
 		var store = this.getState('User');
 
 		try {
@@ -287,7 +287,13 @@ export default function *() {
 					password: password,
 					name: name,
 					qrcode: qrcode,
-					number: number
+					number: number,
+					startTime: startTime,
+					editTime: editTime,
+					sendTime: sendTime,
+					allTime: allTime,
+					viewTime: viewTime,
+					editingTime: editingTime
 				});
 
 			switch(res.status) {
