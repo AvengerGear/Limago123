@@ -6,6 +6,7 @@ import I18n from 'Extension/I18n.jsx';
 import { router, flux, i18n, preAction } from 'Decorator';
 
 // Components
+import LoginState from './LoginState.jsx';
 import Avatar from './Avatar.jsx';
 
 @flux
@@ -16,28 +17,20 @@ class Header extends React.Component {
 		super(props, context);
 
 		this.state = {
-			user: this.flux.getState('User'),
-			service: this.flux.getState('Service')
+			user: context.flux.getState('User'),
+			service: context.flux.getState('Service')
 		};
 	}
 
 	componentWillMount = () => {
 		this.flux.on('state.User', this.flux.bindListener(this.onChange));
 		this.flux.on('state.Service', this.flux.bindListener(this.onChange));
-	}
+	};
 
 	componentWillUnmount = () => {
 		this.flux.off('state.User', this.onChange);
 		this.flux.off('state.Service', this.onChange);
-	}
-
-	componentDidMount() {
-
-		// Enabling dropdown menu
-		$(this.refs.component).find('.ui.dropdown').dropdown({
-			on: 'hover'
-		});
-	}
+	};
 
 	onChange = () => {
 
@@ -45,10 +38,9 @@ class Header extends React.Component {
 			user: this.flux.getState('User'),
 			service: this.flux.getState('Service')
 		});
-	}
+	};
 
 	render() {
-
 		var loginState;
 
 		if (this.state.user.logined) {
@@ -102,7 +94,10 @@ class Header extends React.Component {
 				<Link to='/' className={'item'} activeClassName=''>
 					<div>{this.state.service.name}</div>
 				</Link>
-				{loginState}
+
+				<div className={'right menu'}>
+					<LoginState user={this.state.user} />
+				</div>
 			</div>
 		);
 	}

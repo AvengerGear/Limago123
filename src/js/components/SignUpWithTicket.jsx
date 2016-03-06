@@ -114,6 +114,9 @@ class SignUpWithTicketPage extends React.Component {
 	}
 
 	signUp = () => {
+
+
+console.log('hihi')
 		var qrcode = this.state.qrcode;
 		var number = this.refs.number.value.trim();
 		var email = this.refs.email.value.trim();

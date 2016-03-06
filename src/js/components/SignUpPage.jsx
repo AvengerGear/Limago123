@@ -30,11 +30,11 @@ class SignUpPage extends React.Component {
 
 	componentWillMount = () => {
 		this.flux.on('state.User', this.flux.bindListener(this.onChange));
-	}
+	};
 
 	componentWillUnmount = () => {
 		this.flux.off('state.User', this.onChange);
-	}
+	};
 
 	signUp = () => {
 		var email = this.refs.email.value.trim();
@@ -100,7 +100,7 @@ class SignUpPage extends React.Component {
 			this.refs.password.value,
 			this.refs.name.value
 		);
-	}
+	};
 
 	onChange = () => {
 
@@ -140,7 +140,7 @@ class SignUpPage extends React.Component {
 
 			this.setState(updateState);
 		}
-	}
+	};
 
 	render() {
 		var phoneClasses = 'required field';

@@ -61,7 +61,7 @@ class ChangePassword extends React.Component {
 					this.refs.password.value = '';
 					this.refs.confirm_password.value = '';
 				}.bind(this));
-	}
+	};
 
 	handleChange = () => {
 		var password = this.refs.password.value;
@@ -79,7 +79,7 @@ class ChangePassword extends React.Component {
 		this.setState({
 			readyToUpdate: true
 		});
-	}
+	};
 
 	render() {
 		var passwordClasses = 'required field';

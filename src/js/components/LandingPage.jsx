@@ -61,7 +61,7 @@ class LandingPage extends React.Component {
 		$('html, body').stop().animate({
 			scrollTop: $node.offset().top - $header.height()
 		}, 400);
-	}
+	};
 
 	copyToSignUp = () => {
 		var user = this.flux.getState('User');
