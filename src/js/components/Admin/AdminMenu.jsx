@@ -26,6 +26,9 @@ class AdminMenu extends React.Component {
 				<Link to='/admin/roles' className={this.props.category == 'roles' ? 'item active' : 'item'}>
 					<I18n sign='admin_roles.header'>Roles</I18n>
 				</Link>
+				<Link to='/admin/tickets' className={this.props.category == 'tickets' ? 'item active' : 'item'}>
+					<I18n sign='admin_tickets.header'>Tickets</I18n>
+				</Link>
 			</div>
 		);
 	}

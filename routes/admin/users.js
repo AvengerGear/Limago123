@@ -39,6 +39,7 @@ router.get('/admin/api/users', function *() {
 	var data = yield Member.list(conditions, [
 		'name',
 		'email',
+		'phone',
 		'created'
 	], {
 		skip: (page - 1) * perPage,

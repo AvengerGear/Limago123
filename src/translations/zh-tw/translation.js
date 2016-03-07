@@ -45,4 +45,5 @@ module.exports = {
 	'admin_users.subheader': '用戶管理',
 	'admin_roles.header': '角色',
 	'admin_roles.subheader': '角色管理',
+	'admin_tickets.header': '票券',
 };
