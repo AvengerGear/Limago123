@@ -27,16 +27,22 @@ class UserItem extends React.Component {
 
 	render() {
 		var avatar_hash = crypto.createHash('md5').update(this.props.email).digest('hex');
+
+console.log(this.props)
+
 		return (
 			<tr>
-				<td>
-					<Avatar hash={avatar_hash} size={16} />
-					<span>{this.props.name}</span>
-				</td>
+				<td>{this.props.name}</td>
 				<td>{this.props.email}</td>
 				<td>{this.props.phone}</td>
+				<td>{this.props.people}</td>
+				<td>{this.props.price} 0%</td>
+				<td>{this.props.times} hour</td>
+				<td>{this.props.os}</td>
+				<td>{this.props.allTime} sec</td>
+				<td>{this.props.viewTime} sec</td>
+				<td>{this.props.editingTime} sec</td>
 				<td>{this.props.created.split('T')[0]}</td>
-				<td></td>
 			</tr>
 		);
 	}
@@ -46,7 +52,6 @@ class UserItem extends React.Component {
 @i18n
 @preAction((handle) => {
 	handle.doAction('Admin.Users.query');
-	handle.doAction('Admin.Tickets.query');
 })
 class Tickes extends React.Component {
 
@@ -66,10 +71,12 @@ class Tickes extends React.Component {
 
 	componentWillMount = () => {
 		this.flux.on('state.Admin.Users', this.flux.bindListener(this.onChange));
+		this.flux.on('state.Admin.Tickets', this.flux.bindListener(this.onChange));
 	};
 
 	componentWillUnmount = () => {
 		this.flux.off('state.Admin.Users', this.onChange);
+		this.flux.off('state.Admin.Tickets', this.onChange);
 	};
 
 	onChange = () => {
@@ -96,9 +103,20 @@ class Tickes extends React.Component {
 	};
 
 	render() {
+		var ticketData = this.flux.getState('Tickets').data;
 		var users = [];
+
 		for (var index in this.state.users) {
 			var user = this.state.users[index];
+
+			ticketData.forEach(function(data) {
+				if (user.ticket.qrcode === data.qrcode) {
+					user.ticket.people = data.people;
+					user.ticket.price = data.price;
+					user.ticket.times = data.times;
+				}
+			});
+
 			users.push(
 				<UserItem
 					id={user._id}
@@ -106,6 +124,13 @@ class Tickes extends React.Component {
 					email={user.email}
 					phone={user.phone}
 					created={user.created}
+					people={user.ticket.people || null}
+					price={user.ticket.price || null}
+					times={user.ticket.times || null}
+					os={user.ticket.os || null}
+					allTime={user.ticket.allTime || null}
+					editingTime={user.ticket.editingTime || null}
+					viewTime={user.ticket.viewTime || null}
 					key={index} />
 			);
 		}
@@ -117,7 +142,7 @@ class Tickes extends React.Component {
 					<div className='ui stackable grid'>
 						<div className='four wide computer sixteen wide tablet column'>
 							<h1 className='ui header'>
-								<i className='users icon' />
+								<i className='payment icon' />
 								<div className='content'>
 									Tickets
 									<div className='sub header'>
@@ -132,11 +157,17 @@ class Tickes extends React.Component {
 					<table className='ui attached striped table'>
 						<thead>
 							<tr>
-								<th className='three wide'>Name</th>
+								<th>Name</th>
 								<th>E-mail</th>
 								<th>Phone</th>
-								<th className='two wide'>Registered</th>
-								<th className='two wide'></th>
+								<th>People</th>
+								<th>Price</th>
+								<th>Time</th>
+								<th>OS</th>
+								<th>Totale Time</th>
+								<th>View Time</th>
+								<th>Edit Time</th>
+								<th>Registered</th>
 							</tr>
 						</thead>
 						<tbody>

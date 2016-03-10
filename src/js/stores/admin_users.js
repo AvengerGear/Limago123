@@ -14,7 +14,7 @@ export default function *() {
 		var state = this.getState('Admin.Users');
 
 		// Getting user list by calling API
-		var res = yield this.request
+		var resUsers = yield this.request
 			.get('/admin/api/users')
 			.query({
 				page: state.page,
@@ -23,15 +23,34 @@ export default function *() {
 				q: JSON.stringify(conditions)
 			});
 
-		if (res.status != 200) {
+		var resTickets = yield this.request
+			.get('/admin/api/tickets')
+			.query({
+				q: JSON.stringify(conditions)
+			});
+
+		if (resUsers.status != 200 && resUsers.status != 200) {
 			return;
 		}
 
+		var users = resUsers.body.members;
+		var tickets = resTickets.body.tickets;
+
+		tickets.forEach(function(item) {
+			var ticket = item;
+
+			users.forEach(function(user) {
+				if (ticket.email == user.email) {
+					user.ticket = ticket;
+				}
+			});
+		});
+
 		// Update state
-		state.users = res.body.members;
-		state.page = res.body.page;
-		state.pageCount = res.body.pageCount;
-		state.perPage = res.body.perPage;
+		state.users = users;
+		state.page = resUsers.body.page;
+		state.pageCount = resUsers.body.pageCount;
+		state.perPage = resUsers.body.perPage;
 
 		this.dispatch('state.Admin.Users');
 	});

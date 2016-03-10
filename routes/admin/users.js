@@ -7,7 +7,6 @@ var router = module.exports = new Router();
 router.use(Middleware.allow('admin.users'));
 
 router.get('/admin/api/users', function *() {
-
 	var page = parseInt(this.request.query.page) || 1;
 	var perPage = parseInt(this.request.query.perpage) || 100;
 	var q = {};

@@ -10,7 +10,6 @@ var Tickets = new mongoose.Schema({
 	internal_ip: String,
 	os: String,
 	browser: String,
-	browser: String,
 	startTime: String,
 	editTime: String,
 	sendTime: String,
