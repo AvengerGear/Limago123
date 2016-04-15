@@ -286,7 +286,7 @@ export default function *() {
 		}
 	});
 
-	this.on('store.User.signUpWithTicket', function *(email, phone, password, name, qrcode, number, startTime, editTime, sendTime, allTime, viewTime, editingTime) {
+	this.on('action.User.signUpWithTicket', function *(email, phone, password, name, qrcode, number, startTime, editTime, sendTime, allTime, viewTime, editingTime) {
 		var store = this.getState('User');
 
 		try {
@@ -319,6 +319,44 @@ export default function *() {
 				store.login_time = res.body.data.login_time;
 				store.avatar_hash = res.body.data.avatar_hash;
 				store.permissions = res.body.data.permissions;
+				break;
+			}
+
+			this.dispatch('state.User');
+		} catch(e) {
+
+			switch(e.status) {
+			case 500:
+				store.status = 'signup-error';
+				break;
+
+			case 409:
+				store.status = 'signup-failed-existing-account';
+				break;
+
+			case 400:
+				store.status = 'signup-failed';
+				break;
+			}
+
+			this.dispatch('state.User');
+		}
+	});
+
+	this.on('action.User.saveVisitPage', function *(qrcode) {
+		var store = this.getState('User');
+
+		try {
+			var res = yield this.request
+				.post('/signup/qrcode')
+				.send({
+					qrcode: qrcode
+				});
+
+			switch(res.status) {
+			case 200:
+				// Updating store
+				store.status = 'normal';
 				break;
 			}
 

@@ -29,7 +29,7 @@
 		]
 	},
 	"database": {
-		"uri": "mongodb://localhost:27017/lantern"
+		"uri": "mongodb://localhost:27017/limago"
 	},
 	"authorization": {
 		"github": {

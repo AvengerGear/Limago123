@@ -2,12 +2,13 @@ import React from 'react';
 import I18n from 'Extension/I18n.jsx';
 
 // Decorators
-import { router, flux, i18n, preAction } from 'Decorator';
+import { router, flux, i18n, preAction, wait } from 'Decorator';
 
 @router
 @flux
 @i18n
 @preAction('User.syncProfile')
+@wait('User')
 class UserProfile extends React.Component {
 
 	constructor(props, context) {

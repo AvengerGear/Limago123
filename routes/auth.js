@@ -7,6 +7,7 @@ var RestPack = require('restpack');
 var Member = require('../lib/member');
 var Emails = require('../lib/emails');
 var Tickets = require('../lib/tickets');
+var Visits = require('../lib/visits');
 var Passport = require('../lib/passport');
 var settings = require('../lib/config.js');
 
@@ -334,6 +335,36 @@ router.post('/signup/ticket', function *() {
 	this.body = {
 		success: true,
 		data: m
+	};
+});
+
+router.post('/signup/qrcode', function *() {
+	var qrcode = this.request.body.qrcode || null;
+
+	var parser = new UAParser(this.request.header['user-agent']);
+	var ip = this.request.header['x-forwarded-for'] || null;
+	var internal_ip = this.request.body.internal_ip || null;
+	var os = parser.getOS().name + ' ' + parser.getOS().version || null;
+	var browser = parser.getBrowser().name + ' ' + parser.getBrowser().version || null;
+
+	// Create a new ticket
+	try {
+		var ticket = yield Visits.create({
+			qrcode: qrcode,
+			ip: ip,
+			internal_ip: internal_ip,
+			os: os,
+			browser: browser
+		});
+	} catch(e) {
+		console.log(e);
+		this.status = 500;
+		return;
+	}
+
+	// Return result to client
+	this.body = {
+		success: true
 	};
 });
 

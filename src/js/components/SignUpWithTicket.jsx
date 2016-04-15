@@ -14,16 +14,6 @@ import Footer from './Footer.jsx';
 import ticket from 'Source/images/ticket.jpg';
 
 // icons
-import peopleIcon1 from 'Source/images/people-icon-1.png';
-import peopleIcon2 from 'Source/images/people-icon-2.png';
-import peopleIconMany from 'Source/images/people-icon-many.png';
-import ticketIcon1 from 'Source/images/ticket-icon-1.png';
-import ticketIcon5 from 'Source/images/ticket-icon-5.png';
-import ticketIcon9 from 'Source/images/ticket-icon-9.png';
-import timeIcon3 from 'Source/images/time-icon-3.png';
-import timeIcon8 from 'Source/images/time-icon-8.png';
-import timeIcon24 from 'Source/images/time-icon-24.png';
-
 import arrow from 'Source/images/arrow.png';
 import pen from 'Source/images/pen.png';
 
@@ -98,9 +88,6 @@ class SignUpWithTicketPage extends React.Component {
 
 		tickets.forEach(ticket => {
 			if (urlArrs[2] == ticket.qrcode) {
-				state.people = ticket.people;
-				state.price = ticket.price;
-				state.times = ticket.times;
 				isQrcode = true;
 			}
 		});
@@ -110,11 +97,14 @@ class SignUpWithTicketPage extends React.Component {
 			return;
 		}
 
+		this.flux.dispatch('action.User.saveVisitPage',
+			state.qrcode
+		);
+
 		this.setState(state);
 	}
 
 	signUp = () => {
-
 		var qrcode = this.state.qrcode;
 		var number = this.refs.number.value.trim();
 		var email = this.refs.email.value.trim();
@@ -288,58 +278,6 @@ class SignUpWithTicketPage extends React.Component {
 		var message;
 		var fieldClass = 'field';
 		var user = this.state;
-		var peopleIcon;
-		var ticketIcon;
-		var timeIcon;
-
-		switch(user.people) {
-		case 1:
-			peopleIcon = peopleIcon1;
-			break;
-
-		case 2:
-			peopleIcon = peopleIcon2;
-			break;
-
-		case 'many':
-			peopleIcon = peopleIconMany;
-			break;
-		}
-
-		if (user.people == 'many') {
-			user.people = '多';
-		}
-		switch(user.price) {
-		case 1:
-			ticketIcon = ticketIcon1;
-			break;
-
-		case 5:
-			ticketIcon = ticketIcon5;
-			break;
-
-		case 9:
-			ticketIcon = ticketIcon9;
-			break;
-		}
-
-		switch(user.times) {
-		case 3:
-			timeIcon = timeIcon3;
-			break;
-
-		case 8:
-			timeIcon = timeIcon8;
-			break;
-
-		case 24:
-			timeIcon = timeIcon24;
-			break;
-		}
-
-		if (user.people == 'many') {
-			user.people = '多';
-		}
 
 		if (this.state.error) {
 			fieldClass += ' error';
@@ -520,80 +458,6 @@ class SignUpWithTicketPage extends React.Component {
 				<Footer />
 			</div>
 		);
-		// <section style={ sectionStyle } className="limago" ref='app_section'>
-		// 	<div className={'ui basic center aligned segment'}>
-		// 			<h1>
-		// 				Limago 
-		// 				<span className="step-number color-white bg-color-brown">1</span>
-		// 				<span className="step-number color-white bg-color-orange">2</span>
-		// 				<span className="step-number color-white bg-color-green">3</span>
-		// 			</h1>
-		// 	</div>
-		// </section>
-		// <section ref='app_section' className="section-selects">
-		// 	<div className="ui stackable two column grid limago-select">
-		// 		<div className="five wide column people-section-icon">
-		// 			<div className={'ui basic center aligned segment'}>
-		// 				<img className="ui middle aligned tiny image section-text" src={ peopleIcon } /	>
-		// 				<p className="color-white icon-tag">人數</p>
-		// 			</div>
-		// 		</div>
-		// 		<div className="eleven wide column">
-		// 			<div className="ui stackable sixteen column grid people-section">
-		// 				<div className="three wide column"></div>
-		// 				<div className="ten wide column section-text">
-		// 					<h1 className="select-title color-black text-right">
-		// 						隨機 <span className="color-brown">{'{ ' + user.people + ' }'}</span> 人出發
-		// 					</h1>
-		// 					<p className="text-right select-sub-title">你將有機會認識不一樣的朋友</p>
-		// 				</div>
-		// 			</div>
-		// 		</div>
-		// 	</div>
-		// </section>
-
-		// <section className="section-selects">
-		// 	<div className="ui stackable two column grid limago-select flex">
-		// 		<div className="eleven wide column order-2">
-		// 			<div className="ui stackable sixteen column grid ticket-section">
-		// 				<div className="three wide column"></div>
-		// 				<div className="ten wide column section-text">
-		// 					<h1 className="select-title color-black text-right">
-		// 						<span className="color-orange">{'{ ' + user.price + ' }'}</span> 折機票
-		// 					</h1>
-		// 					<p className="text-right select-sub-title">同時享有你意想不到的折扣機票</p>
-		// 				</div>
-		// 			</div>
-		// 		</div>
-		// 		<div className="five wide column ticket-section-icon order-1">
-		// 			<div className={'ui basic center aligned segment'}>
-		// 				<img className="ui middle aligned tiny image section-text" src={ ticketIcon } /	>
-		// 				<p className="color-white icon-tag">機票</p>
-		// 			</div>
-		// 		</div>
-		// 	</div>
-		// </section>
-
-		// <section className="section-selects">
-		// 	<div className="ui stackable two column grid limago-select">
-		// 		<div className="five wide column time-section-icon">
-		// 			<div className={'ui basic center aligned segment'}>
-		// 				<img className="ui middle aligned tiny image section-text" src={ timeIcon } /	>
-		// 				<p className="color-white icon-tag">時間</p>
-		// 			</div>
-		// 		</div>
-		// 		<div className="eleven wide column time-section">
-		// 			<div className="ui stackable sixteen column grid">
-		// 				<div className="thirteen wide column section-text">
-		// 					<h1 className="select-title color-black text-right">
-		// 						<span className="color-green">{'{ ' + user.times + ' }'}</span> 小時內出發
-		// 					</h1>
-		// 					<p className="text-right select-sub-title">心動了嗎？那就馬上收拾你的行李吧！</p>
-		// 				</div>
-		// 			</div>
-		// 		</div>
-		// 	</div>
-		// </section>
 	}
 }
 
