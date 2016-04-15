@@ -1,10 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Fluky from 'fluky';
-import { Router } from 'react-router';
+import { Router, browserHistory } from 'react-router';
 import App from './App.jsx';
 import Entry from './Entry.jsx';
-import createBrowserHistory from 'history/lib/createBrowserHistory';
 
 // Flux architecture
 import Actions from './actions';
@@ -33,7 +32,13 @@ var initRoutes = function(routeSettings) {
 
 		if (route.path == '/') {
 			routes.indexRoute = {
-				component: route.handler
+				component: route.handler,
+				onLeave: function() {
+					Fluky.dispatch('action.Lantern.setInheritServerState', false);
+
+					// Reset window title
+					Fluky.dispatch('action.Window.setTitle', Fluky.getState('Service').name);
+				}
 			};
 			continue;
 		}
@@ -45,7 +50,7 @@ var initRoutes = function(routeSettings) {
 				routes.childRoutes.push({
 					path: route.path,
 					onEnter: function(nextState, replaceState) {
-						replaceState(null, targetPath);
+						replaceState(targetPath);
 					}
 				});
 			})(route.redirect);
@@ -55,6 +60,8 @@ var initRoutes = function(routeSettings) {
 				path: route.path,
 				component: route.handler,
 				onLeave: function() {
+					Fluky.dispatch('action.Lantern.setInheritServerState', false);
+
 					// Reset window title
 					Fluky.dispatch('action.Window.setTitle', Fluky.getState('Service').name);
 				}
@@ -67,14 +74,13 @@ var initRoutes = function(routeSettings) {
 
 var routeSettings = require('./routes');
 var routes = initRoutes(routeSettings);
-var history = createBrowserHistory();
 
 export default class BrowserInit extends React.Component {
 	render() {
 
 		return (
 			<Entry flux={Fluky}>
-				<Router routes={routes} history={history} onUpdate={this.onUpdate} />
+				<Router routes={routes} history={browserHistory} onUpdate={this.onUpdate} />
 			</Entry>
 		);
 	}

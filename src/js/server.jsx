@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOMServer from 'react-dom/server';
-import { match, RoutingContext } from 'react-router';
+import { match, RouterContext } from 'react-router';
 import Fluky from 'fluky';
 import Entry from './Entry.jsx';
 import App from './App.jsx';
@@ -74,10 +74,11 @@ var initEntry = function(error, redirectLocation, renderProps, state, userdata, 
 
 	// Loading parts of frameworks
 	fluky.load(Actions, Stores, Extensions);
+	fluky.dispatch('action.Lantern.setInheritServerState', true);
 
 	var component = (
 		<Entry flux={fluky}>
-			<RoutingContext {...renderProps} createElement={createElement} />
+			<RouterContext {...renderProps} createElement={createElement} />
 		</Entry>
 	);
 

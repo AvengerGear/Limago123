@@ -9,6 +9,7 @@ import admin_roles from './admin_roles';
 import admin_role from './admin_role';
 
 export default {
+	signup: require('./signup'),
 	user: user,
 	tickets: tickets,
 	admin: admin,

@@ -235,6 +235,17 @@ export default function *() {
 		}
 	});
 
+	this.on('action.User.updateStatus', function *(status) {
+		store.logined = status.logined;
+		store.name = status.name;
+		store.username = status.email;
+		store.email = status.email;
+		store.login_time = status.login_time;
+		store.avatar_hash = status.avatar_hash;
+		store.permissions = status.permissions;
+		this.dispatch('state.User');
+	});
+
 	this.on('store.User.signUpEmailOnly', function *(email) {
 
 		var store = this.getState('User');

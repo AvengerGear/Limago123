@@ -115,8 +115,6 @@ class SignUpWithTicketPage extends React.Component {
 
 	signUp = () => {
 
-
-console.log('hihi')
 		var qrcode = this.state.qrcode;
 		var number = this.refs.number.value.trim();
 		var email = this.refs.email.value.trim();
@@ -405,82 +403,6 @@ console.log('hihi')
 					</button>
 				</div>
 
-				<section style={ sectionStyle } className="limago" ref='app_section'>
-					<div className={'ui basic center aligned segment'}>
-							<h1>
-								Limago 
-								<span className="step-number color-white bg-color-brown">1</span>
-								<span className="step-number color-white bg-color-orange">2</span>
-								<span className="step-number color-white bg-color-green">3</span>
-							</h1>
-					</div>
-				</section>
-
-				<section ref='app_section' className="section-selects">
-					<div className="ui stackable two column grid limago-select">
-						<div className="five wide column people-section-icon">
-							<div className={'ui basic center aligned segment'}>
-								<img className="ui middle aligned tiny image section-text" src={ peopleIcon } /	>
-								<p className="color-white icon-tag">人數</p>
-							</div>
-						</div>
-						<div className="eleven wide column">
-							<div className="ui stackable sixteen column grid people-section">
-								<div className="three wide column"></div>
-								<div className="ten wide column section-text">
-									<h1 className="select-title color-black text-right">
-										隨機 <span className="color-brown">{'{ ' + user.people + ' }'}</span> 人出發
-									</h1>
-									<p className="text-right select-sub-title">你將有機會認識不一樣的朋友</p>
-								</div>
-							</div>
-						</div>
-					</div>
-				</section>
-
-				<section className="section-selects">
-					<div className="ui stackable two column grid limago-select flex">
-						<div className="eleven wide column order-2">
-							<div className="ui stackable sixteen column grid ticket-section">
-								<div className="three wide column"></div>
-								<div className="ten wide column section-text">
-									<h1 className="select-title color-black text-right">
-										<span className="color-orange">{'{ ' + user.price + ' }'}</span> 折機票
-									</h1>
-									<p className="text-right select-sub-title">同時享有你意想不到的折扣機票</p>
-								</div>
-							</div>
-						</div>
-						<div className="five wide column ticket-section-icon order-1">
-							<div className={'ui basic center aligned segment'}>
-								<img className="ui middle aligned tiny image section-text" src={ ticketIcon } /	>
-								<p className="color-white icon-tag">機票</p>
-							</div>
-						</div>
-					</div>
-				</section>
-
-				<section className="section-selects">
-					<div className="ui stackable two column grid limago-select">
-						<div className="five wide column time-section-icon">
-							<div className={'ui basic center aligned segment'}>
-								<img className="ui middle aligned tiny image section-text" src={ timeIcon } /	>
-								<p className="color-white icon-tag">時間</p>
-							</div>
-						</div>
-						<div className="eleven wide column time-section">
-							<div className="ui stackable sixteen column grid">
-								<div className="thirteen wide column section-text">
-									<h1 className="select-title color-black text-right">
-										<span className="color-green">{'{ ' + user.times + ' }'}</span> 小時內出發
-									</h1>
-									<p className="text-right select-sub-title">心動了嗎？那就馬上收拾你的行李吧！</p>
-								</div>
-							</div>
-						</div>
-					</div>
-				</section>
-
 				<div className={'ui basic center aligned segment'}>
 					<div className="ui stackable three column grid">
 						<div className="four wide column"></div>
@@ -598,6 +520,80 @@ console.log('hihi')
 				<Footer />
 			</div>
 		);
+		// <section style={ sectionStyle } className="limago" ref='app_section'>
+		// 	<div className={'ui basic center aligned segment'}>
+		// 			<h1>
+		// 				Limago 
+		// 				<span className="step-number color-white bg-color-brown">1</span>
+		// 				<span className="step-number color-white bg-color-orange">2</span>
+		// 				<span className="step-number color-white bg-color-green">3</span>
+		// 			</h1>
+		// 	</div>
+		// </section>
+		// <section ref='app_section' className="section-selects">
+		// 	<div className="ui stackable two column grid limago-select">
+		// 		<div className="five wide column people-section-icon">
+		// 			<div className={'ui basic center aligned segment'}>
+		// 				<img className="ui middle aligned tiny image section-text" src={ peopleIcon } /	>
+		// 				<p className="color-white icon-tag">人數</p>
+		// 			</div>
+		// 		</div>
+		// 		<div className="eleven wide column">
+		// 			<div className="ui stackable sixteen column grid people-section">
+		// 				<div className="three wide column"></div>
+		// 				<div className="ten wide column section-text">
+		// 					<h1 className="select-title color-black text-right">
+		// 						隨機 <span className="color-brown">{'{ ' + user.people + ' }'}</span> 人出發
+		// 					</h1>
+		// 					<p className="text-right select-sub-title">你將有機會認識不一樣的朋友</p>
+		// 				</div>
+		// 			</div>
+		// 		</div>
+		// 	</div>
+		// </section>
+
+		// <section className="section-selects">
+		// 	<div className="ui stackable two column grid limago-select flex">
+		// 		<div className="eleven wide column order-2">
+		// 			<div className="ui stackable sixteen column grid ticket-section">
+		// 				<div className="three wide column"></div>
+		// 				<div className="ten wide column section-text">
+		// 					<h1 className="select-title color-black text-right">
+		// 						<span className="color-orange">{'{ ' + user.price + ' }'}</span> 折機票
+		// 					</h1>
+		// 					<p className="text-right select-sub-title">同時享有你意想不到的折扣機票</p>
+		// 				</div>
+		// 			</div>
+		// 		</div>
+		// 		<div className="five wide column ticket-section-icon order-1">
+		// 			<div className={'ui basic center aligned segment'}>
+		// 				<img className="ui middle aligned tiny image section-text" src={ ticketIcon } /	>
+		// 				<p className="color-white icon-tag">機票</p>
+		// 			</div>
+		// 		</div>
+		// 	</div>
+		// </section>
+
+		// <section className="section-selects">
+		// 	<div className="ui stackable two column grid limago-select">
+		// 		<div className="five wide column time-section-icon">
+		// 			<div className={'ui basic center aligned segment'}>
+		// 				<img className="ui middle aligned tiny image section-text" src={ timeIcon } /	>
+		// 				<p className="color-white icon-tag">時間</p>
+		// 			</div>
+		// 		</div>
+		// 		<div className="eleven wide column time-section">
+		// 			<div className="ui stackable sixteen column grid">
+		// 				<div className="thirteen wide column section-text">
+		// 					<h1 className="select-title color-black text-right">
+		// 						<span className="color-green">{'{ ' + user.times + ' }'}</span> 小時內出發
+		// 					</h1>
+		// 					<p className="text-right select-sub-title">心動了嗎？那就馬上收拾你的行李吧！</p>
+		// 				</div>
+		// 			</div>
+		// 		</div>
+		// 	</div>
+		// </section>
 	}
 }
 
