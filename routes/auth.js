@@ -98,11 +98,7 @@ router.post('/signup', function *() {
 	}
 
 	// Check fields
-<<<<<<< HEAD
 	if (!name || !phone || !password || !email) {
-		this.status = 400;
-=======
-	if (!name || !email) {
 		restpack.setStatus(RestPack.Status.ValidationFailed);
 
 		if (!name)
@@ -110,13 +106,18 @@ router.post('/signup', function *() {
 
 		if (!email)
 			restpack.appendError('email', RestPack.Code.Required);
+
+		if (!phone)
+			restpack.appendError('phone', RestPack.Code.Required);
+
+		if (!password)
+			restpack.appendError('phone', RestPack.Code.Required);
 	}
 
 	if (restpack.status == RestPack.Status.ValidationFailed) {
 		// Response
 		restpack.sendKoa(this);
 
->>>>>>> upstream/master
 		return;
 	}
 
@@ -159,6 +160,7 @@ router.post('/signup', function *() {
 	// Create a new member
 	var data = {
 		name: name,
+		phone: phone,
 		password: password,
 		email: email
 	};
@@ -173,16 +175,7 @@ router.post('/signup', function *() {
 	}
 
 	try {
-<<<<<<< HEAD
-		var member = yield Member.create({
-			name: name,
-			phone: phone,
-			password: password,
-			email: email
-		});
-=======
 		var member = yield Member.create(data);
->>>>>>> upstream/master
 	} catch(e) {
 		console.log(e);
 		this.status = 500;

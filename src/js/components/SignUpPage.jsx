@@ -198,23 +198,17 @@ class SignUpPage extends React.Component {
 	};
 
 	render() {
-<<<<<<< HEAD
-		var phoneClasses = 'required field';
-=======
-
 		var features = this.flux.getState('Features');
 		var usernameClasses = 'required field';
->>>>>>> upstream/master
+		var phoneClasses = 'required field';
 		var emailClasses = 'required field';
 		var nameClasses = 'required field';
 		var passwordClasses = 'required field';
 		var confirmClasses = 'required field';
 		var errItems = [];
 		var fieldClass = 'field';
-<<<<<<< HEAD
+
 		var user = this.state;
-=======
->>>>>>> upstream/master
 
 		if (this.state.error) {
 			fieldClass += ' error';
@@ -234,7 +228,6 @@ class SignUpPage extends React.Component {
 
 			if (this.state.email_existing_error) {
 				emailClasses += ' error';
-<<<<<<< HEAD
 				message = (
 					<div className='ui negative icon message'>
 						<i className={'warning sign icon'} />
@@ -258,15 +251,6 @@ class SignUpPage extends React.Component {
 				if (this.state.email_error) {
 					emailClasses += ' error';
 				}
-=======
-				errItems.push(this.i18n.getMessage('sign_up.email_existing_error', 'E-mail exists already. Please type another e-mail address then try again'));
-			} else if (this.state.email_empty_error) {
-				emailClasses += ' error';
-				errItems.push(this.i18n.getMessage('sign_up.email_empty_error', 'Please enter e-mail'));
-			} else if (this.state.email_error) {
-				emailClasses += ' error';
-				errItems.push(this.i18n.getMessage('sign_up.email_invalid_error', 'E-mail is invalid'));
->>>>>>> upstream/master
 			}
 
 			if (this.state.name_empty_error) {
@@ -277,15 +261,11 @@ class SignUpPage extends React.Component {
 				errItems.push('Name is invalid');
 			}
 
-<<<<<<< HEAD
 			if (this.state.phone_error) {
 				phoneClasses += ' error';
 			}
 
-			if (this.state.password_error) {
-=======
 			if (this.state.password_empty_error) {
->>>>>>> upstream/master
 				passwordClasses += ' error';
 				confirmClasses += ' error';
 				errItems.push(this.i18n.getMessage('sign_up.password_empty_error', 'Please enter password'));
@@ -359,7 +339,6 @@ class SignUpPage extends React.Component {
 									<div className={nameClasses}>
 										<label><I18n sign='sign_up.display_name'>Display Name</I18n></label>
 										<div className={'ui left icon input'}>
-<<<<<<< HEAD
 											<i className={'user icon'} />
 											<input type='text' ref='name' name='name' placeholder='Limago' value={ user.name || null } />
 										</div>
@@ -370,10 +349,6 @@ class SignUpPage extends React.Component {
 										<div className={'ui left icon input'}>
 											<i className={'phone icon'} />
 											<input type='text' ref='phone' name='phone' placeholder='0912345678' value={ user.phone || null } />
-=======
-											<i className={'tag icon'} />
-											<input type='text' ref='name' name='name' placeholder='Fred Chien' />
->>>>>>> upstream/master
 										</div>
 									</div>
 
@@ -409,9 +384,7 @@ class SignUpPage extends React.Component {
 								</div>
 							</div>
 						</div>
-
 					</div>
-
 				</div>
 			</div>
 		);
