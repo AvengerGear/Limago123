@@ -51,10 +51,10 @@ console.log(this.props)
 @flux
 @i18n
 @preAction((handle) => {
-	handle.doAction('Admin.Users.query');
+	handle.doAction('Admin.Users.graphic');
 })
 @wait('Admin.Users')
-class Tickets extends React.Component {
+class TicketGraphic extends React.Component {
 
 	constructor(props, context) {
 		super(props, context);
@@ -63,6 +63,7 @@ class Tickets extends React.Component {
 
 		this.state = {
 			users: state.users,
+			record: state.record,
 			page: state.page,
 			pageCount: state.pageCount,
 			perPage: state.perPage,
@@ -85,6 +86,7 @@ class Tickets extends React.Component {
 
 		this.setState({
 			users: state.users,
+			record: state.record,
 			page: state.page,
 			pageCount: state.pageCount,
 			perPage: state.perPage,
@@ -106,6 +108,12 @@ class Tickets extends React.Component {
 	render() {
 		var ticketData = this.flux.getState('Tickets').data;
 		var users = [];
+
+
+console.log('ticketData', ticketData)
+console.log('record', this.state.record)
+
+
 
 		if (this.state.users.length) {
 			for (var index in this.state.users) {
@@ -184,4 +192,4 @@ class Tickets extends React.Component {
 	}
 }
 
-export default Tickets;
+export default TicketGraphic;

@@ -118,7 +118,7 @@ module.exports = [
 		path: '/admin/tickets',
 		getHandler: function(nextState, done) {
 			require.ensure([], function(require) {
-				done(null, require('./components/Admin/Tickets.jsx'));
+				done(null, require('./components/Admin/TicketGraphic.jsx'));
 			});
 		}
 	}

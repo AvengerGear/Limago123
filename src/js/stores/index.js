@@ -1,5 +1,6 @@
 import user from './user';
 import tickets from './tickets';
+import record from './record';
 import admin from './admin';
 import admin_users from './admin_users';
 import admin_user from './admin_user';
@@ -12,6 +13,7 @@ export default {
 	signup: require('./signup'),
 	user: user,
 	tickets: tickets,
+	record: record,
 	admin: admin,
 	admin_users: admin_users,
 	admin_user: admin_user,

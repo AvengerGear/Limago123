@@ -6,7 +6,8 @@ export default function *() {
 		page: 1,
 		pageCount: 1,
 		perPage: 100,
-		users: []
+		users: [],
+		record: []
 	});
 
 	this.on('store.Admin.Users.query', function *(conditions) {
@@ -80,6 +81,16 @@ export default function *() {
 				break;
 			}
 		}
+
+		this.dispatch('state.Admin.Users');
+	});
+
+	this.on('store.Admin.Users.graphic', function *(conditions) {
+
+		var state = this.getState('Admin.Users');
+		var record = this.getState('Admin.Record');
+
+		state.record = record;
 
 		this.dispatch('state.Admin.Users');
 	});
