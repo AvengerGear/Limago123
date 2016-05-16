@@ -23,7 +23,8 @@ export default function *() {
 				q: JSON.stringify(conditions)
 			});
 
-		var resTickets = yield this.request
+		var	resTickets = [];
+		resTickets = yield this.request
 			.get('/admin/api/tickets')
 			.query({
 				q: JSON.stringify(conditions)
@@ -36,16 +37,18 @@ export default function *() {
 		var users = resUsers.body.members;
 		var tickets = resTickets.body.tickets;
 
-		tickets.forEach(function(item) {
-			var ticket = item;
+		if (resTickets.length) {
+			tickets.forEach(function(item) {
+				var ticket = item;
 
-			users.forEach(function(user) {
-				if (ticket.email == user.email) {
-					user.ticket = ticket;
-				}
+				users.forEach(function(user) {
+					if (ticket.email == user.email) {
+						user.ticket = ticket;
+					}
+				});
 			});
-		});
-
+		}
+		
 		// Update state
 		state.users = users;
 		state.page = resUsers.body.page;

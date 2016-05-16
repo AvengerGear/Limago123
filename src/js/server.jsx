@@ -10,6 +10,9 @@ import Actions from './actions';
 import Stores from './stores';
 import Extensions from './extensions';
 
+// Server doesn't need setState method
+React.Component.prototype.setState = function() {};
+
 var options = {};
 var routes = null;
 
@@ -32,10 +35,23 @@ var initRoutes = function() {
 			continue;
 		}
 
-		routes.childRoutes.push({
-			path: route.path,
-			component: route.handler
-		});
+		if (route.getHandler) {
+
+			// Load component directly
+			route.getHandler({}, function(err, component) {
+
+				routes.childRoutes.push({
+					path: route.path,
+					component: component
+				});
+			});
+		} else {
+
+			routes.childRoutes.push({
+				path: route.path,
+				component: route.handler
+			});
+		}
 	}
 
 	return routes;
@@ -94,6 +110,16 @@ var initEntry = function(error, redirectLocation, renderProps, state, userdata, 
 
 		fluky.off('action.Lantern.rendered', rendered);
 		fluky.serverRendering = true;
+
+		// Redirect
+		var lanternStore = fluky.getState('Lantern');
+		if (lanternStore.redirect) {
+			callback(null, {
+				redirect: lanternStore.redirect
+			});
+
+			return;
+		}
 
 		generateNewContent(fluky, component, callback);
 	}

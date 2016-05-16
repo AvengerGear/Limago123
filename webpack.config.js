@@ -21,7 +21,8 @@ var configs = module.exports = [
 		output: {
 			path: __dirname + '/public/assets/',
 			publicPath: '/assets/',
-			filename: 'bundle.js'
+			filename: 'bundle.js',
+			chunkFilename: '[chunkhash].chunk.js'
 		},
 		plugins: [
 			new webpack.DefinePlugin({ '_BROWSER': true }),
@@ -33,7 +34,6 @@ var configs = module.exports = [
 				{ from: './src/public', to: '../' }
 			]),
 			new webpack.optimize.CommonsChunkPlugin('vendors', 'vendors.js'),
-			new webpack.optimize.OccurenceOrderPlugin(),
 			new webpack.NoErrorsPlugin()
 		],
 		module: {
@@ -61,6 +61,9 @@ var configs = module.exports = [
 				{ test: /\.woff$/, loader: "url-loader?limit=1000" }
 			],
 			noParse: [
+				'react/dist/react.min.js',
+				'react-dom/dist/react-dom.min.js',
+				'react-router/umd/ReactRouter.min.js',
 				/moment-with-locales/
 			]
 		},
@@ -69,7 +72,11 @@ var configs = module.exports = [
 		},
 		resolve: {
 			alias: {
+				'react$': 'react/dist/react.min.js',
+				'react-dom$': 'react-dom/dist/react-dom.min.js',
+				'react-router$': 'react-router/umd/ReactRouter.min.js',
 				'moment': 'moment/min/moment-with-locales.min.js',
+				hotpot: __dirname + '/framework',
 				Source: __dirname + '/src',
 				Extension: __dirname + '/src/extensions',
 				Decorator: __dirname + '/src/decorators',
@@ -90,7 +97,8 @@ var configs = module.exports = [
 			libraryTarget: 'commonjs2',
 			path: __dirname + '/build',
 			publicPath: '/assets/',
-			filename: 'server.js'
+			filename: 'server.js',
+			chunkFilename: '[chunkhash].chunk.js'
 		},
 		node: {
 			__filename: true
@@ -139,12 +147,19 @@ var configs = module.exports = [
 					}).join('|') + ')$'))
 			],
 			noParse: [
+				'react/dist/react.min.js',
+				'react-dom/dist/react-dom.min.js',
+				'react-router/umd/ReactRouter.min.js',
 				/moment-with-locales/
 			]
 		},
 		resolve: {
 			alias: {
+				'react$': 'react/dist/react.min.js',
+				'react-dom$': 'react-dom/dist/react-dom.min.js',
+				'react-router$': 'react-router/umd/ReactRouter.min.js',
 				'moment': 'moment/min/moment-with-locales.min.js',
+				hotpot: __dirname + '/framework',
 				Source: __dirname + '/src',
 				Extension: __dirname + '/src/extensions',
 				Decorator: __dirname + '/src/decorators',

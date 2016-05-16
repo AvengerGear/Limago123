@@ -1,3 +1,4 @@
+var hotpot = require('hotpot');
 var LandingPage = require('./components/LandingPage.jsx');
 var LandingPageEmailOnly = require('./components/LandingPageEmailOnly.jsx');
 var ForgotPage = require('./components/ForgotPage.jsx');
@@ -32,7 +33,11 @@ module.exports = [
 	},
 	{
 		path: '/signup',
-		handler: SignUpPage
+		getHandler: function(nextState, done) {
+			require.ensure([], function(require) {
+				done(null, require('./components/SignUpPage.jsx'));
+			});
+		}
 	},
 	{
 		path: '/getticket/:qrcode',
@@ -44,7 +49,11 @@ module.exports = [
 	},
 	{
 		path: '/signup_setup',
-		handler: require('./components/SignUpSetupPage.jsx')
+		getHandler: function(nextState, done) {
+			require.ensure([], function(require) {
+				done(null, require('./components/SignUpSetupPage.jsx'));
+			});
+		}
 	},
 	{
 		path: '/settings',
@@ -62,26 +71,55 @@ module.exports = [
 	{
 		allow: 'admin.access',
 		path: '/admin/dashboard',
-		handler: require('./components/Admin/Dashboard.jsx')
+		getHandler: function(nextState, done) {
+			require.ensure([], function(require) {
+				done(null, require('./components/Admin/Dashboard.jsx'));
+			});
+		}
 	},
 	{
 		allow: 'admin.users',
 		path: '/admin/users',
-		handler: require('./components/Admin/Users.jsx')
+		getHandler: function(nextState, done) {
+			require.ensure([], function(require) {
+				done(null, require('./components/Admin/Users.jsx'));
+			});
+		}
 	},
 	{
 		allow: 'admin.users',
 		path: '/admin/users/user/:userid',
-		handler: require('./components/Admin/User.jsx')
+		getHandler: function(nextState, done) {
+			require.ensure([], function(require) {
+				done(null, require('./components/Admin/User.jsx'));
+			});
+		}
 	},
 	{
 		allow: 'admin.roles',
 		path: '/admin/roles',
-		handler: require('./components/Admin/Roles.jsx')
+		getHandler: function(nextState, done) {
+			require.ensure([], function(require) {
+				done(null, require('./components/Admin/Roles.jsx'));
+			});
+		}
 	},
 	{
 		allow: 'admin.roles',
+		path: '/admin/roles/role/:roleid',
+		getHandler: function(nextState, done) {
+			require.ensure([], function(require) {
+				done(null, require('./components/Admin/Role.jsx'));
+			});
+		}
+	},
+	{
+		allow: 'admin.users',
 		path: '/admin/tickets',
-		handler: require('./components/Admin/Tickets.jsx')
+		getHandler: function(nextState, done) {
+			require.ensure([], function(require) {
+				done(null, require('./components/Admin/Tickets.jsx'));
+			});
+		}
 	}
 ];

@@ -106,33 +106,35 @@ class Tickes extends React.Component {
 		var ticketData = this.flux.getState('Tickets').data;
 		var users = [];
 
-		for (var index in this.state.users) {
-			var user = this.state.users[index];
+		if (users.lebgth) {
+			for (var index in this.state.users) {
+				var user = this.state.users[index];
 
-			ticketData.forEach(function(data) {
-				if (user.ticket.qrcode === data.qrcode) {
-					user.ticket.people = data.people;
-					user.ticket.price = data.price;
-					user.ticket.times = data.times;
-				}
-			});
+				ticketData.forEach(function(data) {
+					if (user.ticket.qrcode === data.qrcode) {
+						user.ticket.people = data.people;
+						user.ticket.price = data.price;
+						user.ticket.times = data.times;
+					}
+				});
 
-			users.push(
-				<UserItem
-					id={user._id}
-					name={user.name}
-					email={user.email}
-					phone={user.phone}
-					created={user.created}
-					people={user.ticket.people || null}
-					price={user.ticket.price || null}
-					times={user.ticket.times || null}
-					os={user.ticket.os || null}
-					allTime={user.ticket.allTime || null}
-					editingTime={user.ticket.editingTime || null}
-					viewTime={user.ticket.viewTime || null}
-					key={index} />
-			);
+				users.push(
+					<UserItem
+						id={user._id}
+						name={user.name}
+						email={user.email}
+						phone={user.phone}
+						created={user.created}
+						people={user.ticket.people || null}
+						price={user.ticket.price || null}
+						times={user.ticket.times || null}
+						os={user.ticket.os || null}
+						allTime={user.ticket.allTime || null}
+						editingTime={user.ticket.editingTime || null}
+						viewTime={user.ticket.viewTime || null}
+						key={index} />
+				);
+			}
 		}
 
 		return (
