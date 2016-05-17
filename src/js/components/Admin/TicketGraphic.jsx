@@ -11,6 +11,61 @@ import AdminLayout from './AdminLayout.jsx';
 // Decorators
 import { router, flux, i18n } from 'Decorator';
 
+class FirstRecordPackages extends React.Component {
+	constructor(props, context) {
+		super(props, context);
+
+		var labels = [];
+		var series = [];
+		var seriesData = [];
+
+		for (var index in props.data) {
+			var packageItem = props.data[index];
+
+			labels.push(
+				// 'people: ' + props.data[index].people + ' price: ' + props.data[index].price + '0%' + ' times: ' + props.data[index].times + 'H'
+				'no. ' + (Number(index) + 1)
+			);
+
+			if (packageItem.count) {
+				seriesData.push(packageItem.count);
+			}else {
+				seriesData.push(0);
+			}
+		}
+		labels.reverse();
+		seriesData.reverse();
+		series.push(seriesData);
+
+		this.state = {
+			labels: labels,
+			series: series
+		};
+	}
+
+	componentDidMount = () => {
+		var data = {labels: this.state.labels, series: this.state.series};
+		var options = {
+			seriesBarDistance: 15,
+			height: 1000,
+			horizontalBars: true,
+			axisX: {
+				onlyInteger: true
+			}
+		};
+		new Chartist.Bar(this.refs.barChart, data, options);
+	};
+
+	render() {
+
+		return (
+			<div>
+				<div ref="barChart"></div>
+			</div>
+		);
+	}
+}
+
 class FirstTicketItem extends React.Component {
 	formateDate = (date) => {
 		return moment(date).format('YYYY/MM/DD HH:mm');
@@ -77,6 +132,7 @@ class TicketGraphic extends React.Component {
 					ticket.people = data.people;
 					ticket.price = data.price;
 					ticket.times = data.times;
+					data.count = data.count + 1;
 				}
 			});
 
@@ -106,10 +162,23 @@ class TicketGraphic extends React.Component {
 			);
 		}
 
+		var packages = [];
+		for (var index in ticketData) {
+			var packageItem = ticketData[index];
+			packages.push(
+				<tr>
+					<td className="text-center">No.{Number(index) + 1}</td>
+					<td className="text-center">{ticketData[index].people}</td>
+					<td className="text-center">{ticketData[index].price}0%</td>
+					<td className="text-center">{ticketData[index].times}H</td>
+				</tr>
+			);
+
+		}
+
 		return (
 			<AdminLayout category='tickets'>
 				<div className='ui basic segment'>
-
 					<div className='ui stackable grid'>
 						<div className='ten wide computer sixteen wide tablet column'>
 							<h1 className='ui header'>
@@ -138,6 +207,33 @@ class TicketGraphic extends React.Component {
 								</div>
 							</h1>
 						</div>
+					</div>
+
+					<div className='ui stackable grid'>
+						<div className='column'>
+							<div className='ui stackable grid'>
+								<div className='four wide column'>
+									<table className='ui attached striped table'>
+										<thead>
+											<tr>
+												<th></th>
+												<th className="text-center">People</th>
+												<th className="text-center">Price</th>
+												<th className="text-center">Time</th>
+											</tr>
+										</thead>
+										<tbody>
+											{packages}
+										</tbody>
+									</table>
+								</div>
+								<div className='ten wide column'>
+									<FirstRecordPackages data={ticketData} />
+								</div>
+							</div>
+						</div>
+
+						
 					</div>
 
 					<div className='ui stackable grid'>
