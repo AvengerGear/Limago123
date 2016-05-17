@@ -9,12 +9,8 @@ import I18n from 'Extension/I18n.jsx';
 import AdminLayout from './AdminLayout.jsx';
 
 // Decorators
-import { router, flux, i18n, preAction, wait } from 'Decorator';
+import { router, flux, i18n } from 'Decorator';
 
-
-@flux
-@i18n
-@router
 class FirstTicketItem extends React.Component {
 	formateDate = (date) => {
 		return moment(date).format('YYYY/MM/DD HH:mm');
@@ -27,13 +23,13 @@ class FirstTicketItem extends React.Component {
 				<td>{this.props.name}</td>
 				<td>{this.props.email}</td>
 				<td>{this.props.phone}</td>
-				<td>{this.props.people}</td>
-				<td>{this.props.price}0%</td>
-				<td>{this.props.times}H</td>
-				<td>{this.props.os}</td>
-				<td>{this.props.allTime} sec</td>
-				<td>{this.props.viewTime} sec</td>
-				<td>{this.props.editingTime} sec</td>
+				<td className="text-center">{this.props.people}</td>
+				<td className="text-center">{this.props.price}0%</td>
+				<td className="text-center">{this.props.times}H</td>
+				<td className="text-center">{this.props.os}</td>
+				<td className="text-center">{this.props.allTime} sec</td>
+				<td className="text-center">{this.props.viewTime} sec</td>
+				<td className="text-center">{this.props.editingTime} sec</td>
 				<td>{this.formateDate(this.props.created.$date)}</td>
 			</tr>
 		);
@@ -41,73 +37,38 @@ class FirstTicketItem extends React.Component {
 }
 
 @flux
-@i18n
-@preAction((handle) => {
-	handle.doAction('Admin.Users.graphic');
-})
-@wait('Admin.Users')
 class TicketGraphic extends React.Component {
 
 	constructor(props, context) {
 		super(props, context);
 
-		var state = this.flux.getState('Admin.Users');
-
 		this.state = {
-			users: state.users,
-			record: state.record,
-			page: state.page,
-			pageCount: state.pageCount,
-			perPage: state.perPage,
-			busy: false,
+			ticketData: this.flux.getState('Tickets').data,
+			recordData: this.flux.getState('Admin.Record')
 		};
 	}
 
 	componentWillMount = () => {
-		this.flux.on('state.Admin.Users', this.flux.bindListener(this.onChange));
 		this.flux.on('state.Tickets', this.flux.bindListener(this.onChange));
+		this.flux.on('state.Admin.Record', this.flux.bindListener(this.onChange));
 	};
 
 	componentWillUnmount = () => {
-		this.flux.off('state.Admin.Users', this.onChange);
 		this.flux.off('state.Tickets', this.onChange);
+		this.flux.off('state.Admin.Record', this.onChange);
 	};
 
 	onChange = () => {
-		var state = this.flux.getState('Admin.Users');
-
 		this.setState({
-			users: state.users,
-			record: state.record,
-			page: state.page,
-			pageCount: state.pageCount,
-			perPage: state.perPage,
-			busy: false
+			ticketData: this.flux.getState('Tickets').data,
+			recordData: this.flux.getState('Admin.Record')
 		});
-	};
-
-	updateProfile = () => {
-		if (this.state.busy)
-			return;
-
-		this.setState({
-			busy: true
-		});
-
-		this.flux.dispatch('action.User.updateProfile', this.state.name);
 	};
 
 	render() {
-		var ticketData = this.flux.getState('Tickets').data;
+		var ticketData = this.state.ticketData;
+		var firstUserData = this.state.recordData.firstRecord;
 		var firstUsers = [];
-		var firstUserData = this.state.record.firstRecord;
-
-
-// console.log('ticketData', ticketData)
-console.log('record', firstUserData)
-
-
-
 
 		for (var tIndex in firstUserData.tickets) {
 			var ticket = firstUserData.tickets[tIndex];
@@ -188,13 +149,13 @@ console.log('record', firstUserData)
 										<th>Name</th>
 										<th>E-mail</th>
 										<th>Phone</th>
-										<th>People</th>
-										<th>Price</th>
-										<th>Time</th>
-										<th>OS</th>
-										<th>Totale Time</th>
-										<th>View Time</th>
-										<th>Edit Time</th>
+										<th className="text-center">People</th>
+										<th className="text-center">Price</th>
+										<th className="text-center">Time</th>
+										<th className="text-center">OS</th>
+										<th className="text-center">Totale Time</th>
+										<th className="text-center">View Time</th>
+										<th className="text-center">Edit Time</th>
 										<th>Registered</th>
 									</tr>
 								</thead>

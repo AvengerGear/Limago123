@@ -84,14 +84,4 @@ export default function *() {
 
 		this.dispatch('state.Admin.Users');
 	});
-
-	this.on('store.Admin.Users.graphic', function *(conditions) {
-
-		var state = this.getState('Admin.Users');
-		var record = this.getState('Admin.Record');
-
-		state.record = record;
-
-		this.dispatch('state.Admin.Users');
-	});
 };
