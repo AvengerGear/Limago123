@@ -172,7 +172,7 @@ class FirstTicketItem extends React.Component {
 }
 
 @flux
-class TicketGraphic extends React.Component {
+class TicketFirstRecord extends React.Component {
 
 	constructor(props, context) {
 		super(props, context);
@@ -261,14 +261,14 @@ class TicketGraphic extends React.Component {
 		}
 
 		return (
-			<AdminLayout category='tickets'>
+			<AdminLayout category='firstRecord'>
 				<div className='ui basic segment'>
 					<div className='ui stackable grid'>
 						<div className='ten wide computer sixteen wide tablet column'>
 							<h1 className='ui header'>
 								<i className='payment icon' />
 								<div className='content'>
-									Tickets (1st)
+									First Record
 									<div className='sub header'>
 										<div className="ui large horizontal list">
 											<div className="item">
@@ -351,4 +351,4 @@ class TicketGraphic extends React.Component {
 	}
 }
 
-export default TicketGraphic;
+export default TicketFirstRecord;

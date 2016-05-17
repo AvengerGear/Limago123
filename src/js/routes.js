@@ -115,10 +115,10 @@ module.exports = [
 	},
 	{
 		allow: 'admin.users',
-		path: '/admin/tickets',
+		path: '/admin/record/first',
 		getHandler: function(nextState, done) {
 			require.ensure([], function(require) {
-				done(null, require('./components/Admin/TicketGraphic.jsx'));
+				done(null, require('./components/Admin/TicketFirstRecord.jsx'));
 			});
 		}
 	}
