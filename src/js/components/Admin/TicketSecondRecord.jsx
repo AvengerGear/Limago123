@@ -72,6 +72,12 @@ class RecordOS extends React.Component {
 				labelOffset: 50,
 				labelDirection: 'explode',
 				labelInterpolationFnc: function(value) {
+					if (value == '786a9d01278af5dd') {
+						return 'Photo';
+					}
+					if (value == '782e61c302e1e614') {
+						return 'Graphic';
+					}
 					return value;
 				}
 			}],
@@ -87,6 +93,13 @@ class RecordOS extends React.Component {
 		var tableValue = [];
 		for (var index in this.state.labels) {
 			var label = this.state.labels[index];
+
+			if (label == '786a9d01278af5dd') {
+				label = 'Photo';
+			}
+			if (label == '782e61c302e1e614') {
+				label = 'Graphic';
+			}
 
 			tableValue.push(
 				<tr>
@@ -120,12 +133,11 @@ class SecondTicketItem extends React.Component {
 
 	showStyle = (style) => {
 		if (style == '786a9d01278af5dd') {
-			return 'Photo'
+			return 'Photo';
 		}
 		if (style == '782e61c302e1e614') {
-			return 'Graphic'
+			return 'Graphic';
 		}
-
 	};
 
 	render() {
@@ -181,11 +193,13 @@ class TicketSecondRecord extends React.Component {
 		var firstUsers = [];
 		var ticketOS = [];
 		var visitOS = [];
+		var styles = [];
 
 		for (var tIndex in secondUserData.tickets) {
 			var ticket = secondUserData.tickets[tIndex];
 			
 			ticketOS.push(secondUserData.tickets[tIndex].os);
+			styles.push(secondUserData.tickets[tIndex].qrcode);
 
 			ticketData.forEach(function(data) {
 				if (ticket.qrcode === data.qrcode) {
@@ -259,6 +273,19 @@ class TicketSecondRecord extends React.Component {
 									</div>
 								</div>
 							</h1>
+						</div>
+					</div>
+
+					<div className='ui stackable grid'>
+						<div className='column'>
+							<div className='ui stackable grid'>
+								<div className='eight wide column'>
+									<h2>Styles</h2>
+									<RecordOS data={styles} />
+								</div>
+								<div className='eight wide column'>
+								</div>
+							</div>
 						</div>
 					</div>
 

@@ -88,9 +88,7 @@ class RecordPackages extends React.Component {
 	render() {
 
 		return (
-			<div>
-				<div ref="barChart"></div>
-			</div>
+			<div ref="barChart"></div>
 		);
 	}
 }
