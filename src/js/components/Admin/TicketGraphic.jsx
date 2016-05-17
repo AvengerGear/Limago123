@@ -1,12 +1,12 @@
 import crypto from 'crypto';
 import React from 'react';
+import moment from 'moment';
 import { Link } from 'react-router';
 
 import I18n from 'Extension/I18n.jsx';
 
 // Components
 import AdminLayout from './AdminLayout.jsx';
-import Avatar from '../Avatar.jsx';
 
 // Decorators
 import { router, flux, i18n, preAction, wait } from 'Decorator';
@@ -15,34 +15,26 @@ import { router, flux, i18n, preAction, wait } from 'Decorator';
 @flux
 @i18n
 @router
-class TicketItem extends React.Component {
-
-	componentDidMount = () => {
-		$(this.refs.dropdown).dropdown();
-	};
-
-	deleteUser = () => {
-		this.flux.dispatch('action.Admin.Users.deleteOne', this.props.id);
+class FirstTicketItem extends React.Component {
+	formateDate = (date) => {
+		return moment(date).format('YYYY/MM/DD HH:mm');
 	};
 
 	render() {
-		var avatar_hash = crypto.createHash('md5').update(this.props.email).digest('hex');
-
-console.log(this.props)
-
 		return (
 			<tr>
+				<td>{Number(this.props.id) + 1}</td>
 				<td>{this.props.name}</td>
 				<td>{this.props.email}</td>
 				<td>{this.props.phone}</td>
 				<td>{this.props.people}</td>
-				<td>{this.props.price} 0%</td>
-				<td>{this.props.times} hour</td>
+				<td>{this.props.price}0%</td>
+				<td>{this.props.times}H</td>
 				<td>{this.props.os}</td>
 				<td>{this.props.allTime} sec</td>
 				<td>{this.props.viewTime} sec</td>
 				<td>{this.props.editingTime} sec</td>
-				<td>{this.props.created.split('T')[0]}</td>
+				<td>{this.formateDate(this.props.created.$date)}</td>
 			</tr>
 		);
 	}
@@ -107,43 +99,50 @@ class TicketGraphic extends React.Component {
 
 	render() {
 		var ticketData = this.flux.getState('Tickets').data;
-		var users = [];
+		var firstUsers = [];
+		var firstUserData = this.state.record.firstRecord;
 
 
-console.log('ticketData', ticketData)
-console.log('record', this.state.record)
+// console.log('ticketData', ticketData)
+console.log('record', firstUserData)
 
 
 
-		if (this.state.users.length) {
-			for (var index in this.state.users) {
-				var user = this.state.users[index];
 
-				ticketData.forEach(function(data) {
-					if (user.ticket.qrcode === data.qrcode) {
-						user.ticket.people = data.people;
-						user.ticket.price = data.price;
-						user.ticket.times = data.times;
-					}
-				});
+		for (var tIndex in firstUserData.tickets) {
+			var ticket = firstUserData.tickets[tIndex];
+			ticketData.forEach(function(data) {
+				if (ticket.qrcode === data.qrcode) {
+					ticket.people = data.people;
+					ticket.price = data.price;
+					ticket.times = data.times;
+				}
+			});
 
-				users.push(
-					<TicketItem
-						id={user._id}
-						name={user.name}
-						email={user.email}
-						phone={user.phone}
-						created={user.created}
-						people={user.ticket.people || null}
-						price={user.ticket.price || null}
-						times={user.ticket.times || null}
-						os={user.ticket.os || null}
-						allTime={user.ticket.allTime || null}
-						editingTime={user.ticket.editingTime || null}
-						viewTime={user.ticket.viewTime || null}
-						key={index} />
-				);
+			for (var mIndex in firstUserData.members) {
+				var user = firstUserData.members[mIndex];
+				if (user.email == ticket.email) {
+					ticket.userName = user.name;
+					ticket.userPhone = user.phone;
+				}
 			}
+
+			firstUsers.push(
+				<FirstTicketItem
+					id={tIndex}
+					name={ticket.userName}
+					email={ticket.email}
+					phone={ticket.userPhone}
+					created={ticket.created}
+					people={ticket.people || null}
+					price={ticket.price || null}
+					times={ticket.times || null}
+					os={ticket.os || null}
+					allTime={ticket.allTime || null}
+					editingTime={ticket.editingTime || null}
+					viewTime={ticket.viewTime || null}
+					key={tIndex} />
+			);
 		}
 
 		return (
@@ -151,41 +150,60 @@ console.log('record', this.state.record)
 				<div className='ui basic segment'>
 
 					<div className='ui stackable grid'>
-						<div className='four wide computer sixteen wide tablet column'>
+						<div className='ten wide computer sixteen wide tablet column'>
 							<h1 className='ui header'>
 								<i className='payment icon' />
 								<div className='content'>
-									Tickets
+									Tickets (1st)
 									<div className='sub header'>
-										Tickets Management
+										<div className="ui large horizontal list">
+											<div className="item">
+												<div className="content">
+													<div className="header">January</div>
+												</div>
+											</div>
+											<div className="item">
+												<div className="content">
+													<div className="header"><div className="ui teal label">Total Emails: {firstUserData.emails.length}</div></div>
+												</div>
+											</div>
+											<div className="item">
+												<div className="content">
+													<div className="header"><div className="ui teal label">Total Tickets: {firstUserData.tickets.length}</div></div>
+												</div>
+											</div>
+										</div>
 									</div>
 								</div>
 							</h1>
 						</div>
 					</div>
 
-
-					<table className='ui attached striped table'>
-						<thead>
-							<tr>
-								<th>Name</th>
-								<th>E-mail</th>
-								<th>Phone</th>
-								<th>People</th>
-								<th>Price</th>
-								<th>Time</th>
-								<th>OS</th>
-								<th>Totale Time</th>
-								<th>View Time</th>
-								<th>Edit Time</th>
-								<th>Registered</th>
-							</tr>
-						</thead>
-						<tbody>
-							{users}
-						</tbody>
-					</table>
-
+					<div className='ui stackable grid'>
+						<div className="column">
+							<table className='ui attached striped table'>
+								<thead>
+									<tr>
+										<th></th>
+										<th>Name</th>
+										<th>E-mail</th>
+										<th>Phone</th>
+										<th>People</th>
+										<th>Price</th>
+										<th>Time</th>
+										<th>OS</th>
+										<th>Totale Time</th>
+										<th>View Time</th>
+										<th>Edit Time</th>
+										<th>Registered</th>
+									</tr>
+								</thead>
+								<tbody>
+									{firstUsers}
+								</tbody>
+							</table>
+						</div>
+					</div>
 				</div>
 			</AdminLayout>
 		);

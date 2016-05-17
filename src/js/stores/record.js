@@ -3,8 +3,8 @@ export default function *() {
 
 	// Getting current state. Initialize state if state doesn't exist.
 	var store = this.getState('Admin.Record', {
-		firstRecord: [
-			{emails: [
+		firstRecord: {
+			emails: [
 				{ "email" : "terryyen9630@yahoo.com.tw", "_id" : { "$oid" : "56a6eb8446ad4bd9780c1147" }, "created" : { "$date" : 1453779844094 }, "__v" : 0 },
 				{ "email" : "c910320@hotmail.com", "_id" : { "$oid" : "56a6f50e46ad4bd9780c114e" }, "created" : { "$date" : 1453782286966 }, "__v" : 0 },
 				{ "email" : "Jade_butterfly1980@hotmail.com", "_id" : { "$oid" : "56a7018c46ad4bd9780c1152" }, "created" : { "$date" : 1453785484957 }, "__v" : 0 },
@@ -27,8 +27,8 @@ export default function *() {
 				{ "email" : "rachel@well-linkage.com", "_id" : { "$oid" : "56adadd346ad4bd9780c11a7" }, "created" : { "$date" : 1454222803251 }, "__v" : 0 },
 				{ "email" : "egggo16821@gmail.com", "_id" : { "$oid" : "56af5b7b46ad4bd9780c11ae" }, "created" : { "$date" : 1454332795940 }, "__v" : 0 },
 				{ "email" : "waevel.tw@gmail.com", "_id" : { "$oid" : "56b00f0446ad4bd9780c11af" }, "created" : { "$date" : 1454378756899 }, "__v" : 0 }
-			]},
-			{members: [
+			],
+			members: [
 				{ "password" : "0af8352229c7e84122cda39c32f618438c853e5802699b542f62da8cafb09bd6", "name" : "趙芸含", "email" : "m85296372@gmail.com", "phone" : "0952986866", "salt" : "4f9HcpA3/yDDd7Pa", "permissions" : { "$oid" : "56a6ede946ad4bd9780c1148" }, "_id" : { "$oid" : "56a6ede946ad4bd9780c1149" }, "updated" : { "$date" : 1453780481698 }, "created" : { "$date" : 1453780457346 }, "disabled" : false, "roles" : [], "rule_tokens" : [], "__v" : 0 },
 				{ "password" : "3b95fe7510a8a70b783c4f240972ee8b76ec84d11ff9b4ce400a1883ff0ddaa6", "name" : "鄭常仁", "email" : "c910320@hotmail.com", "phone" : "0955212262", "salt" : "SV2lKdnwtMLtZryc", "permissions" : { "$oid" : "56a6f4ec46ad4bd9780c114b" }, "_id" : { "$oid" : "56a6f4ec46ad4bd9780c114c" }, "updated" : { "$date" : 1453782260123 }, "created" : { "$date" : 1453782252085 }, "disabled" : false, "roles" : [], "rule_tokens" : [], "__v" : 0 },
 				{ "password" : "9fde25a34d6aa11ef7606c3c7e7b38693bdb31a5c6d08a19dce25cbd52dc96a4", "name" : "Yeh naiwei", "email" : "jade_butterfly1980@hotmail.com", "phone" : "0933983776", "salt" : "2rYiyjYXUbbOqKBj", "permissions" : { "$oid" : "56a7004b46ad4bd9780c114f" }, "_id" : { "$oid" : "56a7004b46ad4bd9780c1150" }, "updated" : { "$date" : 1453785163620 }, "created" : { "$date" : 1453785163620 }, "disabled" : false, "roles" : [], "rule_tokens" : [], "__v" : 0 },
@@ -57,8 +57,8 @@ export default function *() {
 				{ "password" : "7beb70cd606d2a43544ebc35601ab849ef8e3c8ceb93c0f1d8e86ddc68c57cf7", "name" : "姜凱凱", "email" : "ewq2007@gmail.com", "phone" : "0939507407", "salt" : "XkQVCOCaw2KE+OlO", "permissions" : { "$oid" : "56aeddf146ad4bd9780c11a8" }, "_id" : { "$oid" : "56aeddf146ad4bd9780c11a9" }, "updated" : { "$date" : 1454300667745 }, "created" : { "$date" : 1454300657997 }, "disabled" : false, "roles" : [], "rule_tokens" : [], "__v" : 0 },
 				{ "password" : "822b40dd4b61120608ea796d42098761828f169f5ea753f2e937c4c56bea8c22", "name" : "Yi wen ", "email" : "egggo16821@gmail.com", "phone" : "0922006169", "salt" : "SOYN9W1+wzYyoYQR", "permissions" : { "$oid" : "56af5b4546ad4bd9780c11ab" }, "_id" : { "$oid" : "56af5b4546ad4bd9780c11ac" }, "updated" : { "$date" : 1454332741061 }, "created" : { "$date" : 1454332741061 }, "disabled" : false, "roles" : [], "rule_tokens" : [], "__v" : 0 },
 				{ "password" : "d857f27dfd7ec59e0ab8cb891fb471e0ba36e8cee878101f4daf63435032dea8", "name" : "Cindy", "email" : "cindy.ho@aiesec.net", "phone" : "0988570345", "salt" : "yRr+YoKxYSgDgtZx", "permissions" : { "$oid" : "56c4391a46ad4bd9780c11b0" }, "_id" : { "$oid" : "56c4391a46ad4bd9780c11b1" }, "updated" : { "$date" : 1455700250073 }, "created" : { "$date" : 1455700250073 }, "disabled" : false, "roles" : [], "rule_tokens" : [], "__v" : 0 }
-			]},
-			{tickets: [
+			],
+			tickets: [
 				{ "email" : "m85296372@gmail.com", "qrcode" : "503b9343fd3e7e08", "number" : "89629eed67", "ip" : "101.14.131.70", "internal_ip" : null, "os" : "Android 5.0.2", "browser" : "Chrome 46.0.2490.76", "startTime" : "2016-01-26T03:39:18.163Z", "editTime" : "2016-01-26T03:39:31.722Z", "sendTime" : "2016-01-26T03:54:16.987Z", "allTime" : "898", "viewTime" : "13", "editingTime" : "885", "_id" : { "$oid" : "56a6ede946ad4bd9780c114a" }, "updated" : { "$date" : 1453780457353 }, "created" : { "$date" : 1453780457353 }, "__v" : 0 },
 				{ "email" : "c910320@hotmail.com", "qrcode" : "e43364c8fa5b804b", "number" : "d69e543486", "ip" : "101.13.37.43", "internal_ip" : null, "os" : "Android 5.0", "browser" : "Chrome 47.0.2526.83", "startTime" : "2016-01-26T04:21:55.293Z", "editTime" : "2016-01-26T04:22:21.055Z", "sendTime" : "2016-01-26T04:24:11.781Z", "allTime" : "136", "viewTime" : "25", "editingTime" : "110", "_id" : { "$oid" : "56a6f4ec46ad4bd9780c114d" }, "updated" : { "$date" : 1453782252089 }, "created" : { "$date" : 1453782252089 }, "__v" : 0 },
 				{ "email" : "jade_butterfly1980@hotmail.com", "qrcode" : "bce414ad7936a799", "number" : "268a8ed658", "ip" : "223.136.164.10", "internal_ip" : null, "os" : "iOS 9.2.1", "browser" : "WebKit 601.1.46", "startTime" : "2016-01-26T05:10:51.536Z", "editTime" : "2016-01-26T05:11:27.225Z", "sendTime" : "2016-01-26T05:12:43.399Z", "allTime" : "111", "viewTime" : "35", "editingTime" : "76", "_id" : { "$oid" : "56a7004b46ad4bd9780c1151" }, "updated" : { "$date" : 1453785163625 }, "created" : { "$date" : 1453785163625 }, "__v" : 0 },
@@ -87,10 +87,10 @@ export default function *() {
 				{ "email" : "ewq2007@gmail.com", "qrcode" : "826397d7f2122aff", "number" : "79bbcc06a7", "ip" : "110.30.161.143", "internal_ip" : null, "os" : "Android 4.2.2", "browser" : "Chrome 46.0.2490.76", "startTime" : "2016-02-01T04:21:25.496Z", "editTime" : "2016-02-01T04:23:15.371Z", "sendTime" : "2016-02-01T04:24:21.793Z", "allTime" : "176", "viewTime" : "109", "editingTime" : "66", "_id" : { "$oid" : "56aeddf246ad4bd9780c11aa" }, "updated" : { "$date" : 1454300658015 }, "created" : { "$date" : 1454300658015 }, "__v" : 0 },
 				{ "email" : "egggo16821@gmail.com", "qrcode" : "3f3841d595c938d1", "number" : "c7d57e5a0c", "ip" : "119.77.167.183", "internal_ip" : null, "os" : "Android 4.4.3", "browser" : "Chrome 47.0.2526.83", "startTime" : "2016-02-01T13:15:49.599Z", "editTime" : "2016-02-01T13:17:02.728Z", "sendTime" : "2016-02-01T13:18:59.294Z", "allTime" : "189", "viewTime" : "73", "editingTime" : "116", "_id" : { "$oid" : "56af5b4546ad4bd9780c11ad" }, "updated" : { "$date" : 1454332741082 }, "created" : { "$date" : 1454332741082 }, "__v" : 0 },
 				{ "email" : "cindy.ho@aiesec.net", "qrcode" : "503b9343fd3e7e08", "number" : "d004b64617", "ip" : "114.136.24.197", "internal_ip" : null, "os" : "iOS 9.2.1", "browser" : "WebKit 601.1.46", "startTime" : "2016-02-17T08:58:21.504Z", "editTime" : "2016-02-17T09:09:31.643Z", "sendTime" : "2016-02-17T09:10:49.038Z", "allTime" : "747", "viewTime" : "670", "editingTime" : "77", "_id" : { "$oid" : "56c4391a46ad4bd9780c11b2" }, "updated" : { "$date" : 1455700250085 }, "created" : { "$date" : 1455700250085 }, "__v" : 0 }
-			]}
-		],
-		secondRecord: [
-			{emails: [
+			]
+		},
+		secondRecord: {
+			emails: [
 				{ "email" : "verna321@gmail.com", "_id" : { "$oid" : "57218cfcc7f7f09a0629f752" }, "created" : { "$date" : 1461816572776 }, "__v" : 0 },
 				{ "email" : "jovian_lin@yahoo.com", "_id" : { "$oid" : "5722c146c7f7f09a0629f783" }, "created" : { "$date" : 1461895494379 }, "__v" : 0 },
 				{ "email" : "sres79513@gmail.com", "_id" : { "$oid" : "5722c225c7f7f09a0629f78d" }, "created" : { "$date" : 1461895717213 }, "__v" : 0 },
@@ -109,8 +109,8 @@ export default function *() {
 				{ "email" : "andes837725@gmail.com", "_id" : { "$oid" : "572375d9c7f7f09a0629f817" }, "created" : { "$date" : 1461941721151 }, "__v" : 0 },
 				{ "email" : "gomgtlm@gmail.com", "_id" : { "$oid" : "5724535bc7f7f09a0629f81f" }, "created" : { "$date" : 1461998427694 }, "__v" : 0 },
 				{ "email" : "lief.tang.tw@gmail.com", "_id" : { "$oid" : "572a2e14c7f7f09a0629f82c" }, "created" : { "$date" : 1462382100810 }, "__v" : 0 }
-			]},
-			{members: [
+			],
+			members: [
 				{ "password" : "a913d4acd72c5d7850f7c59bd694c91d7e760de6261443f6baea845b38a2db25", "name" : "Rachel Hsieh", "email" : "andes837725@gmail.com", "phone" : "0963171977", "username" : "af6ab300-0da1-11e6-9bca-8594f24b7502", "salt" : "0Ls9kHBPD7s2aREi", "permissions" : { "$oid" : "5722ab54c7f7f09a0629f754" }, "_id" : { "$oid" : "5722ab54c7f7f09a0629f755" }, "updated" : { "$date" : 1461889893197 }, "created" : { "$date" : 1461889876538 }, "disabled" : false, "roles" : [], "rule_tokens" : [], "__v" : 0 },
 				{ "password" : "7a6a68346fec8e043354857129440ddf89edc78c532b223cbe1b60126a3817f1", "name" : "連瑋莉", "email" : "evaone0710@hotmail.com", "phone" : "0911936199", "username" : "e8377270-0dad-11e6-9bca-8594f24b7502", "salt" : "5/UJ73IwhfV7CBAr", "permissions" : { "$oid" : "5722bfd5c7f7f09a0629f75f" }, "_id" : { "$oid" : "5722bfd5c7f7f09a0629f760" }, "updated" : { "$date" : 1461895125786 }, "created" : { "$date" : 1461895125785 }, "disabled" : false, "roles" : [], "rule_tokens" : [], "__v" : 0 },
 				{ "password" : "5232f0520c6c75cbbb34c132408948ba351529c2ce50c657397676558504d7e1", "name" : "piolin", "email" : "piplin@gmail.com", "phone" : "0918241181", "username" : "44af5270-0dae-11e6-9bca-8594f24b7502", "salt" : "IU5Gbz46X6gbQ7to", "permissions" : { "$oid" : "5722c070c7f7f09a0629f76c" }, "_id" : { "$oid" : "5722c070c7f7f09a0629f76d" }, "updated" : { "$date" : 1461895290574 }, "created" : { "$date" : 1461895280923 }, "disabled" : false, "roles" : [], "rule_tokens" : [], "__v" : 0 },
@@ -135,8 +135,8 @@ export default function *() {
 				{ "password" : "79f02e06093b96c83aedb0b45a073585201e284a8fffbf91cdc1a58b8c72e43c", "name" : "Kai Lin", "email" : "starflychen@gmail.com", "phone" : "0976029372", "username" : "3cc4ed60-0ebf-11e6-9bca-8594f24b7502", "salt" : "1RM2sgyhMgcmJy5j", "permissions" : { "$oid" : "57248a68c7f7f09a0629f825" }, "_id" : { "$oid" : "57248a68c7f7f09a0629f826" }, "updated" : { "$date" : 1462012530940 }, "created" : { "$date" : 1462012520252 }, "disabled" : false, "roles" : [], "rule_tokens" : [], "__v" : 0 },
 				{ "password" : "ac734ced6f9e7ef27b20c953d6f276b984b590b472d0226ba0c8ed08ef93f9b2", "name" : "imago", "email" : "admin@limago.com", "phone" : "0912123456", "username" : "c26c6980-1b2a-11e6-9bca-8594f24b7502", "salt" : "4zIWvbvkYqBek2Fp", "permissions" : { "$oid" : "573960c2c7f7f09a0629f832" }, "_id" : { "$oid" : "573960c2c7f7f09a0629f833" }, "updated" : { "$date" : 1463378114588 }, "created" : { "$date" : 1463378114588 }, "disabled" : false, "roles" : [], "rule_tokens" : [], "__v" : 0 }
 
-			]},
-			{tickets: [
+			],
+			tickets: [
 				{ "email" : "andes837725@gmail.com", "qrcode" : "786a9d01278af5dd", "number" : "2c1c4b9406", "ip" : "42.72.130.232, 66.249.82.159", "internal_ip" : null, "os" : "Android 4.2.2", "browser" : "Chrome 49.0.2623.105", "startTime" : "2016-04-29T00:29:35.726Z", "editTime" : "2016-04-29T00:30:04.764Z", "sendTime" : "2016-04-29T00:31:13.776Z", "allTime" : "98", "viewTime" : "29", "editingTime" : "69", "_id" : { "$oid" : "5722ab54c7f7f09a0629f756" }, "updated" : { "$date" : 1461889876550 }, "created" : { "$date" : 1461889876550 }, "__v" : 0 },
 				{ "email" : "evaone0710@hotmail.com", "qrcode" : "786a9d01278af5dd", "number" : "1a177e3ece", "ip" : "49.218.1.235", "internal_ip" : null, "os" : "Android 5.0.2", "browser" : "Chrome 50.0.2661.89", "startTime" : "2016-04-29T02:06:50.061Z", "editTime" : "2016-04-29T02:07:10.596Z", "sendTime" : "2016-04-29T02:08:08.880Z", "allTime" : "78", "viewTime" : "20", "editingTime" : "58", "_id" : { "$oid" : "5722bfd5c7f7f09a0629f761" }, "updated" : { "$date" : 1461895125794 }, "created" : { "$date" : 1461895125794 }, "__v" : 0 },
 				{ "email" : "piplin@gmail.com", "qrcode" : "786a9d01278af5dd", "number" : "d2b50eb0c8", "ip" : "180.204.99.133", "internal_ip" : null, "os" : "iOS 9.3.1", "browser" : "Chrome 50.0.2661.77", "startTime" : "2016-04-29T02:00:04.570Z", "editTime" : "2016-04-29T02:00:23.528Z", "sendTime" : "2016-04-29T02:01:20.484Z", "allTime" : "75", "viewTime" : "18", "editingTime" : "56", "_id" : { "$oid" : "5722c070c7f7f09a0629f76e" }, "updated" : { "$date" : 1461895280942 }, "created" : { "$date" : 1461895280942 }, "__v" : 0 },
@@ -160,8 +160,8 @@ export default function *() {
 				{ "email" : "lisa8653@gmail.com", "qrcode" : "782e61c302e1e614", "number" : "6b30dde206", "ip" : "114.136.39.252, 66.249.82.167", "internal_ip" : null, "os" : "Android 4.2.2", "browser" : "Chrome 49.0.2623.105", "startTime" : "2016-04-29T10:13:54.968Z", "editTime" : "2016-04-29T10:14:03.167Z", "sendTime" : "2016-04-29T10:15:19.028Z", "allTime" : "84", "viewTime" : "8", "editingTime" : "75", "_id" : { "$oid" : "5723343ac7f7f09a0629f814" }, "updated" : { "$date" : 1461924922339 }, "created" : { "$date" : 1461924922339 }, "__v" : 0 },
 				{ "email" : "starflychen@gmail.com", "qrcode" : "786a9d01278af5dd", "number" : "f91cacd9a7", "ip" : "163.22.18.51", "internal_ip" : null, "os" : "Android 5.0", "browser" : "Chrome 34.0.1847.76", "startTime" : "2016-04-30T10:03:44.627Z", "editTime" : "2016-04-30T10:34:09.262Z", "sendTime" : "2016-04-30T10:35:18.461Z", "allTime" : "1893", "viewTime" : "1824", "editingTime" : "69", "_id" : { "$oid" : "57248a68c7f7f09a0629f827" }, "updated" : { "$date" : 1462012520264 }, "created" : { "$date" : 1462012520264 }, "__v" : 0 },
 				{ "email" : "admin@limago.com", "qrcode" : "579cd4f4c8012059", "number" : "fjwiefj32jdoijoi", "ip" : "118.166.248.83", "internal_ip" : null, "os" : "Mac OS 10.11.4", "browser" : "Safari 9.1", "startTime" : "2016-05-16T05:54:32.536Z", "editTime" : "2016-05-16T05:54:36.893Z", "sendTime" : "2016-05-16T05:55:14.351Z", "allTime" : "41", "viewTime" : "4", "editingTime" : "37", "_id" : { "$oid" : "573960c2c7f7f09a0629f834" }, "updated" : { "$date" : 1463378114600 }, "created" : { "$date" : 1463378114599 }, "__v" : 0 }
-			]},
-			{visits: [
+			],
+			visits: [
 				{ "qrcode" : "786a9d01278af5dd", "ip" : "42.72.130.232, 66.249.82.163", "internal_ip" : null, "os" : "Android 4.2.2", "browser" : "Chrome 49.0.2623.105", "_id" : { "$oid" : "5722aaf1c7f7f09a0629f753" }, "created" : { "$date" : 1461889777536 }, "__v" : 0 },
 				{ "qrcode" : "786a9d01278af5dd", "ip" : "111.82.69.73", "internal_ip" : null, "os" : "iOS 9.3.1", "browser" : "WebKit 601.1.46", "_id" : { "$oid" : "5722bf46c7f7f09a0629f757" }, "created" : { "$date" : 1461894982398 }, "__v" : 0 },
 				{ "qrcode" : "786a9d01278af5dd", "ip" : "49.217.98.75", "internal_ip" : null, "os" : "iOS 9.3.1", "browser" : "WebKit 601.1.46", "_id" : { "$oid" : "5722bf4bc7f7f09a0629f758" }, "created" : { "$date" : 1461894987120 }, "__v" : 0 },
@@ -302,7 +302,7 @@ export default function *() {
 				{ "qrcode" : "579cd4f4c8012059", "ip" : "118.166.248.83", "internal_ip" : null, "os" : "Mac OS 10.11.4", "browser" : "Safari 9.1", "_id" : { "$oid" : "57396091c7f7f09a0629f82f" }, "created" : { "$date" : 1463378065932 }, "__v" : 0 },
 				{ "qrcode" : "579cd4f4c8012059", "ip" : "118.166.248.83", "internal_ip" : null, "os" : "Mac OS 10.11.4", "browser" : "Safari 9.1", "_id" : { "$oid" : "57396092c7f7f09a0629f830" }, "created" : { "$date" : 1463378066432 }, "__v" : 0 },
 				{ "qrcode" : "579cd4f4c8012059", "ip" : "118.166.248.83", "internal_ip" : null, "os" : "Mac OS 10.11.4", "browser" : "Safari 9.1", "_id" : { "$oid" : "57396098c7f7f09a0629f831" }, "created" : { "$date" : 1463378072660 }, "__v" : 0 }
-			]},
-		]
+			],
+		}
 	});
 };
