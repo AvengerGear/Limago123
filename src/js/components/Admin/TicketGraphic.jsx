@@ -11,7 +11,7 @@ import AdminLayout from './AdminLayout.jsx';
 // Decorators
 import { router, flux, i18n } from 'Decorator';
 
-class FirstRecordPackages extends React.Component {
+class RecordPackages extends React.Component {
 	constructor(props, context) {
 		super(props, context);
 
@@ -61,6 +61,86 @@ class FirstRecordPackages extends React.Component {
 		return (
 			<div>
 				<div ref="barChart"></div>
+			</div>
+		);
+	}
+}
+
+class RecordOS extends React.Component {
+	constructor(props, context) {
+		super(props, context);
+
+		var labels = [];
+		var series = [];
+
+		for (var index in props.data) {
+			var osItem = props.data[index];
+			var os = osItem.split(' ');
+
+			if (labels.indexOf(os[0]) === -1) {
+				labels.push(os[0]);
+				series.push(1)
+			} else {
+				series[labels.indexOf(os[0])] = series[labels.indexOf(os[0])] + 1;
+			}
+		}
+
+		this.state = {
+			labels: labels,
+			series: series
+		};
+	}
+
+	componentDidMount = () => {
+		var data = {labels: this.state.labels, series: this.state.series};
+		var options = {
+			width: 300,
+			labelInterpolationFnc: function(value) {
+				return value[0]
+			}
+		};
+		var responsiveOptions = [
+			['screen and (min-width: 640px)', {
+				chartPadding: 30,
+				labelOffset: 50,
+				labelDirection: 'explode',
+				labelInterpolationFnc: function(value) {
+					return value;
+				}
+			}],
+			['screen and (min-width: 1024px)', {
+				labelOffset: 35,
+				chartPadding: 15
+			}]
+		];
+		new Chartist.Pie(this.refs.pieChart, data, options, responsiveOptions);
+	};
+
+	render() {
+		var tableValue = [];
+		for (var index in this.state.labels) {
+			var label = this.state.labels[index];
+
+			tableValue.push(
+				<tr>
+					<td>{label}</td>
+					<td>{this.state.series[index]}</td>
+				</tr>
+			);
+		}
+
+		return (
+			<div className='ui grid'>
+				<div className='eight wide column'>
+					<div ref="pieChart"></div>
+				</div>
+				<div className='four wide column'>
+					<table className='ui attached striped table'>
+						<tbody>
+							{tableValue}
+						</tbody>
+					</table>
+				</div>
 			</div>
 		);
 	}
@@ -124,9 +204,13 @@ class TicketGraphic extends React.Component {
 		var ticketData = this.state.ticketData;
 		var firstUserData = this.state.recordData.firstRecord;
 		var firstUsers = [];
+		var firstOS = [];
 
 		for (var tIndex in firstUserData.tickets) {
 			var ticket = firstUserData.tickets[tIndex];
+			
+			firstOS.push(firstUserData.tickets[tIndex].os);
+
 			ticketData.forEach(function(data) {
 				if (ticket.qrcode === data.qrcode) {
 					ticket.people = data.people;
@@ -228,16 +312,16 @@ class TicketGraphic extends React.Component {
 									</table>
 								</div>
 								<div className='ten wide column'>
-									<FirstRecordPackages data={ticketData} />
+									<RecordPackages data={ticketData} />
+									<RecordOS data={firstOS} />
 								</div>
 							</div>
 						</div>
-
-						
 					</div>
 
 					<div className='ui stackable grid'>
 						<div className="column">
+							<h2>Sign up with Numbers: {firstUserData.tickets.length}</h2>
 							<table className='ui attached striped table'>
 								<thead>
 									<tr>
