@@ -122,4 +122,14 @@ module.exports = [
 			});
 		}
 	}
+	,
+	{
+		allow: 'admin.users',
+		path: '/admin/record/second',
+		getHandler: function(nextState, done) {
+			require.ensure([], function(require) {
+				done(null, require('./components/Admin/TicketSecondRecord.jsx'));
+			});
+		}
+	}
 ];

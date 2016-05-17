@@ -11,90 +11,6 @@ import AdminLayout from './AdminLayout.jsx';
 // Decorators
 import { router, flux, i18n } from 'Decorator';
 
-class RecordPackages extends React.Component {
-	constructor(props, context) {
-		super(props, context);
-
-		var labels = [];
-		var series = [];
-		var seriesData = [];
-
-		for (var index in props.data) {
-			var packageItem = props.data[index];
-
-			labels.push(
-				// 'people: ' + props.data[index].people + ' price: ' + props.data[index].price + '0%' + ' times: ' + props.data[index].times + 'H'
-				'no. ' + (Number(index) + 1)
-			);
-
-			if (packageItem.count) {
-				seriesData.push(packageItem.count);
-			}else {
-				seriesData.push(0);
-			}
-		}
-		labels.reverse();
-		seriesData.reverse();
-		series.push(seriesData);
-
-		this.state = {
-			labels: labels,
-			series: series
-		};
-	}
-
-	componentWillReceiveProps = (nextProps) => {
-		var labels = [];
-		var series = [];
-		var seriesData = [];
-
-		for (var index in nextProps.data) {
-			var packageItem = nextProps.data[index];
-
-			labels.push(
-				// 'people: ' + nextProps.data[index].people + ' price: ' + nextProps.data[index].price + '0%' + ' times: ' + nextProps.data[index].times + 'H'
-				'no. ' + (Number(index) + 1)
-			);
-
-			if (packageItem.count) {
-				seriesData.push(packageItem.count);
-			}else {
-				seriesData.push(0);
-			}
-		}
-		labels.reverse();
-		seriesData.reverse();
-		series.push(seriesData);
-		
-		this.setState({
-			labels: labels,
-			series: series
-		});
-	};
-
-	componentDidMount = () => {
-		var data = {labels: this.state.labels, series: this.state.series};
-		var options = {
-			seriesBarDistance: 15,
-			height: 1000,
-			horizontalBars: true,
-			axisX: {
-				onlyInteger: true
-			}
-		};
-		new Chartist.Bar(this.refs.barChart, data, options);
-	};
-
-	render() {
-
-		return (
-			<div>
-				<div ref="barChart"></div>
-			</div>
-		);
-	}
-}
-
 class RecordOS extends React.Component {
 	constructor(props, context) {
 		super(props, context);
@@ -119,6 +35,28 @@ class RecordOS extends React.Component {
 			series: series
 		};
 	}
+
+	componentWillReceiveProps = (nextProps) => {
+		var labels = [];
+		var series = [];
+
+		for (var index in nextProps.data) {
+			var osItem = nextProps.data[index];
+			var os = osItem.split(' ');
+
+			if (labels.indexOf(os[0]) === -1) {
+				labels.push(os[0]);
+				series.push(1)
+			} else {
+				series[labels.indexOf(os[0])] = series[labels.indexOf(os[0])] + 1;
+			}
+		}
+
+		this.setState({
+			labels: labels,
+			series: series
+		});
+	};
 
 	componentDidMount = () => {
 		var data = {labels: this.state.labels, series: this.state.series};
@@ -175,9 +113,19 @@ class RecordOS extends React.Component {
 	}
 }
 
-class FirstTicketItem extends React.Component {
+class SecondTicketItem extends React.Component {
 	formateDate = (date) => {
 		return moment(date).format('YYYY/MM/DD HH:mm');
+	};
+
+	showStyle = (style) => {
+		if (style == '786a9d01278af5dd') {
+			return 'Photo'
+		}
+		if (style == '782e61c302e1e614') {
+			return 'Graphic'
+		}
+
 	};
 
 	render() {
@@ -187,9 +135,7 @@ class FirstTicketItem extends React.Component {
 				<td>{this.props.name}</td>
 				<td>{this.props.email}</td>
 				<td>{this.props.phone}</td>
-				<td className="text-center">{this.props.people}</td>
-				<td className="text-center">{this.props.price}0%</td>
-				<td className="text-center">{this.props.times}H</td>
+				<td className="text-center">{this.showStyle(this.props.qrcode)}</td>
 				<td className="text-center">{this.props.os}</td>
 				<td className="text-center">{this.props.allTime} sec</td>
 				<td className="text-center">{this.props.viewTime} sec</td>
@@ -201,14 +147,14 @@ class FirstTicketItem extends React.Component {
 }
 
 @flux
-class TicketFirstRecord extends React.Component {
+class TicketSecondRecord extends React.Component {
 
 	constructor(props, context) {
 		super(props, context);
 
 		this.state = {
 			ticketData: this.flux.getState('Tickets').data,
-			recordData: this.flux.getState('Admin.Record').firstRecord
+			recordData: this.flux.getState('Admin.Record').secondRecord
 		};
 	}
 
@@ -225,20 +171,21 @@ class TicketFirstRecord extends React.Component {
 	onChange = () => {
 		this.setState({
 			ticketData: this.flux.getState('Tickets').data,
-			recordData: this.flux.getState('Admin.Record').firstRecord
+			recordData: this.flux.getState('Admin.Record').secondRecord
 		});
 	};
 
 	render() {
 		var ticketData = this.state.ticketData;
-		var firstUserData = this.state.recordData;
+		var secondUserData = this.state.recordData;
 		var firstUsers = [];
-		var firstOS = [];
+		var ticketOS = [];
+		var visitOS = [];
 
-		for (var tIndex in firstUserData.tickets) {
-			var ticket = firstUserData.tickets[tIndex];
+		for (var tIndex in secondUserData.tickets) {
+			var ticket = secondUserData.tickets[tIndex];
 			
-			firstOS.push(firstUserData.tickets[tIndex].os);
+			ticketOS.push(secondUserData.tickets[tIndex].os);
 
 			ticketData.forEach(function(data) {
 				if (ticket.qrcode === data.qrcode) {
@@ -249,8 +196,8 @@ class TicketFirstRecord extends React.Component {
 				}
 			});
 
-			for (var mIndex in firstUserData.members) {
-				var user = firstUserData.members[mIndex];
+			for (var mIndex in secondUserData.members) {
+				var user = secondUserData.members[mIndex];
 				if (user.email == ticket.email) {
 					ticket.userName = user.name;
 					ticket.userPhone = user.phone;
@@ -258,15 +205,13 @@ class TicketFirstRecord extends React.Component {
 			}
 
 			firstUsers.push(
-				<FirstTicketItem
+				<SecondTicketItem
 					id={tIndex}
 					name={ticket.userName}
 					email={ticket.email}
 					phone={ticket.userPhone}
 					created={ticket.created}
-					people={ticket.people || null}
-					price={ticket.price || null}
-					times={ticket.times || null}
+					qrcode={ticket.qrcode || null}
 					os={ticket.os || null}
 					allTime={ticket.allTime || null}
 					editingTime={ticket.editingTime || null}
@@ -275,44 +220,39 @@ class TicketFirstRecord extends React.Component {
 			);
 		}
 
-		var packages = [];
-		for (var index in ticketData) {
-			var packageItem = ticketData[index];
-			packages.push(
-				<tr>
-					<td className="text-center">No.{Number(index) + 1}</td>
-					<td className="text-center">{ticketData[index].people}</td>
-					<td className="text-center">{ticketData[index].price}0%</td>
-					<td className="text-center">{ticketData[index].times}H</td>
-				</tr>
-			);
-
+		for (var index in secondUserData.visits) {
+			visitOS.push(secondUserData.visits[index].os);
 		}
-
+		
 		return (
-			<AdminLayout category='firstRecord'>
+			<AdminLayout category='secondRecord'>
 				<div className='ui basic segment'>
 					<div className='ui stackable grid'>
 						<div className='ten wide computer sixteen wide tablet column'>
 							<h1 className='ui header'>
 								<i className='payment icon' />
 								<div className='content'>
-									First Record
+									Second Record
 									<div className='sub header'>
 										<div className="ui large horizontal list">
 											<div className="item">
 												<div className="content">
-													<div className="header">January</div>
+													<div className="header">April</div>
 												</div>
 											</div>
 											<div className="item">
 												<div className="content">
-													<div className="header"><div className="ui teal label">Total Emails: {firstUserData.emails.length}</div></div>
+													<div className="header"><div className="ui teal label">Total Emails: {secondUserData.emails.length}</div></div>
 												</div>
 											</div>
 											<div className="item">
 												<div className="content">
-													<div className="header"><div className="ui teal label">Total Tickets: {firstUserData.tickets.length}</div></div>
+													<div className="header"><div className="ui teal label">Total Tickets: {secondUserData.tickets.length}</div></div>
+												</div>
+											</div>
+											<div className="item">
+												<div className="content">
+													<div className="header"><div className="ui teal label">Total Visits: {secondUserData.visits.length}</div></div>
 												</div>
 											</div>
 										</div>
@@ -325,24 +265,13 @@ class TicketFirstRecord extends React.Component {
 					<div className='ui stackable grid'>
 						<div className='column'>
 							<div className='ui stackable grid'>
-								<div className='four wide column'>
-									<table className='ui attached striped table'>
-										<thead>
-											<tr>
-												<th></th>
-												<th className="text-center">People</th>
-												<th className="text-center">Price</th>
-												<th className="text-center">Time</th>
-											</tr>
-										</thead>
-										<tbody>
-											{packages}
-										</tbody>
-									</table>
+								<div className='eight wide column'>
+									<h2>Visits</h2>
+									<RecordOS data={visitOS} />
 								</div>
-								<div className='ten wide column'>
-									<RecordPackages data={ticketData} />
-									<RecordOS data={firstOS} />
+								<div className='eight wide column'>
+									<h2>Sign up with Numbers</h2>
+									<RecordOS data={ticketOS} />
 								</div>
 							</div>
 						</div>
@@ -350,7 +279,7 @@ class TicketFirstRecord extends React.Component {
 
 					<div className='ui stackable grid'>
 						<div className="column">
-							<h2>Sign up with Numbers: {firstUserData.tickets.length}</h2>
+							<h2>Sign up with Numbers: {secondUserData.tickets.length}</h2>
 							<table className='ui attached striped table'>
 								<thead>
 									<tr>
@@ -358,9 +287,7 @@ class TicketFirstRecord extends React.Component {
 										<th>Name</th>
 										<th>E-mail</th>
 										<th>Phone</th>
-										<th className="text-center">People</th>
-										<th className="text-center">Price</th>
-										<th className="text-center">Time</th>
+										<th className="text-center">Style</th>
 										<th className="text-center">OS</th>
 										<th className="text-center">Totale Time</th>
 										<th className="text-center">View Time</th>
@@ -380,4 +307,4 @@ class TicketFirstRecord extends React.Component {
 	}
 }
 
-export default TicketFirstRecord;
+export default TicketSecondRecord;

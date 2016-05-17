@@ -29,6 +29,9 @@ class AdminMenu extends React.Component {
 				<Link to='/admin/record/first' className={this.props.category == 'firstRecord' ? 'item active' : 'item'}>
 					First Record
 				</Link>
+				<Link to='/admin/record/second' className={this.props.category == 'secondRecord' ? 'item active' : 'item'}>
+					Second Record
+				</Link>
 			</div>
 		);
 	}
