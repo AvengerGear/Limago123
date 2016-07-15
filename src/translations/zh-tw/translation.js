@@ -20,6 +20,7 @@ module.exports = {
 	'sign_up.header': '建立新帳號',
 	'sign_up.username': '使用者帳號',
 	'sign_up.display_name': '顯示名稱',
+	'sign_up.phone': '手機號碼',
 	'sign_up.email': '電子郵件信箱',
 	'sign_up.password': '密碼',
 	'sign_up.confirm': '再確認密碼',

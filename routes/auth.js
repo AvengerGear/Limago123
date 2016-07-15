@@ -243,7 +243,7 @@ router.post('/signup/ticket', function *() {
 	var password = this.request.body.password || null;
 	var email = this.request.body.email || null;
 	var qrcode = this.request.body.qrcode || null;
-	var number = this.request.body.number || null;
+	var type = this.request.body.type || null;
 	var startTime = this.request.body.startTime || null;
 	var editTime = this.request.body.editTime || null;
 	var sendTime = this.request.body.sendTime || null;
@@ -258,7 +258,7 @@ router.post('/signup/ticket', function *() {
 	var browser = parser.getBrowser().name + ' ' + parser.getBrowser().version || null;
 
 	// Check fields
-	if (!name || !phone || !password || !email || !qrcode || !number) {
+	if (!name || !phone || !password || !email || !qrcode || !type) {
 		this.status = 400;
 		return;
 	}
@@ -267,19 +267,6 @@ router.post('/signup/ticket', function *() {
 	try {
 		// TODO: It should create a record directly if account was available.
 		var ret = yield Member.getMemberByEmail(email);
-		if (ret) {
-			this.status = 409;
-			return;
-		}
-	} catch(e) {
-		console.log(e);
-		this.status = 500;
-		return;
-	}
-
-	// Check whether numbers exists or not
-	try {
-		var ret = yield Tickets.getNumbers(number);
 		if (ret) {
 			this.status = 409;
 			return;
@@ -313,7 +300,7 @@ router.post('/signup/ticket', function *() {
 			user_id: m.id,
 			email: email,
 			qrcode: qrcode,
-			number: number,
+			type: type,
 			ip: ip,
 			internal_ip: internal_ip,
 			os: os,

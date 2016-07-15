@@ -35,16 +35,18 @@ var stepStyle = {
 	paddingLeft: '5%'
 };
 
+var lableStyle = {
+	textAlign: 'left'
+};
+
 @router
 @flux
-class SignUpWithTicketPage extends React.Component {
+class StudentWithTicketPage extends React.Component {
 	constructor() {
 		super();
 
 		this.state = {
 			error: false,
-			number_error: false,
-			number_empty_error: false,
 			email_existing_error: false,
 			email_error: false,
 			email_empty_error: false,
@@ -106,8 +108,8 @@ class SignUpWithTicketPage extends React.Component {
 	}
 
 	signUp = () => {
+		var type = this.state.type;
 		var qrcode = this.state.qrcode;
-		var number = this.refs.number.value.trim();
 		var email = this.refs.email.value.trim();
 		var phone = this.refs.phone.value.trim();
 		var name = this.refs.name.value.trim();
@@ -117,8 +119,6 @@ class SignUpWithTicketPage extends React.Component {
 
 		var state = {
 			error: false,
-			number_error: false,
-			number_empty_error: false,
 			email_error: false,
 			email_empty_error: false,
 			confirm_error: false,
@@ -129,12 +129,6 @@ class SignUpWithTicketPage extends React.Component {
 			phone_error: false,
 			phone_empty_error: false
 		};
-
-		if (number == '') {
-			state.error = true;
-			state.number_error = true;
-			state.number_empty_error = true;
-		}
 
 		if (email == '') {
 			state.error = true;
@@ -167,7 +161,7 @@ class SignUpWithTicketPage extends React.Component {
 			state.confirm_error = true;
 		}
 
-		if (qrcode == '') {
+		if (qrcode == '' || type =='') {
 			state.error = true;
 		}
 
@@ -188,7 +182,7 @@ class SignUpWithTicketPage extends React.Component {
 			this.refs.password.value,
 			this.refs.name.value,
 			qrcode,
-			this.refs.number.value,
+			type,
 			this.state.timer_start,
 			this.state.timer_edit,
 			currentTime,
@@ -270,7 +264,6 @@ class SignUpWithTicketPage extends React.Component {
 	}
 
 	render() {
-		var numberClasses = 'required field';
 		var phoneClasses = 'required field';
 		var emailClasses = 'required field';
 		var nameClasses = 'required field';
@@ -290,7 +283,7 @@ class SignUpWithTicketPage extends React.Component {
 						<i className={'warning sign icon'} />
 						<div className='content'>
 							<div className='header'>註冊失敗</div>
-							<p>臨時會員編號或email已經有人用囉!，請重新輸入</p>
+							<p>email已經有人用囉!，請重新輸入</p>
 						</div>
 					</div>
 				);
@@ -308,10 +301,6 @@ class SignUpWithTicketPage extends React.Component {
 				if (this.state.email_error) {
 					emailClasses += ' error';
 				}
-			}
-
-			if (this.state.number_error) {
-				numberClasses += ' error';
 			}
 
 			if (this.state.name_error) {
@@ -360,51 +349,16 @@ class SignUpWithTicketPage extends React.Component {
 				<div ref="joinUs" className={'ui basic center aligned segment user-data'}>
 					<img className="ui middle aligned tiny image title-tag" src={ pen } />
 					<span className="main-title">馬上開始你的旅程</span>
-					<div className='ui two column centered stackable grid' style={stepStyle}>
-						<div className='column'>
-							<div className="ui ordered steps">
-								<div className={ this.state.step1_status + ' step'}>
-									<div className="content">
-										<div className="title">輸入臨時會員編號</div>
-										<div className="description">一個編號只能使用一次</div>
-									</div>
-								</div>
-								<div className="active step">
-									<div className="content">
-										<div className="title">取得帳號</div>
-										<div className="description">請直接註冊</div>
-									</div>
-								</div>
-								<div className="active step">
-									<div className="content">
-										<div className="title">完成註冊</div>
-										<div className="description">恭喜你取得專屬票券！</div>
-									</div>
-								</div>
-							</div>
-							<p><i className="info circle icon"></i>如離開本頁請重新掃描票券上的 QR Code，重新進入本頁進行註冊。</p>
-						</div>
-					</div>
+					<div className='ui hidden divider'></div>
+					<div className='ui hidden divider'></div>
+
 					<div className='ui two column centered stackable grid'>
-						<div className='column'>
+						<div className='seven wide column'>
 							<div className={'ui basic segment'}>
 								{message}
-
 								<div className='ui form'>
-									<div className={numberClasses}>
-										<label className="mouse-pointer" onClick={this.showTicket}>臨時會員編號<i className="help circle icon"></i></label>
-										<div className={'ui left icon input'}>
-											<i className={'privacy icon'} />
-											<input type='text' ref='number' name='number' placeholder='1234567890' maxLength="16" onChange={this.stepStatus, this.saveEditTime} />
-										</div>
-									</div>
-									<div id="show-ticket" className="ui stacked segment hide">
-										<img className="ui large bordered image center-block" src={ ticket } />
-										<p className="color-black text-center"><i className="warning circle icon"></i>每個臨時會員編號只能使用一次</p>
-									</div>
-
 									<div className={nameClasses}>
-										<label>你的姓名</label>
+										<label style={lableStyle}>你的姓名</label>
 										<div className={'ui left icon input'}>
 											<i className={'user icon'} />
 											<input type='text' ref='name' name='name' placeholder='Limago' value={ user.name || null } onChange={this.saveEditTime} />
@@ -412,7 +366,7 @@ class SignUpWithTicketPage extends React.Component {
 									</div>
 
 									<div className={phoneClasses}>
-										<label><I18n sign='sign_up.phone'>Cellphone Number</I18n></label>
+										<label style={lableStyle}><I18n sign='sign_up.phone'>Cellphone Number</I18n></label>
 										<div className={'ui left icon input'}>
 											<i className={'phone icon'} />
 											<input type='text' ref='phone' name='phone' placeholder='0912345678' value={ user.phone || null } onChange={this.saveEditTime} />
@@ -420,7 +374,7 @@ class SignUpWithTicketPage extends React.Component {
 									</div>
 
 									<div className={emailClasses}>
-										<label><I18n sign='sign_up.email'>E-mail Address</I18n></label>
+										<label style={lableStyle}><I18n sign='sign_up.email'>E-mail Address</I18n></label>
 										<div className={'ui left icon input'}>
 											<i className={'mail icon'} />
 											<input type='email' ref='email' name='email' placeholder='limago@example.com' value={ user.email || null } onChange={this.saveEditTime} />
@@ -428,7 +382,7 @@ class SignUpWithTicketPage extends React.Component {
 									</div>
 
 									<div className={passwordClasses}>
-										<label><I18n sign='sign_up.password'>Password</I18n></label>
+										<label style={lableStyle}><I18n sign='sign_up.password'>Password</I18n></label>
 										<div className={'ui left icon input'}>
 											<i className={'lock icon'} />
 											<input type='password' ref='password' name='password' onChange={this.saveEditTime} />
@@ -436,7 +390,7 @@ class SignUpWithTicketPage extends React.Component {
 									</div>
 
 									<div className={confirmClasses}>
-										<label><I18n sign='sign_up.confirm'>Confirm</I18n></label>
+										<label style={lableStyle}><I18n sign='sign_up.confirm'>Confirm</I18n></label>
 										<div className={'ui left icon input'}>
 											<i className={'lock icon'} />
 											<input type='password' ref='confirm_password' name='confirm_password' onChange={this.saveEditTime} />
@@ -462,4 +416,4 @@ class SignUpWithTicketPage extends React.Component {
 	}
 }
 
-export default SignUpWithTicketPage;
+export default StudentWithTicketPage;
