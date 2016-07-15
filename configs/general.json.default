@@ -29,7 +29,7 @@
 		]
 	},
 	"database": {
-		"uri": "mongodb://localhost:27017/limagoApril"
+		"uri": "mongodb://localhost:27017/limagoJuly"
 	},
 	"authorization": {
 		"github": {

@@ -2,6 +2,7 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 var Visits = new mongoose.Schema({
+	type: String,
 	qrcode: String,
 	ip: String,
 	internal_ip: String,

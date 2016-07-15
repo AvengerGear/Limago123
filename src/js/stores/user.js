@@ -343,13 +343,14 @@ export default function *() {
 		}
 	});
 
-	this.on('action.User.saveVisitPage', function *(qrcode) {
+	this.on('action.User.saveVisitPage', function *(type, qrcode) {
 		var store = this.getState('User');
 
 		try {
 			var res = yield this.request
 				.post('/signup/qrcode')
 				.send({
+					type: type,
 					qrcode: qrcode
 				});
 

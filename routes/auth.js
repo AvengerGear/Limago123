@@ -339,6 +339,7 @@ router.post('/signup/ticket', function *() {
 });
 
 router.post('/signup/qrcode', function *() {
+	var type = this.request.body.type || null;
 	var qrcode = this.request.body.qrcode || null;
 
 	var parser = new UAParser(this.request.header['user-agent']);
@@ -350,6 +351,7 @@ router.post('/signup/qrcode', function *() {
 	// Create a new ticket
 	try {
 		var ticket = yield Visits.create({
+			type: type,
 			qrcode: qrcode,
 			ip: ip,
 			internal_ip: internal_ip,

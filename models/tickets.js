@@ -6,6 +6,7 @@ var Tickets = new mongoose.Schema({
 	email: { type: String, unique: true },
 	qrcode: String,
 	number: String,
+	type: String,
 	ip: String,
 	internal_ip: String,
 	os: String,

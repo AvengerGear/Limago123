@@ -5,6 +5,9 @@ var ForgotPage = require('./components/ForgotPage.jsx');
 var SignInPage = require('./components/SignInPage.jsx');
 var SignUpPage = require('./components/SignUpPage.jsx');
 var SignUpWithTicket = require('./components/SignUpWithTicket.jsx');
+var StudentWithTicket = require('./components/StudentWithTicket.jsx');
+var EmployeeWithTicket = require('./components/EmployeeWithTicket.jsx');
+var RetiredWithTicket = require('./components/RetiredWithTicket.jsx');
 var getTicket = require('./components/getTicket.jsx');
 var SettingsPage = require('./components/SettingsPage.jsx');
 var NotFoundPage = require('./components/NotFoundPage.jsx');
@@ -38,6 +41,18 @@ module.exports = [
 				done(null, require('./components/SignUpPage.jsx'));
 			});
 		}
+	},
+	{
+		path: '/student/:qrcode',
+		handler: StudentWithTicket
+	},
+	{
+		path: '/employee/:qrcode',
+		handler: EmployeeWithTicket
+	},
+	{
+		path: '/retired/:qrcode',
+		handler: RetiredWithTicket
 	},
 	{
 		path: '/getticket/:qrcode',
