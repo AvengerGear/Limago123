@@ -1,7 +1,7 @@
 {
 	"service": {
 		"name": "Limago",
-		"external_url": "http://localhost:3001"
+		"external_url": "http://limago123.com/"
 	},
 	"server": {
 		"port": 3001
