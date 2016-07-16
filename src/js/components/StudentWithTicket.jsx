@@ -16,10 +16,14 @@ import ticket from 'Source/images/ticket.jpg';
 // icons
 import arrow from 'Source/images/arrow.png';
 import pen from 'Source/images/pen.png';
-import leafWhite from 'Source/images/leaf-white.png';
+import sakulaWhite from 'Source/images/sakula-white.png';
 import email from 'Source/images/email-black.png';
-import lantern from 'Source/images/lantern.png';
+import sakulaBanner from 'Source/images/sakula.png';
 import plane from 'Source/images/plane.jpg';
+import jpIcon1 from 'Source/images/jp-icon-1.png';
+import jpIcon2 from 'Source/images/jp-icon-2.png';
+import jpIcon3 from 'Source/images/jp-icon-3.png';
+import jpIcon4 from 'Source/images/jp-icon-4.png';
 
 var sectionStyle = {
 	paddingTop: '40px',
@@ -27,6 +31,10 @@ var sectionStyle = {
 };
 
 var joinBtnStyle = {
+	marginTop: '20px',
+};
+
+var submitBtnStyle = {
 	marginTop: '50px',
 };
 
@@ -269,6 +277,12 @@ class StudentWithTicketPage extends React.Component {
 			marginLeft: 'auto',
 			marginRight: 'auto'
 		};
+		var jpIconStyle = {
+			width: '110px',
+			marginLeft: 'auto',
+			marginRight: 'auto',
+			marginTop: '40px'
+		};
 		var limaogStyle = {
 			display: 'inline-block',
 			paddingLeft: '10px',
@@ -374,7 +388,7 @@ class StudentWithTicketPage extends React.Component {
 
 					<div className="ui one column centered grid">
 						<div className="computer only tablet only three wide column">
-							<button className={'large ui inverted button join'} onClick={this.joinUs} style={joinBtnStyle}>
+							<button className={'huge ui inverted button join'} onClick={this.joinUs} style={joinBtnStyle}>
 								加入 Limago
 							</button>
 						</div>
@@ -382,7 +396,21 @@ class StudentWithTicketPage extends React.Component {
 				</div>
 				<div className='ui hidden divider'></div>
 				
-				<div className="ui one column centered grid">
+
+
+
+
+
+
+
+
+				<div className="ui stackable five column centered grid">
+					<div className="column">
+						<img className="ui tiny image" src={jpIcon1} style={jpIconStyle} />
+					</div>
+					<div className="column">
+						<img className="ui tiny image" src={jpIcon2} style={jpIconStyle} />
+					</div>
 					<div className="column">
 						<div className="ui basic center aligned segment">
 							<img className="ui tiny image" src={plane} style={planeStyle} />
@@ -390,7 +418,20 @@ class StudentWithTicketPage extends React.Component {
 							<h3 style={travelStyle}>隨機旅遊</h3>
 						</div>
 					</div>
+					<div className="column">
+						<img className="ui tiny image" src={jpIcon3} style={jpIconStyle} />
+					</div>
+					<div className="column">
+						<img className="ui tiny image" src={jpIcon4} style={jpIconStyle} />
+					</div>
 				</div>
+
+
+
+
+
+
+
 
 
 				<div className='ui hidden divider'></div>
@@ -406,25 +447,22 @@ class StudentWithTicketPage extends React.Component {
 				<div className='ui hidden divider'></div>
 				<div className='ui hidden divider'></div>
 				<div className='ui hidden divider'></div>
-
-
-
-				<div className={'ui basic segment des-background leaf'}>
+				<div className={'ui basic segment des-background'}>
 					<div className="ui grid">
 						<div className="six wide column"></div>
 						<div className="ten wide column" style={redLineStyle}>
 							<div className="ui stackable grid">
 								<div className="nine wide column" style={sakulaStyle}>
-									<img className="ui fluid image" src={leafWhite} />
+									<img className="ui fluid image" src={sakulaWhite} />
 								</div>
 							</div>
 						</div>
 					</div>
 					<div className="ui stackable two column grid">
 						<div className="six wide column" style={sakulaStyle}>
-							<img className="ui fluid image" src={lantern} />
+							<img className="ui fluid image" src={sakulaBanner} />
 						</div>
-						<div className="ten wide column leaf">
+						<div className="ten wide column sakula">
 							<div className="ui grid">
 								<div className="two wide column"></div>
 								<div className="computer only tablet only eleven wide column">
@@ -506,7 +544,7 @@ class StudentWithTicketPage extends React.Component {
 									</div>
 
 									<div className='field'>
-										<button className="big ui inverted button center-block" style={joinBtnStyle} onClick={this.signUp}>
+										<button className="big ui inverted button center-block" style={submitBtnStyle} onClick={this.signUp}>
 											<i className="icon send"></i>
 											送出資料
 										</button>

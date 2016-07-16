@@ -16,14 +16,14 @@ import ticket from 'Source/images/ticket.jpg';
 // icons
 import arrow from 'Source/images/arrow.png';
 import pen from 'Source/images/pen.png';
+import leafWhite from 'Source/images/leaf-white.png';
+import email from 'Source/images/email-black.png';
+import osaka from 'Source/images/osaka.png';
+import plane from 'Source/images/plane.jpg';
 
 var sectionStyle = {
 	paddingTop: '40px',
 	paddingBottom: '50px'
-};
-
-var bannerStyle = {
-	minHeight: '600px'
 };
 
 var joinBtnStyle = {
@@ -36,6 +36,7 @@ var stepStyle = {
 };
 
 var lableStyle = {
+	color: 'white',
 	textAlign: 'left'
 };
 
@@ -264,6 +265,44 @@ class RetiredWithTicketPage extends React.Component {
 	}
 
 	render() {
+		var planeStyle = {
+			marginLeft: 'auto',
+			marginRight: 'auto'
+		};
+		var limaogStyle = {
+			display: 'inline-block',
+			paddingLeft: '10px',
+			paddingRight: '10px',
+			color: '#cc3300',
+			marginTop: 0,
+			marginBottom: 0,
+			paddingBottom: '8px',
+			borderBottom: '2px solid #cc3300'
+		};
+		var travelStyle = {
+			marginTop: '8px'
+		};
+		var japanLang = {
+			color: '#ebebe0',
+			lineHeight: '25px'
+		};
+		var dottedStyle = {
+			color: '#cc3300',
+			fontSize: '10px',
+			verticalAlign: 'top',
+			marginTop: '2px'
+		};
+		var redLineStyle = {
+			backgroundColor: '#cc3300',
+			minHeight: '100px'
+		};
+		var sakulaStyle = {
+			padding: 0
+		};
+		var desStyle = {
+			lineHeight: '50px'
+		};
+
 		var phoneClasses = 'required field';
 		var emailClasses = 'required field';
 		var nameClasses = 'required field';
@@ -323,27 +362,91 @@ class RetiredWithTicketPage extends React.Component {
 		return (
 			<div className='main-page'>
 				<Header />
-				<div className={'ui basic center aligned segment landing-page-header'} style={bannerStyle}>
-					<h2 className="head-title color-white">很想去</h2>
-					<h1 className="head-sub-title color-white">東京？巴黎？紐約？莫斯科？</h1>
-					<button className={'large ui inverted button join'} onClick={this.joinUs} style={joinBtnStyle}>
-						加入 Limago
-					</button>
-				</div>
+				<div className={'ui basic center aligned segment landing-page-retired'}>
+					<div className="ui one column centered grid">
+						<div className="computer only tablet only three wide column">
+							<div className="ui very padded center aligned segment mark">
+								<h1 className="head-sub-title">京都</h1>
+								<h2 style={japanLang}>きょうと</h2>
+							</div>
+						</div>
+					</div>
 
-				<div className={'ui basic center aligned segment'}>
-					<div className="ui stackable three column grid">
-						<div className="four wide column"></div>
-						<div className="seven wide column">
-							<h2 className="limago-description">
-								LiMaGo 提供 100 個以上的獨特早鳥票，只要輸入你專屬的臨時會員編號，登入 LiMaGo 會員，你就有機會立馬進行一趟美妙的隨機旅程。
-							</h2>
+					<div className="ui one column centered grid">
+						<div className="computer only tablet only three wide column">
+							<button className={'large ui inverted button join'} onClick={this.joinUs} style={joinBtnStyle}>
+								加入 Limago
+							</button>
 						</div>
 					</div>
 				</div>
+				<div className='ui hidden divider'></div>
+				
+				<div className="ui one column centered grid">
+					<div className="column">
+						<div className="ui basic center aligned segment">
+							<img className="ui tiny image" src={plane} style={planeStyle} />
+							<h2 style={limaogStyle}>Limago</h2>
+							<h3 style={travelStyle}>隨機旅遊</h3>
+						</div>
+					</div>
+				</div>
+				<div className='ui hidden divider'></div>
+				<div className='ui hidden divider'></div>
 
-				<div className={'ui basic center aligned segment target-space'}>
-					<img className="arrow" src={ arrow } />
+				<div className="ui stackable grid center aligned container">
+					<div className="three column row">
+						<div className="column"><h1><i className="circle icon" style={dottedStyle}></i> 隨機出發</h1></div>
+						<div className="column"><h1><i className="circle icon" style={dottedStyle}></i> 隨機地點</h1></div>
+						<div className="column"><h1><i className="circle icon" style={dottedStyle}></i> 隨機同行</h1></div>
+					</div>
+				</div>
+				<div className='ui hidden divider'></div>
+				<div className='ui hidden divider'></div>
+				<div className='ui hidden divider'></div>
+				<div className={'ui basic segment des-background leaf'}>
+					<div className="ui grid">
+						<div className="six wide column"></div>
+						<div className="ten wide column" style={redLineStyle}>
+							<div className="ui stackable grid">
+								<div className="nine wide column" style={sakulaStyle}>
+									<img className="ui fluid image" src={leafWhite} />
+								</div>
+							</div>
+						</div>
+					</div>
+					<div className="ui stackable two column grid">
+						<div className="six wide column" style={sakulaStyle}>
+							<img className="ui fluid image" src={osaka} />
+						</div>
+						<div className="ten wide column leaf">
+							<div className="ui grid">
+								<div className="two wide column"></div>
+								<div className="computer only tablet only eleven wide column">
+									<div className='ui hidden divider'></div>
+									<div className='ui hidden divider'></div>
+									<div className={'ui very padded basic segment'}>
+										<h1 style={desStyle}>
+											LiMaGo 提供 100 張以上的獨特早鳥票，滿足每一位隨時都想旅遊的你，只要提上行李就能馬上出發！一直有股衝動想去旅遊卻沒有時間嗎？馬上填寫下方的登入資料吧！立即享有機會立馬進行一趟美妙的隨機旅程。
+										</h1>
+									</div>
+									<div className='ui hidden divider'></div>
+									<div className='ui hidden divider'></div>
+								</div>
+								<div className="mobile only sixteen wide column">
+									<div className='ui hidden divider'></div>
+									<div className='ui hidden divider'></div>
+									<div className={'ui very padded basic segment'}>
+										<h1 style={desStyle}>
+											LiMaGo 提供 100 張以上的獨特早鳥票，滿足每一位隨時都想旅遊的你，只要提上行李就能馬上出發！一直有股衝動想去旅遊卻沒有時間嗎？馬上填寫下方的登入資料吧！立即享有機會立馬進行一趟美妙的隨機旅程。
+										</h1>
+									</div>
+									<div className='ui hidden divider'></div>
+									<div className='ui hidden divider'></div>
+								</div>
+							</div>
+						</div>
+					</div>
 				</div>
 
 				<div ref="joinUs" className={'ui basic center aligned segment user-data'}>
@@ -361,7 +464,7 @@ class RetiredWithTicketPage extends React.Component {
 										<label style={lableStyle}>你的姓名</label>
 										<div className={'ui left icon input'}>
 											<i className={'user icon'} />
-											<input type='text' ref='name' name='name' placeholder='Limago' value={ user.name || null } onChange={this.saveEditTime} />
+											<input type='text' ref='name' name='name' placeholder='Limago' defaultValue={ user.name || null } onChange={this.saveEditTime} />
 										</div>
 									</div>
 
@@ -369,7 +472,7 @@ class RetiredWithTicketPage extends React.Component {
 										<label style={lableStyle}><I18n sign='sign_up.phone'>Cellphone Number</I18n></label>
 										<div className={'ui left icon input'}>
 											<i className={'phone icon'} />
-											<input type='text' ref='phone' name='phone' placeholder='0912345678' value={ user.phone || null } onChange={this.saveEditTime} />
+											<input type='text' ref='phone' name='phone' placeholder='0912345678' defaultValue={ user.phone || null } onChange={this.saveEditTime} />
 										</div>
 									</div>
 
@@ -377,7 +480,7 @@ class RetiredWithTicketPage extends React.Component {
 										<label style={lableStyle}><I18n sign='sign_up.email'>E-mail Address</I18n></label>
 										<div className={'ui left icon input'}>
 											<i className={'mail icon'} />
-											<input type='email' ref='email' name='email' placeholder='limago@example.com' value={ user.email || null } onChange={this.saveEditTime} />
+											<input type='email' ref='email' name='email' placeholder='limago@example.com' defaultValue={ user.email || null } onChange={this.saveEditTime} />
 										</div>
 									</div>
 
@@ -410,7 +513,13 @@ class RetiredWithTicketPage extends React.Component {
 				</div>
 
 				<div ref="app_section"></div>
-				<Footer />
+
+				<div className={'ui basic center aligned segment footer'}>
+					<img className="ui middle aligned tiny image icon" src={ email } />
+					<span>contact@limago.com</span>
+					<br />
+					<span>Copyright &copy; 2015 Limago Project. All Rights Reserved.</span>
+				</div>
 			</div>
 		);
 	}
