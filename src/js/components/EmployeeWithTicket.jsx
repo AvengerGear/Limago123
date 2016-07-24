@@ -365,11 +365,27 @@ class EmployeeWithTicketPage extends React.Component {
 								</div>
 							</div>
 						</div>
+
+						<div className="mobile only ten wide column">
+							<div className="ui very padded center aligned segment">
+								<h1 className="head-sub-title">京<br />都</h1>
+								<h2 style={japanLang}>き<br />ょ<br />う<br />と</h2>
+								<div className="ui basic center aligned segment">
+									<h2 style={limaogStyle}>Limago</h2>
+									<h3 style={travelStyle}>隨機旅遊</h3>
+								</div>
+							</div>
+						</div>
 					</div>
 
 					<div className="ui one column centered grid">
 						<div className="computer only tablet only three wide column">
 							<button className={'large ui inverted button join'} onClick={this.joinUs} style={joinBtnStyle}>
+								加入 Limago
+							</button>
+						</div>
+						<div className="mobile only ten wide column">
+							<button className={'huge ui inverted button join'} onClick={this.joinUs} style={joinBtnStyle}>
 								加入 Limago
 							</button>
 						</div>
@@ -414,18 +430,16 @@ class EmployeeWithTicketPage extends React.Component {
 									<div className='ui hidden divider'></div>
 									<div className={'ui very padded basic segment'}>
 										<h1 style={desStyle}>
-											LiMaGo 提供 100 張以上的獨特早鳥票，滿足每一位隨時都想旅遊的你，只要提上行李就能馬上出發！一直有股衝動想去旅遊卻沒有時間嗎？馬上填寫下方的登入資料吧！立即享有機會立馬進行一趟美妙的隨機旅程。
+											每天上班很苦悶嗎？很久沒有離開熟悉的環境嗎？LiMaGo 提供 100 張以上的獨特早鳥票，滿足每一位隨時都想出走的你，只要提上行李就能馬上出發！還在猶豫嗎？馬上填寫下方的登入資料！立馬享受一趟美妙的隨機旅程吧。
 										</h1>
 									</div>
 									<div className='ui hidden divider'></div>
 									<div className='ui hidden divider'></div>
 								</div>
 								<div className="mobile only sixteen wide column">
-									<div className='ui hidden divider'></div>
-									<div className='ui hidden divider'></div>
-									<div className={'ui very padded basic segment'}>
+									<div className={'ui basic segment'}>
 										<h1 style={desStyle}>
-											LiMaGo 提供 100 張以上的獨特早鳥票，滿足每一位隨時都想旅遊的你，只要提上行李就能馬上出發！一直有股衝動想去旅遊卻沒有時間嗎？馬上填寫下方的登入資料吧！立即享有機會立馬進行一趟美妙的隨機旅程。
+											每天上班很苦悶嗎？很久沒有離開熟悉的環境嗎？LiMaGo 提供 100 張以上的獨特早鳥票，滿足每一位隨時都想出走的你，只要提上行李就能馬上出發！還在猶豫嗎？馬上填寫下方的登入資料！立馬享受一趟美妙的隨機旅程吧。
 										</h1>
 									</div>
 									<div className='ui hidden divider'></div>
