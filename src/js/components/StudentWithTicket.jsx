@@ -298,7 +298,8 @@ class StudentWithTicketPage extends React.Component {
 		};
 		var japanLang = {
 			color: '#ebebe0',
-			lineHeight: '25px'
+			lineHeight: '25px',
+			marginTop: '5px'
 		};
 		var dottedStyle = {
 			color: '#cc3300',
@@ -384,6 +385,12 @@ class StudentWithTicketPage extends React.Component {
 								<h2 style={japanLang}>きょうと</h2>
 							</div>
 						</div>
+						<div className="mobile only ten wide column">
+							<div className="ui very padded center aligned segment mark">
+								<h1 className="head-sub-title">京都</h1>
+								<h2 style={japanLang}>きょうと</h2>
+							</div>
+						</div>
 					</div>
 
 					<div className="ui one column centered grid">
@@ -392,19 +399,16 @@ class StudentWithTicketPage extends React.Component {
 								加入 Limago
 							</button>
 						</div>
+						<div className="mobile only ten wide column">
+							<button className={'huge ui inverted button join'} onClick={this.joinUs} style={joinBtnStyle}>
+								加入 Limago
+							</button>
+						</div>
 					</div>
 				</div>
 				<div className='ui hidden divider'></div>
-				
 
-
-
-
-
-
-
-
-				<div className="ui stackable five column centered grid">
+				<div className="ui computer only tablet only stackable five column centered grid">
 					<div className="column">
 						<img className="ui tiny image" src={jpIcon1} style={jpIconStyle} />
 					</div>
@@ -426,24 +430,27 @@ class StudentWithTicketPage extends React.Component {
 					</div>
 				</div>
 
-
-
-
-
-
-
-
+				<div className="ui mobile only one column centered grid">
+					<div className="column">
+						<div className="ui basic center aligned segment">
+							<img className="ui tiny image" src={plane} style={planeStyle} />
+							<h2 style={limaogStyle}>Limago</h2>
+							<h3 style={travelStyle}>隨機旅遊</h3>
+						</div>
+					</div>
+				</div>
 
 				<div className='ui hidden divider'></div>
 				<div className='ui hidden divider'></div>
 
-				<div className="ui stackable grid center aligned container">
+				<div className="ui computer only tablet only stackable grid center aligned container">
 					<div className="three column row">
 						<div className="column"><h1><i className="circle icon" style={dottedStyle}></i> 隨機出發</h1></div>
 						<div className="column"><h1><i className="circle icon" style={dottedStyle}></i> 隨機地點</h1></div>
 						<div className="column"><h1><i className="circle icon" style={dottedStyle}></i> 隨機同行</h1></div>
 					</div>
 				</div>
+
 				<div className='ui hidden divider'></div>
 				<div className='ui hidden divider'></div>
 				<div className='ui hidden divider'></div>
@@ -470,18 +477,16 @@ class StudentWithTicketPage extends React.Component {
 									<div className='ui hidden divider'></div>
 									<div className={'ui very padded basic segment'}>
 										<h1 style={desStyle}>
-											LiMaGo 提供 100 張以上的獨特早鳥票，滿足每一位隨時都想旅遊的你，只要提上行李就能馬上出發！一直有股衝動想去旅遊卻沒有時間嗎？馬上填寫下方的登入資料吧！立即享有機會立馬進行一趟美妙的隨機旅程。
+											想要來場隨機旅遊嗎？LiMaGo 提供 100 張以上的獨特早鳥票，滿足每一位渴望驚奇的你，只要提上行李就能隨時出發！還在考慮什麼？馬上填寫下方的登入資料！立即享有一趟美妙的隨機旅程吧。
 										</h1>
 									</div>
 									<div className='ui hidden divider'></div>
 									<div className='ui hidden divider'></div>
 								</div>
 								<div className="mobile only sixteen wide column">
-									<div className='ui hidden divider'></div>
-									<div className='ui hidden divider'></div>
-									<div className={'ui very padded basic segment'}>
+									<div className={'ui basic segment'}>
 										<h1 style={desStyle}>
-											LiMaGo 提供 100 張以上的獨特早鳥票，滿足每一位隨時都想旅遊的你，只要提上行李就能馬上出發！一直有股衝動想去旅遊卻沒有時間嗎？馬上填寫下方的登入資料吧！立即享有機會立馬進行一趟美妙的隨機旅程。
+											想要來場隨機旅遊嗎？LiMaGo 提供 100 張以上的獨特早鳥票，滿足每一位渴望驚奇的你，只要提上行李就能隨時出發！還在考慮什麼？馬上填寫下方的登入資料！立即享有一趟美妙的隨機旅程吧。
 										</h1>
 									</div>
 									<div className='ui hidden divider'></div>
