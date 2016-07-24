@@ -394,7 +394,7 @@ class EmployeeWithTicketPage extends React.Component {
 				<div className='ui hidden divider'></div>
 				<div className='ui hidden divider'></div>
 				<div className='ui hidden divider'></div>
-				<div className="ui stackable grid center aligned container">
+				<div className="ui computer only tablet only stackable grid center aligned container">
 					<div className="three column row">
 						<div className="column"><h1><i className="circle icon" style={dottedStyle}></i> 隨機出發</h1></div>
 						<div className="column"><h1><i className="circle icon" style={dottedStyle}></i> 隨機地點</h1></div>
@@ -404,8 +404,6 @@ class EmployeeWithTicketPage extends React.Component {
 				<div className='ui hidden divider'></div>
 				<div className='ui hidden divider'></div>
 				<div className='ui hidden divider'></div>
-
-
 
 				<div className={'ui basic segment des-background'}>
 					<div className="ui grid">
