@@ -9,6 +9,7 @@ export default function *() {
 				.send({
 					username: user.username || undefined,
 					email: user.email || undefined,
+					phone: user.phone || undefined,
 					password: user.password || undefined,
 					name: user.name || undefined
 				});

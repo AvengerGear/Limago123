@@ -1,7 +1,7 @@
 {
 	"service": {
 		"name": "Limago",
-		"external_url": "http://limago123.com/"
+		"external_url": "http://limago123.com"
 	},
 	"server": {
 		"port": 3001
@@ -29,7 +29,7 @@
 		]
 	},
 	"database": {
-		"uri": "mongodb://localhost:27017/limagoJuly"
+		"uri": "mongodb://localhost:27017/limagoApril"
 	},
 	"authorization": {
 		"github": {

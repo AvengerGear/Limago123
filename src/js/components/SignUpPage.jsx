@@ -226,6 +226,7 @@ class SignUpPage extends React.Component {
 				}
 			}
 
+			var message;
 			if (this.state.email_existing_error) {
 				emailClasses += ' error';
 				message = (
