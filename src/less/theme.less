@@ -60,24 +60,30 @@
 	}
 }
 
+.ui.basic.segment.landing-page-package {
+	background-image: url(../images/package-for-travel.jpg);
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-position: center center;
+	min-height: 450px;
+	padding-top: 200px;
+	overflow: hidden;
+	h1 {
+		color: white
+	}
+}
+
 .ui.basic.segment.landing-page-student {
-	background-image: url(../images/kyoto3.jpg);
+	background-image: url(../images/travel2.jpg);
 	background-repeat: no-repeat;
 	background-size: cover;
 	background-position: center top;
 	min-height: 1000px;
-	padding-top: 600px;
+	padding-top: 200px;
 	overflow: hidden;
 
-	.mark {
-		border-radius: 100%;
-		background-color: #cc3300;
-		padding-top: 57px;
-		padding-bottom: 57px;
-	}
 	.head-sub-title {
-		color: white;
-		font-size: 54px;
+		font-size: 42px;
 		font-weight: normal;
 		text-shadow: 0 0 4px rgba(0,0,0,.6);
 	}
@@ -98,15 +104,11 @@
 	background-size: cover;
 	background-position: center top;
 	min-height: 1000px;
-	padding-top: 600px;
+	padding-top: 200px;
 	overflow: hidden;
 
-	.mark {
-		background-color: #cc3300;
-	}
 	.head-sub-title {
-		color: white;
-		font-size: 54px;
+		font-size: 42px;
 		font-weight: normal;
 		text-shadow: 0 0 4px rgba(0,0,0,.6);
 	}
@@ -131,7 +133,7 @@
 	overflow: hidden;
 
 	.head-sub-title {
-		font-size: 54px;
+		font-size: 42px;
 		font-weight: normal;
 		text-shadow: 0 0 4px rgba(0,0,0,.6);
 	}
@@ -145,41 +147,8 @@
 		margin-top: 20px;
 	}
 }
-
-.ui.basic.segment.des-background {
-	background-image: url(../images/door-with-sakula.png);
-	background-repeat: no-repeat;
-	background-size: 75%;
-	background-position: left top;
+.main-page {
 	overflow: hidden;
-	margin-bottom: 0;
-}
-.ui.basic.segment.des-background.leaf {
-	background-image: url(../images/door-with-leaf.png);
-	background-repeat: no-repeat;
-	background-size: 75%;
-	background-position: left top;
-	overflow: hidden;
-	margin-bottom: 0;
-}
-.ten.wide.column.sakula {
-	background-image: url(../images/sakula-red.png);
-	background-repeat: no-repeat;
-	background-size: 100%;
-	background-position: right bottom;
-	overflow: hidden;
-	margin-bottom: 0;
-}
-.ten.wide.column.leaf {
-	background-image: url(../images/leaf-red.png);
-	background-repeat: no-repeat;
-	background-size: 100%;
-	background-position: right bottom;
-	overflow: hidden;
-	margin-bottom: 0;
-}
-.main-page .ui.basic.segment {
-	margin-top: 0px;
 }
 .section-selects {
 	margin-bottom: 14px;
@@ -201,7 +170,7 @@
 		.include {
 			display: inline-block!important;
 			margin-top: -10px;
-		}	
+		}
 	}
 	.people-section-icon {
 		background-color: @brown;
@@ -262,6 +231,7 @@
 .ui.basic.segment.user-data {
 	background-color: #cc3300;
 	color: white;
+	margin-top: 0;
 	margin-bottom: 0;
 	padding-top: 50px;
 	padding-bottom: 60px;
@@ -272,7 +242,7 @@
 		margin-right: 5px;
 	}
 	.main-title {
-		font-size: 32px;
+		font-size: 28px;
 	}
 	input[type='text'], input[type='email'], input[type='password'] {
 		margin-top: 10px;
@@ -286,15 +256,15 @@
 		}
 
 		&:-moz-placeholder { /* Firefox 18- */
-		   color: white;  
+		   color: white;
 		}
 
 		&::-moz-placeholder {  /* Firefox 19+ */
-		   color: white;  
+		   color: white;
 		}
 
-		&:-ms-input-placeholder {  
-		   color: white;  
+		&:-ms-input-placeholder {
+		   color: white;
 		}
 	}
 	.top-row {
@@ -316,82 +286,5 @@
 		margin-right: 6px;
 		height: 30px!important;
 		width: 30px!important;
-	}
-}
-@media (max-width: @screen-sm-min) {
-	.ui.basic.segment.landing-page-student {
-		background-image: url(../images/kyoto3.jpg);
-		background-repeat: no-repeat;
-		background-size: cover;
-		background-position: center top;
-		min-height: 800px;
-		padding-top: 300px;
-		overflow: hidden;
-
-		.mark {
-			border-radius: 100%;
-			background-color: #cc3300;
-		}
-		.head-sub-title {
-			color: white;
-			font-size: 54px;
-			font-weight: normal;
-			text-shadow: 0 0 4px rgba(0,0,0,.6);
-			margin-bottom: 0;
-		}
-		.head-title {
-			color: white;
-			font-size: 30px;
-			font-weight: normal;
-			text-shadow: 0 0 7px rgba(0,0,0,.6);
-		}
-		.join {
-			margin-top: 20px;
-		}
-	}
-	.flex {
-		display: -ms-flexbox!important;
-		display: -webkit-flex!important;
-		display: -moz-flex!important;
-		display: flex!important;
-		-webkit-flex-flow: row wrap!important;
-		-ms-flex-flow: row wrap!important;
-		-moz-flex-flow: row wrap!important;
-		flex-flow: row wrap!important;
-	}
-	.order-1 {
-		order: 1;
-		-webkit-order: 1;
-		-ms-order: 1;
-		-moz-order: 1;
-	}
-	.order-2 {
-		order: 2;
-	    -webkit-order: 2;
-	    -ms-order: 2;
-	    -moz-order: 2;
-	}
-	.ui.basic.segment.landing-page-header {
-		padding-bottom: 60px; 
-		.center-item {
-			border: 0;
-		}
-	}
-	.limago-select {
-		.section-text {
-			margin-top: 0;
-		}
-		.select-sub-title {
-			margin-bottom: 40px;
-		}
-		.people-section {
-			background-size: contain;
-		}
-		.ticket-section {
-			background-size: contain;
-		}
-		.time-section {
-			background-size: cover;
-		}
 	}
 }

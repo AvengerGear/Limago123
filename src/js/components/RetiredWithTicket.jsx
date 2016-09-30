@@ -12,14 +12,22 @@ import Footer from './Footer.jsx';
 
 //images
 import ticket from 'Source/images/ticket.jpg';
+import greenlight from 'Source/images/retired-greenlight.jpg';
+import england from 'Source/images/worker-england.jpg';
+import japan from 'Source/images/retired-japan.jpg';
+import longwall from 'Source/images/retired-longwall.jpg';
+import paris from 'Source/images/retired-paris.jpg';
+import redwine from 'Source/images/retired-redwine.jpg';
+import ship from 'Source/images/retired-ship.jpg';
+import starsky from 'Source/images/retired-starsky.jpg';
+import sakula from 'Source/images/retired-sakula.jpg';
 
 // icons
 import arrow from 'Source/images/arrow.png';
 import pen from 'Source/images/pen.png';
-import leafWhite from 'Source/images/leaf-white.png';
+import sakulaWhite from 'Source/images/sakula-white.png';
 import email from 'Source/images/email-black.png';
-import osaka from 'Source/images/osaka.png';
-import plane from 'Source/images/plane.jpg';
+import lantern from 'Source/images/lantern.png';
 
 var sectionStyle = {
 	paddingTop: '40px',
@@ -254,8 +262,8 @@ class RetiredWithTicketPage extends React.Component {
 			updateState.error = true;
 
 			// Clear password inputbox
-			this.refs.password.value = ''; 
-			this.refs.confirm_password.value = ''; 
+			this.refs.password.value = '';
+			this.refs.confirm_password.value = '';
 
 			// Focus on email inputbox
 			this.refs.email.select();
@@ -265,16 +273,8 @@ class RetiredWithTicketPage extends React.Component {
 	}
 
 	render() {
-		var planeStyle = {
-			marginLeft: 'auto',
-			marginRight: 'auto'
-		};
 		var limaogStyle = {
-			display: 'inline-block',
-			paddingLeft: '10px',
-			paddingRight: '10px',
 			color: '#cc3300',
-			marginTop: 0,
 			marginBottom: 0,
 			paddingBottom: '8px',
 			borderBottom: '2px solid #cc3300'
@@ -282,25 +282,23 @@ class RetiredWithTicketPage extends React.Component {
 		var travelStyle = {
 			marginTop: '8px'
 		};
-		var japanLang = {
-			color: '#ebebe0',
-			lineHeight: '25px'
+		var sloganStyle = {
+			fontSize: '32px'
+		};
+		var sloganScreenStyle = {
+			fontSize: '44px'
 		};
 		var dottedStyle = {
 			color: '#cc3300',
 			fontSize: '10px',
-			verticalAlign: 'top',
-			marginTop: '2px'
+			verticalAlign: 'top'
 		};
 		var redLineStyle = {
 			backgroundColor: '#cc3300',
 			minHeight: '100px'
 		};
-		var sakulaStyle = {
-			padding: 0
-		};
-		var desStyle = {
-			lineHeight: '50px'
+		var ticketStyle = {
+			textAlign: 'left'
 		};
 
 		var phoneClasses = 'required field';
@@ -362,106 +360,165 @@ class RetiredWithTicketPage extends React.Component {
 		return (
 			<div className='main-page'>
 				<Header />
-				<div className={'ui basic center aligned segment landing-page-retired'}>
-					<div className="ui one column centered grid">
-						<div className="computer only tablet only three wide column">
-							<div className="ui very padded center aligned segment mark">
-								<h1 className="head-sub-title">京都</h1>
-								<h2 style={japanLang}>きょうと</h2>
-							</div>
-						</div>
-					</div>
-
-					<div className="ui one column centered grid">
-						<div className="mobile only ten wide column">
-							<div className="ui very padded center aligned segment mark">
-								<h1 className="head-sub-title">京都</h1>
-								<h2 style={japanLang}>きょうと</h2>
-							</div>
-						</div>
-					</div>
-
-					<div className="ui one column centered grid">
-						<div className="computer only tablet only three wide column">
-							<button className={'large ui inverted button join'} onClick={this.joinUs} style={joinBtnStyle}>
-								加入 Limago
-							</button>
-						</div>
-						<div className="mobile only ten wide column">
-							<button className={'huge ui inverted button join'} onClick={this.joinUs} style={joinBtnStyle}>
-								加入 Limago
-							</button>
-						</div>
-					</div>
-				</div>
-				<div className='ui hidden divider'></div>
-				
-				<div className="ui one column centered grid">
-					<div className="column">
-						<div className="ui basic center aligned segment">
-							<img className="ui tiny image" src={plane} style={planeStyle} />
-							<h2 style={limaogStyle}>Limago</h2>
-							<h3 style={travelStyle}>隨機旅遊</h3>
-						</div>
-					</div>
-				</div>
-				<div className='ui hidden divider'></div>
-				<div className='ui hidden divider'></div>
-
-				<div className="ui stackable grid center aligned container">
-					<div className="computer only tablet only three column row">
-						<div className="column"><h1><i className="circle icon" style={dottedStyle}></i> 隨機出發</h1></div>
-						<div className="column"><h1><i className="circle icon" style={dottedStyle}></i> 隨機地點</h1></div>
-						<div className="column"><h1><i className="circle icon" style={dottedStyle}></i> 隨機同行</h1></div>
-					</div>
-				</div>
-				<div className='ui hidden divider'></div>
-				<div className='ui hidden divider'></div>
-				<div className='ui hidden divider'></div>
-				<div className={'ui basic segment des-background leaf'}>
-					<div className="ui grid">
-						<div className="six wide column"></div>
-						<div className="ten wide column" style={redLineStyle}>
-							<div className="ui stackable grid">
-								<div className="nine wide column" style={sakulaStyle}>
-									<img className="ui fluid image" src={leafWhite} />
-								</div>
-							</div>
-						</div>
-					</div>
-					<div className="ui stackable two column grid">
-						<div className="six wide column" style={sakulaStyle}>
-							<img className="ui fluid image" src={osaka} />
-						</div>
-						<div className="ten wide column leaf">
-							<div className="ui grid">
-								<div className="two wide column"></div>
-								<div className="computer only tablet only eleven wide column">
-									<div className='ui hidden divider'></div>
-									<div className='ui hidden divider'></div>
-									<div className={'ui very padded basic segment'}>
-										<h1 style={desStyle}>
-											LiMaGo 提供 100 張以上的獨特早鳥票，滿足每一位隨時想旅遊的你，只要提上行李就能馬上出發！一直想去旅遊卻沒有時間嗎？馬上填寫下方的登入資料！立馬進行一趟美妙的隨機旅程，為你的人生留下美麗的一筆吧。
-										</h1>
+				<section>
+					<div className={'ui basic center aligned segment landing-page-retired'}>
+						<div className="ui one column centered grid">
+							<div className="computer only three wide column">
+								<div className="ui very padded center aligned segment">
+									<h1 className="head-sub-title">隨機<br />旅遊</h1>
+									<div className="ui basic center aligned segment">
+										<h2 style={limaogStyle}>Limago</h2>
+										<h3 style={travelStyle}>立馬出發</h3>
 									</div>
-									<div className='ui hidden divider'></div>
-									<div className='ui hidden divider'></div>
 								</div>
-								<div className="mobile only sixteen wide column">
-									<div className={'ui basic segment'}>
-										<h1 style={desStyle}>
-											LiMaGo 提供 100 張以上的獨特早鳥票，滿足每一位隨時想旅遊的你，只要提上行李就能馬上出發！一直想去旅遊卻沒有時間嗎？馬上填寫下方的登入資料！立馬進行一趟美妙的隨機旅程，為你的人生留下美麗的一筆吧。
-										</h1>
+							</div>
+
+							<div className="tablet only seven wide column">
+								<div className="ui very padded center aligned segment">
+									<h1 className="head-sub-title">隨機<br />旅遊</h1>
+									<div className="ui basic center aligned segment">
+										<h2 style={limaogStyle}>Limago</h2>
+										<h3 style={travelStyle}>立馬出發</h3>
 									</div>
-									<div className='ui hidden divider'></div>
-									<div className='ui hidden divider'></div>
+								</div>
+							</div>
+
+							<div className="mobile only ten wide column">
+								<div className="ui very padded center aligned segment">
+									<h1 className="head-sub-title">隨機<br />旅遊</h1>
+									<div className="ui basic center aligned segment">
+										<h3 style={limaogStyle}>Limago</h3>
+										<h5 style={travelStyle}>立馬出發</h5>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<div className="ui one column centered grid">
+							<div className="ten wide column">
+								<button className={'large ui inverted button join'} onClick={this.joinUs} style={joinBtnStyle}>
+									加入 Limago
+								</button>
+							</div>
+						</div>
+					</div>
+				</section>
+
+				<div className='ui hidden divider'></div>
+				<div className='ui hidden divider'></div>
+				<div className='ui hidden divider'></div>
+
+				<section>
+					<div className="ui stackable grid center aligned container">
+						<div className="computer only tablet only one column row">
+							<h1 style={sloganScreenStyle}>重新發現旅遊的重要</h1>
+						</div>
+						<div className="mobile only one column row">
+							<h1 style={sloganStyle}>重新發現旅遊的重要</h1>
+						</div>
+					</div>
+
+					<div className="ui centered grid">
+						<div className="computer only four wide column">
+							<div className="ui three column grid">
+								<div className="three column centered row">
+									<div className="column"><h3><i className="circle icon" style={dottedStyle}></i> 隨機出發</h3></div>
+									<div className="column"><h3><i className="circle icon" style={dottedStyle}></i> 隨機地點</h3></div>
+									<div className="column"><h3><i className="circle icon" style={dottedStyle}></i> 隨機同行</h3></div>
+								</div>
+							</div>
+						</div>
+						<div className="tablet only ten wide column">
+							<div className="ui three column grid">
+								<div className="three column centered row">
+									<div className="column"><h3><i className="circle icon" style={dottedStyle}></i> 隨機出發</h3></div>
+									<div className="column"><h3><i className="circle icon" style={dottedStyle}></i> 隨機地點</h3></div>
+									<div className="column"><h3><i className="circle icon" style={dottedStyle}></i> 隨機同行</h3></div>
+								</div>
+							</div>
+						</div>
+						<div className="mobile only fifteen wide column">
+							<div className="ui three column grid">
+								<div className="three column centered row">
+									<div className="column"><h4><i className="circle icon" style={dottedStyle}></i> 隨機出發</h4></div>
+									<div className="column"><h4><i className="circle icon" style={dottedStyle}></i> 隨機地點</h4></div>
+									<div className="column"><h4><i className="circle icon" style={dottedStyle}></i> 隨機同行</h4></div>
 								</div>
 							</div>
 						</div>
 					</div>
-				</div>
+				</section>
 
-				<div ref="joinUs" className={'ui basic center aligned segment user-data'}>
+				<div className='ui hidden divider'></div>
+				<div className='ui hidden divider'></div>
+				<div className='ui hidden divider'></div>
+
+				<section className="ui basic segment container">
+					<div className="ui stackable centered grid">
+						<div className="two column row">
+							<div className="ten wide column">
+								<img className="ui fluid image" src={longwall} alt="" />
+							</div>
+							<div className="five wide column">
+								<img className="ui fluid image" src={paris} alt="" />
+							</div>
+						</div>
+						<div className="three column row">
+							<div className="five wide column">
+								<img className="ui fluid image" src={england} alt="" />
+							</div>
+							<div className="five wide column">
+								<img className="ui fluid image" src={greenlight} alt="" />
+							</div>
+							<div className="five wide column">
+								<img className="ui fluid image" src={ship} alt="" />
+							</div>
+						</div>
+						<div className="two column row">
+							<div className="five wide column">
+								<img className="ui fluid image" src={redwine} alt="" />
+							</div>
+							<div className="computer only ten wide column">
+								<div className="ui very padded basic segment">
+									<h1 style={ticketStyle}>LiMaGo 提供 100 個以上的獨特早鳥票，只要登入我們的會員，你就有機會馬上進行一趟美妙的旅程。</h1>
+								</div>
+							</div>
+							<div className="tablet only ten wide column">
+								<div className="ui padded basic segment">
+									<h3 style={ticketStyle}>LiMaGo 提供 100 個以上的獨特早鳥票，只要登入我們的會員，你就有機會馬上進行一趟美妙的旅程。</h3>
+								</div>
+							</div>
+							<div className="mobile only ten wide column">
+								<div className="ui padded basic segment">
+									<h3>LiMaGo 提供 100 個以上的獨特早鳥票，只要登入我們的會員，你就有機會馬上進行一趟美妙的旅程。</h3>
+								</div>
+							</div>
+						</div>
+						<div className="three column row">
+							<div className="five wide column">
+								<img className="ui fluid image" src={sakula} alt="" />
+							</div>
+							<div className="five wide column">
+								<img className="ui fluid image" src={japan} alt="" />
+							</div>
+							<div className="five wide column">
+								<img className="ui fluid image" src={starsky} alt="" />
+							</div>
+						</div>
+					</div>
+				</section>
+
+				<section>
+					<div className={'ui basic center aligned segment landing-page-package'}>
+						<div className="ui one column centered grid">
+							<div className="ten wide column">
+								<h1>準備好行李了嗎？</h1>
+							</div>
+						</div>
+					</div>
+				</section>
+
+				<section ref="joinUs" className={'ui basic center aligned segment user-data'}>
 					<img className="ui middle aligned tiny image title-tag" src={ pen } />
 					<span className="main-title">馬上開始你的旅程</span>
 					<div className='ui hidden divider'></div>
@@ -522,7 +579,7 @@ class RetiredWithTicketPage extends React.Component {
 							</div>
 						</div>
 					</div>
-				</div>
+				</section>
 
 				<div ref="app_section"></div>
 
