@@ -357,6 +357,8 @@ class StudentWithTicketPage extends React.Component {
 			}
 		}
 
+		var slogan = '開始一場屬於你的大冒險，透過這趟旅程你將獲得證明，冒險不再只是自己的想像，而是你創造的親身體驗。';
+
 		return (
 			<div className='main-page'>
 				<Header />
@@ -480,17 +482,17 @@ class StudentWithTicketPage extends React.Component {
 							</div>
 							<div className="computer only ten wide column">
 								<div className="ui very padded basic segment">
-									<h1 style={ticketStyle}>LiMaGo 提供 100 個以上的獨特早鳥票，只要登入我們的會員，你就有機會馬上進行一趟美妙的旅程。</h1>
+									<h1 style={ticketStyle}>{slogan}</h1>
 								</div>
 							</div>
 							<div className="tablet only ten wide column">
 								<div className="ui padded basic segment">
-									<h3 style={ticketStyle}>LiMaGo 提供 100 個以上的獨特早鳥票，只要登入我們的會員，你就有機會馬上進行一趟美妙的旅程。</h3>
+									<h3 style={ticketStyle}>{slogan}</h3>
 								</div>
 							</div>
 							<div className="mobile only ten wide column">
 								<div className="ui padded basic segment">
-									<h3>LiMaGo 提供 100 個以上的獨特早鳥票，只要登入我們的會員，你就有機會馬上進行一趟美妙的旅程。</h3>
+									<h3>{slogan}</h3>
 								</div>
 							</div>
 						</div>
@@ -568,6 +570,13 @@ class StudentWithTicketPage extends React.Component {
 											<input type='password' ref='confirm_password' name='confirm_password' onChange={this.saveEditTime} />
 										</div>
 									</div>
+
+									<h4 style={ticketStyle}>附註說明:</h4>
+									<p style={ticketStyle}>1. 當您完成電子郵件登記，將會不定期的收到隨機旅遊所發出的活動邀請函。</p>
+									<p style={ticketStyle}>2. 每個活動邀請函將包含一個隨機旅遊地點，您可報名參加或選擇忽略並等待下一次的邀請函。</p>
+									<p style={ticketStyle}>3. 若您選擇報名參加，將有 24 小時時間準備，然後即刻搭機出發！</p>
+									<p style={ticketStyle}>4. 我們將提供旅遊全程網際網路連線，以確保您可以隨時利用網路進行旅遊資訊查詢或求助。</p>
+									<p style={ticketStyle}>5. 在旅遊目的地點，您將由自己處理交通與食宿。但若遭遇困境或危險，我們會有全天無休的專員，提供您全方位的旅遊協助與緊急救援服務。</p>
 
 									<div className='field'>
 										<button className="big ui inverted button center-block" style={joinBtnStyle} onClick={this.signUp}>
