@@ -357,7 +357,7 @@ class StudentWithTicketPage extends React.Component {
 			}
 		}
 
-		var slogan = '開始一場屬於你的大冒險，透過這趟旅程你將獲得證明，冒險不再只是自己的想像，而是你創造的親身體驗。';
+		var slogan = '沒什麼能真的阻止你參加這趟旅程，讓冒險不再只是你的想像，而是你貨真價實的親身體驗。';
 
 		return (
 			<div className='main-page'>
@@ -413,10 +413,15 @@ class StudentWithTicketPage extends React.Component {
 				<section>
 					<div className="ui stackable grid center aligned container">
 						<div className="computer only tablet only one column row">
-							<h1 style={sloganScreenStyle}>重新發現旅遊的重要</h1>
+							<h1 style={sloganScreenStyle}>開始一場<br />屬於你的大冒險</h1>
 						</div>
 						<div className="mobile only one column row">
-							<h1 style={sloganStyle}>重新發現旅遊的重要</h1>
+							<h1 style={sloganStyle}>開始一場<br />屬於你的大冒險</h1>
+						</div>
+						<div className="mobile only ten wide column">
+							<div className="ui padded basic segment">
+								<h3>{slogan}</h3>
+							</div>
 						</div>
 					</div>
 
@@ -482,17 +487,12 @@ class StudentWithTicketPage extends React.Component {
 							</div>
 							<div className="computer only ten wide column">
 								<div className="ui very padded basic segment">
-									<h1 style={ticketStyle}>{slogan}</h1>
+									<h1><br />{slogan}</h1>
 								</div>
 							</div>
 							<div className="tablet only ten wide column">
 								<div className="ui padded basic segment">
-									<h3 style={ticketStyle}>{slogan}</h3>
-								</div>
-							</div>
-							<div className="mobile only ten wide column">
-								<div className="ui padded basic segment">
-									<h3>{slogan}</h3>
+									<h3><br />{slogan}</h3>
 								</div>
 							</div>
 						</div>
