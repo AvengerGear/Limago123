@@ -51,7 +51,7 @@ class LandingPage extends React.Component {
 
 	onChange = () => {
 		var user = this.flux.getState('User');
-		
+
 		// No need to sign in if logined already
 		if (user.logined) {
 			if (this.props.location.query.target)
@@ -175,28 +175,47 @@ class LandingPage extends React.Component {
 			);
 		}
 
+		var inputEmail = (
+			<div className="ui fluid icon input">
+				<input type="email" ref='email' placeholder="請輸入E-mail" onChange={this.closeAlert} />
+			</div>
+		);
+
 		return (
 			<div className='main-page'>
 				<Header ref='header' />
 				<div className={'ui basic center aligned segment landing-page-header'} style={sectionStyle}>
 					<h2 className="head-title">很想去</h2>
 					<br />
-					<h1 className="head-sub-title">東京？巴黎？紐約？莫斯科？</h1>
+					<div className="ui one column centered grid">
+						<div className="computer only ten wide column">
+							<h1 className="head-sub-title">東京？巴黎？紐約？莫斯科？</h1>
+						</div>
+						<div className="tablet only eleven wide column">
+							<h1 className="head-sub-title">東京？巴黎？紐約？莫斯科？</h1>
+						</div>
+						<div className="mobile only fifteen wide column">
+							<h1 className="head-mobile-sub-title">東京？巴黎？紐約？莫斯科？</h1>
+						</div>
+					</div>
+
 					<div style={ breakInput }></div>
-					<div className="ui stackable three column grid">
-						<div className="three wide column"></div>
-						<div className="ten wide column">
-									{ message }
-							<div className="ui stackable three column grid">
-								<div className="column"></div>
-								<div className="column">
-									<div className="ui fluid icon input">
-										<input type="email" ref='email' placeholder="請輸入E-mail" onChange={this.closeAlert} />
-									</div>
-									<p className="text-left input-tag color-gray">E-mail</p>
-								</div>
-								<div className="column"></div>
-							</div>
+
+					<div className="ui one column centered grid">
+						<div className="computer only six wide column">
+							{inputEmail}
+							{ message }
+							<p className="text-left input-tag color-gray">E-mail</p>
+						</div>
+						<div className="tablet only eight wide column">
+							{inputEmail}
+							{ message }
+							<p className="text-left input-tag color-gray">E-mail</p>
+						</div>
+						<div className="mobile only fourteen wide column">
+							{inputEmail}
+							{ message }
+							<p className="text-left input-tag color-gray">E-mail</p>
 						</div>
 					</div>
 
@@ -204,16 +223,32 @@ class LandingPage extends React.Component {
 						加入 Limago
 					</button>
 
-					<div style={ breakItems }></div>
-					<div className="ui stackable three column grid">
-						<div className="column"></div>
-						<div className="column">
+					<div className='ui hidden divider'></div>
+					<div className='ui hidden divider'></div>
+					<div className='ui hidden divider'></div>
+					<div className='ui hidden divider'></div>
+					<div className='ui hidden divider'></div>
+					<div className='ui hidden divider'></div>
+
+					<div className="ui one column centered grid">
+						<div className="computer only six wide column">
 							<div className="ui stacked segment">
 								<h4 className="ui header">對隨機旅遊感興趣嗎？</h4>
 								<p>請留下您的 E-mail，Limago 將提供最新的資訊給您。</p>
 							</div>
 						</div>
-						<div className="column"></div>
+						<div className="tablet only eight wide column">
+							<div className="ui stacked segment">
+								<h4 className="ui header">對隨機旅遊感興趣嗎？</h4>
+								<p>請留下您的 E-mail，Limago 將提供最新的資訊給您。</p>
+							</div>
+						</div>
+						<div className="mobile only fourteen wide column">
+							<div className="ui stacked segment">
+								<h4 className="ui header">對隨機旅遊感興趣嗎？</h4>
+								<p>請留下您的 E-mail，Limago 將提供最新的資訊給您。</p>
+							</div>
+						</div>
 					</div>
 				</div>
 				<Footer />
