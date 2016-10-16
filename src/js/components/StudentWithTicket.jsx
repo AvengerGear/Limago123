@@ -357,7 +357,7 @@ class StudentWithTicketPage extends React.Component {
 			}
 		}
 
-		var slogan = '沒什麼能真的阻止你參加這趟旅程，讓冒險不再只是你的想像，而是你貨真價實的親身體驗。';
+		var slogan = <span>沒什麼能真的阻止你參加這趟旅程<br />讓冒險不再只是你的想像<br />而是你貨真價實的親身體驗</span>;
 
 		return (
 			<div className='main-page'>
@@ -385,8 +385,8 @@ class StudentWithTicketPage extends React.Component {
 								</div>
 							</div>
 
-							<div className="mobile only ten wide column">
-								<div className="ui very padded center aligned segment">
+							<div className="mobile only seven wide column">
+								<div className="ui padded center aligned segment">
 									<h1 className="head-sub-title">隨機<br />旅遊</h1>
 									<div className="ui basic center aligned segment">
 										<h3 style={limaogStyle}>Limago</h3>
@@ -398,7 +398,7 @@ class StudentWithTicketPage extends React.Component {
 
 						<div className="ui one column centered grid">
 							<div className="ten wide column">
-								<button className={'large ui inverted button join'} onClick={this.joinUs} style={joinBtnStyle}>
+								<button className={'large ui inverted button join'} onClick={this.joinUs}>
 									加入 Limago
 								</button>
 							</div>
