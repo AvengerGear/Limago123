@@ -283,7 +283,7 @@ class EmployeeWithTicketPage extends React.Component {
 			marginTop: '8px'
 		};
 		var sloganStyle = {
-			fontSize: '32px'
+			fontSize: '28px'
 		};
 		var sloganScreenStyle = {
 			fontSize: '44px'
@@ -357,7 +357,7 @@ class EmployeeWithTicketPage extends React.Component {
 			}
 		}
 
-		var slogan = '你將跳脫一成不變的生活，因為這趟旅程的每一刻都是未知，每一刻都值得你去期待。';
+		var slogan = <span>你將跳脫一成不變的生活<br />因為這趟旅程的每一刻都是未知<br />每一刻都值得你去期待</span>;
 
 		return (
 			<div className='main-page'>
@@ -385,8 +385,8 @@ class EmployeeWithTicketPage extends React.Component {
 								</div>
 							</div>
 
-							<div className="mobile only ten wide column">
-								<div className="ui very padded center aligned segment">
+							<div className="mobile only seven wide column">
+								<div className="ui padded center aligned segment">
 									<h1 className="head-sub-title">隨機<br />旅遊</h1>
 									<div className="ui basic center aligned segment">
 										<h3 style={limaogStyle}>Limago</h3>
@@ -398,7 +398,7 @@ class EmployeeWithTicketPage extends React.Component {
 
 						<div className="ui one column centered grid">
 							<div className="ten wide column">
-								<button className={'large ui button join'} onClick={this.joinUs} style={joinBtnStyle}>
+								<button className={'large ui button join'} onClick={this.joinUs}>
 									加入 Limago
 								</button>
 							</div>
@@ -419,8 +419,8 @@ class EmployeeWithTicketPage extends React.Component {
 							<h1 style={sloganStyle}>開始一場<br />無限可能的旅程</h1>
 						</div>
 						<div className="mobile only ten wide column">
-							<div className="ui padded basic segment">
-								<h3>{slogan}</h3>
+							<div className="ui basic segment">
+								<h4>{slogan}</h4>
 							</div>
 						</div>
 					</div>
