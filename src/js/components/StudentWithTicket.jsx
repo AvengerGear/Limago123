@@ -283,7 +283,7 @@ class StudentWithTicketPage extends React.Component {
 			marginTop: '8px'
 		};
 		var sloganStyle = {
-			fontSize: '32px'
+			fontSize: '28px'
 		};
 		var sloganScreenStyle = {
 			fontSize: '44px'
@@ -357,7 +357,7 @@ class StudentWithTicketPage extends React.Component {
 			}
 		}
 
-		var slogan = <span>沒什麼能真的阻止你參加這趟旅程<br />讓冒險不再只是你的想像<br />而是你貨真價實的親身體驗</span>;
+			var slogan = <span>沒什麼能真的阻止你參加這趟旅程<br />讓冒險不再只是你的想像<br />而是你貨真價實的親身體驗</span>;
 
 		return (
 			<div className='main-page'>
@@ -419,8 +419,8 @@ class StudentWithTicketPage extends React.Component {
 							<h1 style={sloganStyle}>開始一場<br />屬於你的大冒險</h1>
 						</div>
 						<div className="mobile only ten wide column">
-							<div className="ui padded basic segment">
-								<h3>{slogan}</h3>
+							<div className="ui basic segment">
+								<h4>{slogan}</h4>
 							</div>
 						</div>
 					</div>
