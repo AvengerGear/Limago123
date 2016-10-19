@@ -398,7 +398,7 @@ class StudentWithTicketPage extends React.Component {
 
 						<div className="ui one column centered grid">
 							<div className="ten wide column">
-								<button className={'large ui inverted button join'} onClick={this.joinUs}>
+								<button className={'large ui red button join'} onClick={this.joinUs}>
 									加入 Limago
 								</button>
 							</div>
@@ -446,10 +446,20 @@ class StudentWithTicketPage extends React.Component {
 						</div>
 						<div className="mobile only fifteen wide column">
 							<div className="ui three column grid">
-								<div className="three column centered row">
-									<div className="column"><h4><i className="circle icon" style={dottedStyle}></i> 隨機出發</h4></div>
-									<div className="column"><h4><i className="circle icon" style={dottedStyle}></i> 隨機地點</h4></div>
-									<div className="column"><h4><i className="circle icon" style={dottedStyle}></i> 隨機同行</h4></div>
+								<div className="one column centered row">
+									<div className="column">
+										<div className="ui small horizontal list">
+											<div className="item">
+												<i className="circle icon" style={dottedStyle}></i> 隨機出發
+											</div>
+											<div className="item">
+												<i className="circle icon" style={dottedStyle}></i> 隨機地點
+											</div>
+											<div className="item">
+												<i className="circle icon" style={dottedStyle}></i> 隨機同行
+											</div>
+										</div>
+									</div>
 								</div>
 							</div>
 						</div>
@@ -458,10 +468,9 @@ class StudentWithTicketPage extends React.Component {
 
 				<div className='ui hidden divider'></div>
 				<div className='ui hidden divider'></div>
-				<div className='ui hidden divider'></div>
 
 				<section className="ui basic segment container">
-					<div className="ui stackable centered grid">
+					<div className="ui stackable centered grid computer only tablet only">
 						<div className="two column row">
 							<div className="ten wide column">
 								<img className="ui fluid image" src={partner} alt="" />
@@ -504,6 +513,23 @@ class StudentWithTicketPage extends React.Component {
 								<img className="ui fluid image" src={bike} alt="" />
 							</div>
 							<div className="five wide column">
+								<img className="ui fluid image" src={wheel} alt="" />
+							</div>
+						</div>
+					</div>
+
+					<div className="ui grid mobile only">
+						<div className="doubling eight column row">
+							<div className="column">
+								<img className="ui fluid image" src={japan} alt="" />
+							</div>
+							<div className="column">
+								<img className="ui fluid image" src={camera} alt="" />
+							</div>
+							<div className="column">
+								<img className="ui fluid image" src={diving} alt="" />
+							</div>
+							<div className="column">
 								<img className="ui fluid image" src={wheel} alt="" />
 							</div>
 						</div>
