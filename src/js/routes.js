@@ -43,6 +43,10 @@ module.exports = [
 		}
 	},
 	{
+		path: '/demoThree/:type',
+		handler: require('./components/DemoThree.jsx')
+	},
+	{
 		path: '/student/:qrcode',
 		handler: StudentWithTicket
 	},

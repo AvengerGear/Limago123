@@ -87,19 +87,19 @@ class StudentWithTicketPage extends React.Component {
 	}
 
 	componentDidMount = () => {
-		var url = window.location.pathname;
-		var urlArrs = url.split('/');
+	// 	var url = window.location.pathname;
+	// 	var urlArrs = url.split('/');
 		var tickets = this.flux.getState('Tickets').data;
 		var isQrcode = false;
-		var currentTime = new Date();
-		var state = {
-			type: urlArrs[1],
-			qrcode: urlArrs[2],
-			timer_start: currentTime
-		};
+	// 	var currentTime = new Date();
+	// 	var state = {
+	// 		type: urlArrs[1],
+	// 		qrcode: urlArrs[2],
+	// 		timer_start: currentTime
+	// 	};
 
 		tickets.forEach(ticket => {
-			if (urlArrs[2] == ticket.qrcode) {
+			if (this.props.qrcode == ticket.qrcode) {
 				isQrcode = true;
 			}
 		});
@@ -109,16 +109,17 @@ class StudentWithTicketPage extends React.Component {
 			return;
 		}
 
-		this.flux.dispatch('action.User.saveVisitPage',
-			state.type, state.qrcode
-		);
-
-		this.setState(state);
+	// 	this.flux.dispatch('action.User.saveVisitPage',
+	// 		state.type, state.qrcode
+	// 	);
+	//
+	// 	this.setState(state);
 	}
 
 	signUp = () => {
-		var type = this.state.type;
-		var qrcode = this.state.qrcode;
+		// var type = this.state.type;
+		var type = 'student';
+		var qrcode = this.props.qrcode;
 		var email = this.refs.email.value.trim();
 		var phone = this.refs.phone.value.trim();
 		var name = this.refs.name.value.trim();

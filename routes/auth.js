@@ -7,6 +7,7 @@ var RestPack = require('restpack');
 var Member = require('../lib/member');
 var Emails = require('../lib/emails');
 var Tickets = require('../lib/tickets');
+var typeCounter = require('../lib/page_count');
 var Visits = require('../lib/visits');
 var Passport = require('../lib/passport');
 var settings = require('../lib/config.js');
@@ -468,5 +469,56 @@ router.get('/auth/:serviceName/callback', function *() {
 		console.log(e);
 		ctx.status = 500;
 		return;
+	}
+});
+
+router.get('/api/demoThree/getTypeCount', function *() {
+	var q = {};
+	try {
+		q = JSON.parse(this.request.query.q);
+	} catch(e) {}
+
+	var conditions = {};
+	if (q.type) {
+		conditions.type = q.type;
+	}
+
+	// Fetching a item with specific condition
+	var typeCount = yield typeCounter.get(conditions.type, [
+		'page_type',
+		'counter'
+	], {});
+
+	if (typeCount == undefined) {
+		try {
+			// Create a new role
+			var typeCount = yield typeCounter.create({
+				page_type: conditions.type
+			});
+		} catch(e) {
+			console.log(e);
+		}
+
+		try {
+			var count = yield typeCounter.update(conditions.type, 0);
+		} catch(e) {
+			console.log(e);
+		}
+
+		this.body = {
+			success: true,
+			typeCount: 0
+		};
+	}else {
+		try {
+			var count = yield typeCounter.update(conditions.type, typeCount.counter);
+		} catch(e) {
+			console.log(e);
+		}
+
+		this.body = {
+			success: true,
+			typeCount: typeCount
+		};
 	}
 });

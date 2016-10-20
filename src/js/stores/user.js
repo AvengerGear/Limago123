@@ -11,7 +11,8 @@ export default function *() {
 		logined: false,
 		permissions: {},
 		login_time: null,
-		avatar_hash: null
+		avatar_hash: null,
+		typeCounter: null
 	});
 
 	this.on('store.User.syncProfile', function *() {
@@ -264,7 +265,7 @@ export default function *() {
 				store.logined = false;
 				break;
 			}
-			
+
 			this.dispatch('state.User');
 		} catch(e) {
 
@@ -396,6 +397,37 @@ export default function *() {
 		var store = this.getState('User');
 
 		store.status = 'reset';
+
+		this.dispatch('state.User');
+	});
+
+	this.on('store.User.demoThree.getTypeCount', function *(type) {
+		var store = this.getState('User');
+
+		var conditions = {};
+		conditions.type = type;
+
+		try {
+			var res = yield this.request
+				.get('/api/demoThree/getTypeCount')
+				.query({
+					q: JSON.stringify(conditions)
+				});
+
+			if (res.status != 200) {
+				return;
+			}
+
+			if (res.body.success) {
+				// Update store
+				var store = this.getState('User');
+				store.typeCounter = res.body.typeCount;
+			}
+
+			this.dispatch('state.User');
+		} catch(e) {
+			console.log(e);
+		}
 
 		this.dispatch('state.User');
 	});

@@ -17,7 +17,7 @@ class ChangePassword extends React.Component {
 		if (!state.logined) {
 			this.history.pushState(null, '/');
 		}
-		
+
 		this.state = {
 			readyToUpdate: false,
 			busy: false,
