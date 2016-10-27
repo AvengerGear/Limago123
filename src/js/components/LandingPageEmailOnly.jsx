@@ -49,6 +49,12 @@ class LandingPage extends React.Component {
 		this.flux.off('state.User', this.onChange);
 	}
 
+	componentDidMount = () => {
+		this.flux.dispatch('action.User.saveVisitPage',
+			'langingpage', 'd7b591c3b4211daa'
+		);
+	}
+
 	onChange = () => {
 		var user = this.flux.getState('User');
 

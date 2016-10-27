@@ -65,7 +65,7 @@ class LandingPage extends React.Component {
 
 	copyToSignUp = () => {
 		var user = this.flux.getState('User');
-		
+
 		// No need to sign in if logined already
 		if (!user.logined) {
 			this.history.pushState(null, '/signup');
@@ -95,7 +95,7 @@ class LandingPage extends React.Component {
 				<section style={ sectionStyle } className="limago" ref='app_section'>
 					<div className={'ui basic center aligned segment'}>
 							<h1>
-								Limago 
+								Limago
 								<span className="step-number color-white bg-color-brown">1</span>
 								<span className="step-number color-white bg-color-orange">2</span>
 								<span className="step-number color-white bg-color-green">3</span>
@@ -211,7 +211,7 @@ class LandingPage extends React.Component {
 							</div>
 						</div>
 					</div>
-				
+
 					<div className="ui stackable two column grid top-row">
 						<div className="six wide column"></div>
 						<div className="four wide column">

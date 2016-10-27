@@ -44,16 +44,44 @@ class DemoThree extends React.Component {
 	};
 
 	render() {
-		var content = <StudentWithTicket qrcode="947b282a978de2ae" />;
-		if (this.state.typeCounter) {
-			if(this.state.typeCounter.counter % 3 == 0) {
-				content = <StudentWithTicket qrcode="947b282a978de2ae" />;
-			}else if (this.state.typeCounter.counter % 3 == 1) {
-				content = <EmployeeWithTicket qrcode="872cc32b89ab3824" />;
-			}else if (this.state.typeCounter.counter % 3 == 2) {
-				content = <RetiredWithTicket qrcode="dedb266d9c1e0347" />;
+		var content;
+		if (this.state.type == 'student') {
+			content = <StudentWithTicket type={this.state.type} qrcode="947b282a978de2ae" />;
+			if (this.state.typeCounter) {
+				if(this.state.typeCounter.counter % 3 == 0) {
+					content = <StudentWithTicket type={this.state.type} qrcode="947b282a978de2ae" />;
+				}else if (this.state.typeCounter.counter % 3 == 1) {
+					content = <EmployeeWithTicket type={this.state.type} qrcode="872cc32b89ab3824" />;
+				}else if (this.state.typeCounter.counter % 3 == 2) {
+					content = <RetiredWithTicket type={this.state.type} qrcode="dedb266d9c1e0347" />;
+				}
 			}
 		}
+		if (this.state.type == 'employee') {
+			content = <EmployeeWithTicket type={this.state.type} qrcode="872cc32b89ab3824" />;
+			if (this.state.typeCounter) {
+				if(this.state.typeCounter.counter % 3 == 0) {
+					content = <EmployeeWithTicket type={this.state.type} qrcode="872cc32b89ab3824" />;
+				}else if (this.state.typeCounter.counter % 3 == 1) {
+					content = <StudentWithTicket type={this.state.type} qrcode="947b282a978de2ae" />;
+				}else if (this.state.typeCounter.counter % 3 == 2) {
+					content = <RetiredWithTicket type={this.state.type} qrcode="dedb266d9c1e0347" />;
+				}
+			}
+		}
+		if (this.state.type == 'retired') {
+			content = <RetiredWithTicket type={this.state.type} qrcode="dedb266d9c1e0347" />;
+			if (this.state.typeCounter) {
+				if(this.state.typeCounter.counter % 3 == 0) {
+					content = <RetiredWithTicket type={this.state.type} qrcode="dedb266d9c1e0347" />;
+				}else if (this.state.typeCounter.counter % 3 == 1) {
+					content = <EmployeeWithTicket type={this.state.type} qrcode="872cc32b89ab3824" />;
+				}else if (this.state.typeCounter.counter % 3 == 2) {
+					content = <StudentWithTicket type={this.state.type} qrcode="947b282a978de2ae" />;
+				}
+			}
+		}
+
 		return (
 			<div>
 				{content}

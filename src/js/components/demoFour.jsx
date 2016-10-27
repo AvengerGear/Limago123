@@ -1,58 +1,67 @@
 import React from 'react';
+import { Link } from 'react-router';
 import ReactDOM from 'react-dom';
-import I18n from 'Extension/I18n.jsx';
-import moment from 'moment';
-
-// Decorators
-import { router, flux, i18n } from 'Decorator';
-
-// Components
 import Header from './Header.jsx';
 import Footer from './Footer.jsx';
+import I18n from 'Extension/I18n.jsx';
 
-//images
-import ticket from 'Source/images/ticket.jpg';
-import surf from 'Source/images/student-surf.jpg';
-import england from 'Source/images/worker-england.jpg';
-import bike from 'Source/images/student-bike.jpg';
-import partner from 'Source/images/student-partner.jpg';
-import bus from 'Source/images/worker-bus.jpg';
-import camera from 'Source/images/student-camera.jpg';
-import japan from 'Source/images/worker-japan.jpg';
-import wheel from 'Source/images/student-wheel.jpg';
-import diving from 'Source/images/worker-diving.jpg';
+// Decorators
+import { flux, router, preAction, wait } from 'Decorator';
 
 // icons
+import xIcon from 'Source/images/x-icon-white.png';
+import xIconBrown from 'Source/images/x-icon-brown.png';
+import xIconOrange from 'Source/images/x-icon-orange.png';
+import xIconGreen from 'Source/images/x-icon-green.png';
+
+import peopleIcon from 'Source/images/people-icon-2.png';
+import ticketIcon from 'Source/images/ticket-icon-5.png';
+import timeIcon from 'Source/images/time-icon-8.png';
+
 import arrow from 'Source/images/arrow.png';
 import pen from 'Source/images/pen.png';
-import sakulaWhite from 'Source/images/sakula-white.png';
-import email from 'Source/images/email-black.png';
-import lantern from 'Source/images/lantern.png';
 
 var sectionStyle = {
 	paddingTop: '40px',
 	paddingBottom: '50px'
 };
-
-var joinBtnStyle = {
-	marginTop: '50px',
+var peopleColor =  {
+	backgroundColor: '#BCA27D'
+};
+var breakInput = {
+	marginTop: '100px'
+};
+var breakItems = {
+	marginTop: '150px'
 };
 
-var stepStyle = {
-	marginTop: '30px',
-	paddingLeft: '5%'
-};
-
-var lableStyle = {
-	color: 'white',
-	textAlign: 'left'
-};
+class Notes extends React.Component {
+	render() {
+		return (
+			<div className="ui stackable two column grid">
+				<div className="three wide column"></div>
+				<div className="ten wide column">
+					<p className="text-left textarea-tag color-white">最想去哪裡旅行 ?</p>
+					<div className="ui fluid icon input">
+						<textarea rows="6" cols="250"></textarea>
+					</div>
+				</div>
+			</div>
+		);
+	}
+}
 
 @router
 @flux
-class StudentWithTicketPage extends React.Component {
+@preAction((handle) => {
+	handle.doAction('User.demoThree.getTypeCount', handle.props.params.type);
+})
+@wait('User')
+class LandingPage extends React.Component {
 	constructor(props, context) {
 		super(props, context);
+
+		var state = context.flux.getState('User');
 
 		this.state = {
 			error: false,
@@ -74,17 +83,13 @@ class StudentWithTicketPage extends React.Component {
 			timer_edit: null,
 			isEdit: false,
 			timer_send: null,
-			type: props.type,
-			qrcode: props.qrcode
+			qrcode: '1ef902f0099a68c7',
+			type: props.params.type,
+			typeCounter: state.typeCounter,
+			people: '1',
+			time: '3'
 		};
 	}
-
-	componentWillReceiveProps = (nextProps) => {
-		this.setState({
-			type: nextProps.type,
-			qrcode: nextProps.qrcode
-		});
-	};
 
 	componentWillMount = () => {
 		this.flux.on('state.User', this.flux.bindListener(this.onChange));
@@ -100,10 +105,30 @@ class StudentWithTicketPage extends React.Component {
 		var tickets = this.flux.getState('Tickets').data;
 		var isQrcode = false;
 		var currentTime = new Date();
+
+		var people = Math.floor(Math.random() * 3) + 1;
+		if (people == 1) {
+			people = '1';
+		}else if (people == 2) {
+			people = '2';
+		}else if (people == 3) {
+			people = 'n';
+		}
+
+		var time = Math.floor(Math.random() * 3) + 1;
+		if (time == 1) {
+			time = '3';
+		}else if (time == 2) {
+			time = '8';
+		}else if (time == 3) {
+			time = '24';
+		}
+
 		var state = {
-			type: this.props.type,
-			qrcode: this.props.qrcode,
-			timer_start: currentTime
+			qrcode: people + ',' + time,
+			timer_start: currentTime,
+			people: people,
+			time: time
 		};
 
 		tickets.forEach(ticket => {
@@ -218,20 +243,6 @@ class StudentWithTicketPage extends React.Component {
 		}, 400);
 	}
 
-	showTicket = () => {
-		$('#show-ticket').toggleClass('hide');
-	}
-
-	stepStatus = () => {
-		var status = {step1_status: 'active'};
-
-		if (this.refs.number.value.length == 16) {
-			status.step1_status = 'completed';
-		}
-
-		this.setState(status);
-	}
-
 	saveEditTime = () => {
 		if (!this.state.isEdit) {
 			var currentTime = new Date();
@@ -255,7 +266,8 @@ class StudentWithTicketPage extends React.Component {
 		var userData = {
 			'name': user.name,
 			'phone': user.phone,
-			'email': user.email
+			'email': user.email,
+			'typeCounter': user.typeCounter
 		}
 
 		this.setState(userData);
@@ -281,32 +293,20 @@ class StudentWithTicketPage extends React.Component {
 	}
 
 	render() {
-		var limaogStyle = {
-			color: '#cc3300',
-			marginBottom: 0,
-			paddingBottom: '8px',
-			borderBottom: '2px solid #cc3300'
-		};
-		var travelStyle = {
-			marginTop: '8px'
-		};
-		var sloganStyle = {
-			fontSize: '28px'
-		};
-		var sloganScreenStyle = {
-			fontSize: '44px'
-		};
-		var dottedStyle = {
-			color: '#cc3300',
-			fontSize: '10px',
-			verticalAlign: 'top'
-		};
-		var redLineStyle = {
-			backgroundColor: '#cc3300',
-			minHeight: '100px'
-		};
+		var includeIconBrown = <img className="ui mini image include" src={ xIconBrown } />;
+		var includeIconOrange = <img className="ui mini image include" src={ xIconOrange } />;
+		var includeIconGreen = <img className="ui mini image include" src={ xIconGreen } />;
+		var includeIcon = <img className="ui mini image include" src={ xIcon } />;
+
 		var ticketStyle = {
 			textAlign: 'left'
+		};
+		var lableStyle = {
+			color: 'white',
+			textAlign: 'left'
+		};
+		var joinBtnStyle = {
+			marginTop: '50px',
 		};
 
 		var phoneClasses = 'required field';
@@ -365,194 +365,138 @@ class StudentWithTicketPage extends React.Component {
 			}
 		}
 
-			var slogan = <span>沒什麼能真的阻止你參加這趟旅程<br />讓冒險不再只是你的想像<br />而是你貨真價實的親身體驗</span>;
+		var people = this.state.people;
+		if (this.state.people == 'n') {
+			people = '多';
+		}
 
 		return (
 			<div className='main-page'>
-				<Header />
-				<section>
-					<div className={'ui basic center aligned segment landing-page-student'}>
-						<div className="ui one column centered grid">
-							<div className="computer only three wide column">
-								<div className="ui very padded center aligned segment">
-									<h1 className="head-sub-title">隨機<br />旅遊</h1>
-									<div className="ui basic center aligned segment">
-										<h2 style={limaogStyle}>Limago</h2>
-										<h3 style={travelStyle}>立馬出發</h3>
-									</div>
-								</div>
-							</div>
+				<Header ref='header' />
 
-							<div className="tablet only seven wide column">
-								<div className="ui very padded center aligned segment">
-									<h1 className="head-sub-title">隨機<br />旅遊</h1>
-									<div className="ui basic center aligned segment">
-										<h2 style={limaogStyle}>Limago</h2>
-										<h3 style={travelStyle}>立馬出發</h3>
-									</div>
-								</div>
-							</div>
+				<div className={'ui basic center aligned segment landing-page-demo-four-header'}>
+					<h2 className="head-title">很想去</h2>
+					<br />
+					<h1 className="head-sub-title">東京？巴黎？紐約？莫斯科？</h1>
+					<div style={ breakInput }></div>
 
-							<div className="mobile only seven wide column">
-								<div className="ui padded center aligned segment">
-									<h1 className="head-sub-title">隨機<br />旅遊</h1>
-									<div className="ui basic center aligned segment">
-										<h3 style={limaogStyle}>Limago</h3>
-										<h5 style={travelStyle}>立馬出發</h5>
-									</div>
-								</div>
-							</div>
+					<button className={'huge ui orange button join'} onClick={this.joinUs}>
+						加入 Limago
+					</button>
+
+					<div style={ breakItems }></div>
+					<div className="ui stackable three column grid">
+						<div className="column item">
+							<img className="ui middle aligned tiny image" src={peopleIcon} />
+							<span className="color-white item-title">人數</span>
 						</div>
-
-						<div className="ui one column centered grid">
-							<div className="ten wide column">
-								<button className={'large ui red button join'} onClick={this.joinUs}>
-									加入 Limago
-								</button>
-							</div>
+						<div className="column item center-item">
+							<img className="ui middle aligned tiny image" src={ticketIcon} />
+							<span className="color-white item-title"> 機票</span>
 						</div>
+						<div className="column item">
+							<img className="ui middle aligned tiny image" src={timeIcon} />
+							<span className="color-white item-title"> 時間</span>
+						</div>
+					</div>
+				</div>
+
+				<section style={ sectionStyle } className="limago">
+					<div className={'ui basic center aligned segment'}>
+							<h1>
+								Limago
+								<span className="step-number color-white bg-color-brown">1</span>
+								<span className="step-number color-white bg-color-orange">2</span>
+								<span className="step-number color-white bg-color-green">3</span>
+							</h1>
 					</div>
 				</section>
 
-				<div className='ui hidden divider'></div>
-				<div className='ui hidden divider'></div>
-				<div className='ui hidden divider'></div>
-
-				<section>
-					<div className="ui stackable grid center aligned container">
-						<div className="computer only tablet only one column row">
-							<h1 style={sloganScreenStyle}>開始一場<br />屬於你的大冒險</h1>
-						</div>
-						<div className="mobile only one column row">
-							<h1 style={sloganStyle}>開始一場<br />屬於你的大冒險</h1>
-						</div>
-						<div className="mobile only ten wide column">
-							<div className="ui basic segment">
-								<h4>{slogan}</h4>
+				<section className="section-selects">
+					<div className="ui stackable two column grid limago-select">
+						<div className="five wide column people-section-icon">
+							<div className={'ui basic center aligned segment'}>
+								<img className="ui middle aligned tiny image section-text" src={ peopleIcon } /	>
+								<p className="color-white icon-tag">人數</p>
 							</div>
 						</div>
-					</div>
-
-					<div className="ui centered grid">
-						<div className="computer only four wide column">
-							<div className="ui three column grid">
-								<div className="three column centered row">
-									<div className="column"><h3><i className="circle icon" style={dottedStyle}></i> 隨機出發</h3></div>
-									<div className="column"><h3><i className="circle icon" style={dottedStyle}></i> 隨機地點</h3></div>
-									<div className="column"><h3><i className="circle icon" style={dottedStyle}></i> 隨機同行</h3></div>
-								</div>
-							</div>
-						</div>
-						<div className="tablet only ten wide column">
-							<div className="ui three column grid">
-								<div className="three column centered row">
-									<div className="column"><h3><i className="circle icon" style={dottedStyle}></i> 隨機出發</h3></div>
-									<div className="column"><h3><i className="circle icon" style={dottedStyle}></i> 隨機地點</h3></div>
-									<div className="column"><h3><i className="circle icon" style={dottedStyle}></i> 隨機同行</h3></div>
-								</div>
-							</div>
-						</div>
-						<div className="mobile only fifteen wide column">
-							<div className="ui three column grid">
-								<div className="one column centered row">
-									<div className="column">
-										<div className="ui small horizontal list">
-											<div className="item">
-												<i className="circle icon" style={dottedStyle}></i> 隨機出發
-											</div>
-											<div className="item">
-												<i className="circle icon" style={dottedStyle}></i> 隨機地點
-											</div>
-											<div className="item">
-												<i className="circle icon" style={dottedStyle}></i> 隨機同行
-											</div>
-										</div>
-									</div>
+						<div className="eleven wide column">
+							<div className="ui stackable sixteen column grid people-section">
+								<div className="three wide column"></div>
+								<div className="ten wide column section-text">
+									<h1 className="select-title color-brown text-right">
+										{people} <span className="color-black">人同行</span>
+									</h1>
+									<p className="text-right select-sub-title">你將有機會認識不一樣的朋友</p>
 								</div>
 							</div>
 						</div>
 					</div>
 				</section>
 
-				<div className='ui hidden divider'></div>
-				<div className='ui hidden divider'></div>
-
-				<section className="ui basic segment container">
-					<div className="ui stackable centered grid computer only tablet only">
-						<div className="two column row">
-							<div className="ten wide column">
-								<img className="ui fluid image" src={partner} alt="" />
-							</div>
-							<div className="five wide column">
-								<img className="ui fluid image" src={bus} alt="" />
-							</div>
-						</div>
-						<div className="three column row">
-							<div className="five wide column">
-								<img className="ui fluid image" src={england} alt="" />
-							</div>
-							<div className="five wide column">
-								<img className="ui fluid image" src={surf} alt="" />
-							</div>
-							<div className="five wide column">
-								<img className="ui fluid image" src={japan} alt="" />
-							</div>
-						</div>
-						<div className="two column row">
-							<div className="five wide column">
-								<img className="ui fluid image" src={camera} alt="" />
-							</div>
-							<div className="computer only ten wide column">
-								<div className="ui very padded basic segment">
-									<h1><br />{slogan}</h1>
-								</div>
-							</div>
-							<div className="tablet only ten wide column">
-								<div className="ui padded basic segment">
-									<h3><br />{slogan}</h3>
-								</div>
-							</div>
-						</div>
-						<div className="three column row">
-							<div className="five wide column">
-								<img className="ui fluid image" src={diving} alt="" />
-							</div>
-							<div className="five wide column">
-								<img className="ui fluid image" src={bike} alt="" />
-							</div>
-							<div className="five wide column">
-								<img className="ui fluid image" src={wheel} alt="" />
-							</div>
+				<section className="section-selects">
+					<div className="ui stackable two column grid limago-select flex">
+					<div className="mobile only five wide column ticket-section-icon">
+						<div className={'ui basic center aligned segment'}>
+							<img className="ui middle aligned tiny image section-text" src={ ticketIcon } /	>
+							<p className="color-white icon-tag">機票</p>
 						</div>
 					</div>
-
-					<div className="ui grid mobile only">
-						<div className="doubling eight column row">
-							<div className="column">
-								<img className="ui fluid image" src={japan} alt="" />
+						<div className="eleven wide column">
+							<div className="ui stackable sixteen column grid ticket-section">
+								<div className="three wide column"></div>
+								<div className="ten wide column section-text">
+									<h1 className="select-title color-orange text-right">
+										{ 5 } <span className="color-black">折機票</span>
+									</h1>
+									<p className="text-right select-sub-title">同時享有你意想不到的折扣機票</p>
+								</div>
 							</div>
-							<div className="column">
-								<img className="ui fluid image" src={camera} alt="" />
-							</div>
-							<div className="column">
-								<img className="ui fluid image" src={diving} alt="" />
-							</div>
-							<div className="column">
-								<img className="ui fluid image" src={wheel} alt="" />
+						</div>
+						<div className="computer only tablet only five wide column ticket-section-icon">
+							<div className={'ui basic center aligned segment'}>
+								<img className="ui middle aligned tiny image section-text" src={ ticketIcon } /	>
+								<p className="color-white icon-tag">機票</p>
 							</div>
 						</div>
 					</div>
 				</section>
 
-				<section>
-					<div className={'ui basic center aligned segment landing-page-package'}>
-						<div className="ui one column centered grid">
-							<div className="ten wide column">
-								<h1>準備好行李了嗎？</h1>
+				<section className="section-selects">
+					<div className="ui stackable two column grid limago-select">
+						<div className="five wide column time-section-icon">
+							<div className={'ui basic center aligned segment'}>
+								<img className="ui middle aligned tiny image section-text" src={ timeIcon } /	>
+								<p className="color-white icon-tag">時間</p>
+							</div>
+						</div>
+						<div className="eleven wide column time-section">
+							<div className="ui stackable sixteen column grid">
+								<div className="thirteen wide column section-text">
+									<h1 className="select-title color-green text-right">
+										{this.state.time} <span className="color-black">小時內出發</span>
+									</h1>
+									<p className="text-right select-sub-title">心動了嗎？那就馬上收拾你的行李吧！</p>
+								</div>
 							</div>
 						</div>
 					</div>
 				</section>
+
+				<div className={'ui basic center aligned segment'}>
+					<div className="ui stackable three column grid">
+						<div className="four wide column"></div>
+						<div className="seven wide column">
+							<h2 className="limago-description">
+								LiMaGo 提供 100 個以上的獨特早鳥票，只要登入我們的會員，你就有機會馬上進行一趟美妙的旅程。
+							</h2>
+						</div>
+					</div>
+				</div>
+
+				<div className={'ui basic center aligned segment target-space'}>
+					<img className="arrow" src={ arrow } />
+				</div>
 
 				<section ref="joinUs" className={'ui basic center aligned segment user-data'}>
 					<img className="ui middle aligned tiny image title-tag" src={ pen } />
@@ -563,7 +507,6 @@ class StudentWithTicketPage extends React.Component {
 					<div className='ui two column centered stackable grid'>
 						<div className='seven wide column'>
 							<div className={'ui basic segment'}>
-								{message}
 								<div className='ui form'>
 									<div className={nameClasses}>
 										<label style={lableStyle}>你的姓名</label>
@@ -612,11 +555,18 @@ class StudentWithTicketPage extends React.Component {
 									<p style={ticketStyle}>4. 我們將提供旅遊全程網際網路連線，以確保您可以隨時利用網路進行旅遊資訊查詢或求助。</p>
 									<p style={ticketStyle}>5. 在旅遊目的地點，您將由自己處理交通與食宿。但若遭遇困境或危險，我們會有全天無休的專員，提供您全方位的旅遊協助與緊急救援服務。</p>
 
-									<div className='field'>
-										<button className="big ui inverted button center-block" style={joinBtnStyle} onClick={this.signUp}>
-											<i className="icon send"></i>
-											送出資料
-										</button>
+									<div className='ui hidden divider'></div>
+									<div className='ui hidden divider'></div>
+
+									<div className="ui centered grid">
+										<div className="row">
+											<div className="column">
+												{message}
+												<div className={'btn-style btn-base btn-submit'} onClick={ this.signUp }>
+													馬上加入Limago
+												</div>
+											</div>
+										</div>
 									</div>
 								</div>
 							</div>
@@ -626,15 +576,10 @@ class StudentWithTicketPage extends React.Component {
 
 				<div ref="app_section"></div>
 
-				<div className={'ui basic center aligned segment footer'}>
-					<img className="ui middle aligned tiny image icon" src={ email } />
-					<span>contact@limago.com</span>
-					<br />
-					<span>Copyright &copy; 2015 Limago Project. All Rights Reserved.</span>
-				</div>
+				<Footer />
 			</div>
 		);
 	}
 }
 
-export default StudentWithTicketPage;
+export default LandingPage;

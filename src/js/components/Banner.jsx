@@ -39,7 +39,7 @@ class Banner extends React.Component {
 				this.refs.phone.value,
 				this.refs.name.value
 			);
-			
+
 			return;
 		}else {
 			return;

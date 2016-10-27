@@ -51,8 +51,8 @@ var lableStyle = {
 @router
 @flux
 class EmployeeWithTicketPage extends React.Component {
-	constructor() {
-		super();
+	constructor(props, context) {
+		super(props, context);
 
 		this.state = {
 			error: false,
@@ -66,7 +66,6 @@ class EmployeeWithTicketPage extends React.Component {
 			name_empty_error: false,
 			phone_error: false,
 			phone_empty_error: false,
-			qrcode: null,
 			people: '',
 			price: '',
 			times: '',
@@ -74,32 +73,41 @@ class EmployeeWithTicketPage extends React.Component {
 			timer_start: null,
 			timer_edit: null,
 			isEdit: false,
-			timer_send: null
+			timer_send: null,
+			type: props.type,
+			qrcode: props.qrcode
 		};
 	}
 
+	componentWillReceiveProps = (nextProps) => {
+		this.setState({
+			type: nextProps.type,
+			qrcode: nextProps.qrcode
+		});
+	};
+
 	componentWillMount = () => {
 		this.flux.on('state.User', this.flux.bindListener(this.onChange));
-	}
+	};
 
 	componentWillUnmount = () => {
 		this.flux.off('state.User', this.onChange);
-	}
+	};
 
 	componentDidMount = () => {
 	// 	var url = window.location.pathname;
 	// 	var urlArrs = url.split('/');
 		var tickets = this.flux.getState('Tickets').data;
 		var isQrcode = false;
-	// 	var currentTime = new Date();
-	// 	var state = {
-	// 		type: urlArrs[1],
-	// 		qrcode: urlArrs[2],
-	// 		timer_start: currentTime
-	// 	};
+		var currentTime = new Date();
+		var state = {
+			type: this.props.type,
+			qrcode: this.props.qrcode,
+			timer_start: currentTime
+		};
 
 		tickets.forEach(ticket => {
-			if (this.props.qrcode == ticket.qrcode) {
+			if (this.state.qrcode == ticket.qrcode) {
 				isQrcode = true;
 			}
 		});
@@ -109,17 +117,16 @@ class EmployeeWithTicketPage extends React.Component {
 			return;
 		}
 
-	// 	this.flux.dispatch('action.User.saveVisitPage',
-	// 		state.type, state.qrcode
-	// 	);
-	//
-	// 	this.setState(state);
-	}
+		this.flux.dispatch('action.User.saveVisitPage',
+			state.type, state.qrcode
+		);
+
+		this.setState(state);
+	};
 
 	signUp = () => {
-		// var type = this.state.type;
-		var type = 'employee';
-		var qrcode = this.props.qrcode;
+		var type = this.state.type;
+		var qrcode = this.state.qrcode;
 		var email = this.refs.email.value.trim();
 		var phone = this.refs.phone.value.trim();
 		var name = this.refs.name.value.trim();
