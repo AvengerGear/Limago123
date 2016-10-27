@@ -425,7 +425,7 @@ class LandingPage extends React.Component {
 								<div className="three wide column"></div>
 								<div className="ten wide column section-text">
 									<h1 className="select-title color-brown text-right">
-										{people} <span className="color-black">人同行</span>
+										多 <span className="color-black">人同行</span>
 									</h1>
 									<p className="text-right select-sub-title">你將有機會認識不一樣的朋友</p>
 								</div>
@@ -447,7 +447,7 @@ class LandingPage extends React.Component {
 								<div className="three wide column"></div>
 								<div className="ten wide column section-text">
 									<h1 className="select-title color-orange text-right">
-										{ 5 } <span className="color-black">折機票</span>
+										5 <span className="color-black">折機票</span>
 									</h1>
 									<p className="text-right select-sub-title">同時享有你意想不到的折扣機票</p>
 								</div>
@@ -474,7 +474,7 @@ class LandingPage extends React.Component {
 							<div className="ui stackable sixteen column grid">
 								<div className="thirteen wide column section-text">
 									<h1 className="select-title color-green text-right">
-										{this.state.time} <span className="color-black">小時內出發</span>
+										24 <span className="color-black">小時內出發</span>
 									</h1>
 									<p className="text-right select-sub-title">心動了嗎？那就馬上收拾你的行李吧！</p>
 								</div>

@@ -3,7 +3,7 @@ export default function *() {
 
 	// Getting current state. Initialize state if state doesn't exist.
 	var store = this.getState('User', {
-		status: 'normal',
+		status: null,
 		name: 'Nobody',
 		username: null,
 		phone: null,
@@ -358,7 +358,7 @@ export default function *() {
 			switch(res.status) {
 			case 200:
 				// Updating store
-				store.status = 'normal';
+				store.status = null;
 				break;
 			}
 

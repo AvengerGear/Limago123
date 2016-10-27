@@ -181,12 +181,6 @@ class LandingPage extends React.Component {
 			);
 		}
 
-		var inputEmail = (
-			<div className="ui fluid icon input">
-				<input type="email" ref='email' placeholder="請輸入E-mail" onChange={this.closeAlert} />
-			</div>
-		);
-
 		return (
 			<div className='main-page'>
 				<Header ref='header' />
@@ -208,18 +202,10 @@ class LandingPage extends React.Component {
 					<div style={ breakInput }></div>
 
 					<div className="ui one column centered grid">
-						<div className="computer only six wide column">
-							{inputEmail}
-							{ message }
-							<p className="text-left input-tag color-gray">E-mail</p>
-						</div>
-						<div className="tablet only eight wide column">
-							{inputEmail}
-							{ message }
-							<p className="text-left input-tag color-gray">E-mail</p>
-						</div>
-						<div className="mobile only fourteen wide column">
-							{inputEmail}
+						<div className="six wide computer eight wide tablet fourteen wide mobile column">
+							<div className="ui fluid icon input">
+								<input type="email" ref="email" placeholder="請輸入E-mail" onChange={this.closeAlert} />
+							</div>
 							{ message }
 							<p className="text-left input-tag color-gray">E-mail</p>
 						</div>
