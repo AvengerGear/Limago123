@@ -4,6 +4,18 @@
 .nav {
 	background-color: rgba(0,0,0,.6)!important;
 }
+.shuffly-page {
+    overflow: hidden;
+    .banner {
+        background-image: url(../images/adventure-01-1920-2.jpg);
+    	background-repeat: no-repeat;
+    	background-size: cover;
+    	background-position: center top;
+    	min-height: 240px;
+    	overflow: hidden;
+    }
+}
+
 .ui.basic.segment.landing-page-header {
 	background-image: url(../images/travel2.jpg);
 	background-repeat: no-repeat;
@@ -366,6 +378,12 @@
 }
 
 @media (max-width: @mobile-width) {
+    .shuffly-page {
+        .banner {
+            background-image: url(../images/adventure-01-960-6.jpg);
+        }
+    }
+
 	.ui.basic.segment.landing-page-header {
 		background-repeat: no-repeat;
 		background-size: cover;

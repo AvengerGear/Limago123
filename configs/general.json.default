@@ -1,6 +1,6 @@
 {
 	"service": {
-		"name": "Limago",
+		"name": "Shuffly | 隨機地點、報名隔日出發，體驗一趟無限可能的旅程！",
 		"external_url": "http://localhost:3001"
 	},
 	"server": {
