@@ -1,7 +1,7 @@
 var hotpot = require('hotpot');
 var LandingPage = require('./components/LandingPage.jsx');
 var LandingPageEmailOnly = require('./components/LandingPageEmailOnly.jsx');
-var ShufflyEmailOnly = require('./components/ShufflyEmailOnly.jsx');
+var ShufflyNameOnly = require('./components/ShufflyNameOnly.jsx');
 var ForgotPage = require('./components/ForgotPage.jsx');
 var SignInPage = require('./components/SignInPage.jsx');
 var SignUpPage = require('./components/SignUpPage.jsx');
@@ -21,7 +21,7 @@ module.exports = [
 	},
 	{
 		path: '/',
-		handler: ShufflyEmailOnly
+		handler: ShufflyNameOnly
 	},
 	{
 		path: '/signin',

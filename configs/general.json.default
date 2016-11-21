@@ -1,6 +1,6 @@
 {
 	"service": {
-		"name": "Shuffly | 隨機地點、報名隔日出發，體驗一趟無限可能的旅程！",
+		"name": "隨機旅遊 Limago | 隨機地點、報名隔日出發，體驗一趟無限可能的旅程！",
 		"external_url": "http://localhost:3001"
 	},
 	"server": {
@@ -29,7 +29,7 @@
 		]
 	},
 	"database": {
-		"uri": "mongodb://localhost:27017/limagoApril"
+		"uri": "mongodb://localhost:27017/limago"
 	},
 	"authorization": {
 		"github": {

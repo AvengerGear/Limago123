@@ -287,6 +287,47 @@ export default function *() {
 		}
 	});
 
+    this.on('store.User.signUpNameOnly', function *(name, phone) {
+
+		var store = this.getState('User');
+
+		try {
+			var res = yield this.request
+				.post('/signup/phone')
+				.send({
+					name: name,
+                    phone: phone
+				});
+
+			switch(res.status) {
+			case 200:
+				// Updating store
+				store.status = 'normal';
+				store.logined = false;
+				break;
+			}
+
+			this.dispatch('state.User');
+		} catch(e) {
+
+			switch(e.status) {
+			case 500:
+				store.status = 'signup-error';
+				break;
+
+			case 409:
+				store.status = 'signup-failed-existing-account';
+				break;
+
+			case 400:
+				store.status = 'signup-failed';
+				break;
+			}
+
+			this.dispatch('state.User');
+		}
+	});
+
 	this.on('action.User.signUpWithTicket', function *(email, phone, password, name, qrcode, type, startTime, editTime, sendTime, allTime, viewTime, editingTime) {
 		var store = this.getState('User');
 

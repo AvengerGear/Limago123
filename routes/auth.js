@@ -6,6 +6,7 @@ var UAParser = require('ua-parser-js');
 var RestPack = require('restpack');
 var Member = require('../lib/member');
 var Emails = require('../lib/emails');
+var Phones = require('../lib/phones');
 var Tickets = require('../lib/tickets');
 var typeCounter = require('../lib/page_count');
 var Visits = require('../lib/visits');
@@ -222,6 +223,48 @@ router.post('/signup/email', function *() {
 	try {
 		var email = yield Emails.create({
 			email: email
+		});
+	} catch(e) {
+		console.log(e);
+		this.status = 500;
+		return;
+	}
+
+	// Return result to client
+	this.body = {
+		success: true
+	};
+});
+
+router.post('/signup/phone', function *() {
+	var name = this.request.body.name || null;
+	var phone = this.request.body.phone || null;
+
+	// Check fields
+	if (!name || !phone) {
+		this.status = 400;
+		return;
+	}
+
+	// Check whether phone exists or not
+	try {
+		// TODO: It should create a record directly if account was available.
+		var ret = yield Phones.getPhones(phone);
+		if (ret) {
+			this.status = 409;
+			return;
+		}
+	} catch(e) {
+		console.log(e);
+		this.status = 500;
+		return;
+	}
+
+	// Create a new user
+	try {
+		var phone = yield Phones.create({
+			name: name,
+            phone: phone
 		});
 	} catch(e) {
 		console.log(e);
